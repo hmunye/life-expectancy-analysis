@@ -1,0 +1,195 @@
+---
+title: "Outliers for Life Expectancy Data Set"
+format: html
+editor: visual
+---
+
+## First Import Life Expectancy Data Set
+
+```{r}
+data <- Life_Expectancy_Data_Updated
+```
+
+## Find Number of Outliers and Plot:
+
+```{r}
+num_outliers <- function(data_set, column) {
+  q1 <- quantile(column, 0.25)
+  q3 <- quantile(column, 0.75)
+  iqr <- q3 -q1
+  
+  upper_bound <- q3 + 1.5 * iqr
+  lower_bound <- q1 - 1.5 * iqr
+  
+  outliers <- column[column < lower_bound | column > upper_bound]
+  
+  plot <- ggplot(data_set) + geom_boxplot(aes(x = "", y = column))
+  
+  print(plot)
+  
+  return(length(outliers))
+}
+```
+
+```{r}
+num_outliers(data, data$Infant_deaths)
+```
+
+```{r}
+num_outliers(data, data$Under_five_deaths)
+```
+
+```{r}
+num_outliers(data, data$Adult_mortality)
+```
+
+```{r}
+num_outliers(data, data$Alcohol_consumption)
+```
+
+```{r}
+num_outliers(data, data$Hepatitis_B)
+```
+
+```{r}
+num_outliers(data, data$Measles)
+```
+
+```{r}
+num_outliers(data, data$BMI)
+```
+
+```{r}
+num_outliers(data, data$Polio)
+```
+
+```{r}
+num_outliers(data, data$Diphtheria)
+```
+
+```{r}
+num_outliers(data, data$Incidents_HIV)
+```
+
+```{r}
+num_outliers(data, data$GDP_per_capita)
+```
+
+```{r}
+num_outliers(data, data$Population_mln)
+```
+
+```{r}
+num_outliers(data, data$Thinness_ten_nineteen_years)
+```
+
+```{r}
+num_outliers(data, data$Thinness_five_nine_years)
+```
+
+```{r}
+num_outliers(data, data$Schooling)
+```
+
+```{r}
+num_outliers(data, data$Life_expectancy)
+```
+
+## Facet By Region:
+
+```{r}
+outlier_by_regions <- function(data_set, column) {
+  data_set %>%
+  ggplot() +
+  geom_boxplot(aes(x = "", y = column)) +
+  facet_wrap(~ Region)
+}
+```
+
+## High Outliers:
+
+```{r}
+outlier_by_regions(data, data$Incidents_HIV)
+```
+
+```{r}
+outlier_by_regions(data, data$GDP_per_capita)
+```
+
+```{r}
+outlier_by_regions(data, data$Population_mln)
+```
+
+## Filter Original Data Set by Region:
+
+```{r}
+filter_out_region <- function(region) {
+  var_name <- paste("filtered_out_", region, sep = "")
+  assign(var_name, data %>%
+           filter(Region == region), envir = .GlobalEnv)
+}
+
+```
+
+```{r}
+filter_out_region("Middle East")
+```
+
+```{r}
+filter_out_region("European Union")
+```
+
+```{r}
+filter_out_region("Asia")
+```
+
+```{r}
+filter_out_region("South America")
+```
+
+```{r}
+filter_out_region("Central America and Caribbean")
+```
+
+```{r}
+filter_out_region("Rest of Europe")
+```
+
+```{r}
+filter_out_region("Africa")
+```
+
+```{r}
+filter_out_region("Oceania")
+```
+
+```{r}
+filter_out_region("North America")
+```
+
+## Filter Out Non-Numeric: 
+
+```{r}
+numeric_data <- data[, sapply(data, is.numeric)]
+```
+
+## Find Variance for Each Column:
+
+```{r}
+for (col in names(numeric_data)) {
+  if (is.numeric(numeric_data[[col]])) {
+    var_value <- var(numeric_data[[col]])
+    
+    cat("Variance of column", col, ":", var_value, "\n")
+    
+  }
+}
+```
+
+## Find Covariance:
+
+```{r}
+cov(numeric_data)
+```
+
+Add Explanation and Insights
