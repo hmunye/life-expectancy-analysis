@@ -52,3 +52,49 @@ author: Group 5
     -   5.1 Variance Analysis
 
     -   5.2 Covariance Analysis
+
+## Introduction
+
+#### Data Understanding
+
+#### Data Source
+
+## Data Loading
+
+#### Importing Libraries
+
+#### Loading and Understanding the Data
+
+#### Categorizing the Datasets Attributes
+
+## Data Cleaning
+
+### Handling Null Values
+
+#### Treating Null Values
+
+#### Decision for Treating Null Values
+
+#### Approach
+
+### Handling Outliers
+
+#### Treating Outliers
+
+#### Decision for Treating Outliers
+
+#### Approach
+
+## Data Analysis
+
+#### Plots
+
+#### Variance Analysis
+
+#### Covariance Analysis
+
+## Final Conclusions
+
+#### Variance Analysis
+
+#### Covariance Analysis
