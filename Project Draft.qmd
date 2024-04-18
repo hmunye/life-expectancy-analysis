@@ -1,0 +1,54 @@
+---
+title: "Report Draft"
+format: html
+editor: visual
+author: Group 5
+---
+
+# Table of Contents
+
+-   **1 Introduction**
+
+    -   1.1 Data Understanding
+
+    -   1.2 Data Source
+
+-   **2 Data Loading**
+
+    -   2.1 Importing Libraries
+
+    -   2.2 Loading & Understanding the Data
+
+    -   2.3 Categorizing Datasets Attributes
+
+-   **3 Data Cleaning**
+
+    -   3.1 Handling Null Values
+
+        -   3.1.1 Treating Null Values
+
+        -   3.1.2 Decision for Treating Null Values
+
+        -   3.1.3 Approach
+
+    -   3.2 Handling Outliers
+
+        -   3.2.1 Treating Outliers
+
+        -   3.2.2 Decision for Treating Outliers
+
+        -   3.2.3 Approach
+
+-   **4 Data Analysis**
+
+    -   4.1 Plots
+
+    -   4.2 Variance Analysis
+
+    -   4.3 Covariance Analysis
+
+-   **5 Final Conclusions**
+
+    -   5.1 Variance Analysis
+
+    -   5.2 Covariance Analysis
