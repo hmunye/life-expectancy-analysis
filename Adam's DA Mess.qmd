@@ -1,0 +1,481 @@
+---
+title: "Main Doc"
+format: html
+editor: visual
+---
+
+```{r}
+library(tidyverse)
+
+```
+
+Check for NA values
+
+```{r}
+any(is.na(Life_Expectancy_Data))
+```
+
+This means that there is at least one NA value in the data set.
+
+If we look at the dataset
+
+```{r}
+View(Life_Expectancy_Data)
+```
+
+We can see that there are a good number of NA values
+
+```{r}
+summary(Life_Expectancy_Data)
+```
+
+This gives us a count how how many NA's are in each column, separated by the status as a developing or developed nation
+
+```{r}
+Life_Expectancy_Data |> 
+group_by(Status) |>
+summarize(across(everything(), ~sum(is.na(.))))
+
+```
+
+Next is to look for outliers. As there are many variables to look at I will attempt to make a function to speed it up and reduce errors.
+
+```{r}
+ggplot( data = Life_Expectancy_Data) + geom_boxplot(mapping = aes( x = Status, y = Life_Expectancy_Data$`Life expectancy`))
+```
+
+As it seems like the outliers are in the Developing nations, here is a box and whisker for only the developing nations
+
+```{r}
+Developing_Sub <- filter(Life_Expectancy_Data, Status == 'Developing')
+ggplot(Developing_Sub) + geom_boxplot(mapping = aes(x = Country, y = Developing_Sub$`Life expectancy`)) +
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+```{r}
+ggplot( data = Life_Expectancy_Data) + geom_boxplot(width = 1 , mapping = aes( x = Life_Expectancy_Data$Country, y = Life_Expectancy_Data$`Life expectancy`)) +
+  scale_x_discrete(guide = guide_axis (n.dodge = 1)) +
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+```{r}
+ggplot( data = Life_Expectancy_Data, mapping = aes( x = Life_Expectancy_Data$`Life expectancy`, color=Life_Expectancy_Data$Status)) + geom_freqpoly()
+```
+
+```{r}
+ggplot(Life_Expectancy_Data) + 
+    geom_histogram(mapping = aes(x = Life_Expectancy_Data$`Life expectancy`))
+```
+
+```{r}
+ggplot(Life_Expectancy_Data) + 
+    geom_histogram(mapping = aes(x = Life_Expectancy_Data$`Adult Mortality`))
+```
+
+Function to make coveriation faster
+
+```{r}
+create_scatter_plot <- function(x_var, title = NULL) {
+ ggplot(data = Life_Expectancy_Data, mapping = aes(y= Life_Expectancy_Data$`Life expectancy`, x = x_var)) +
+  geom_point() +
+    labs(title = title, xlab= x_var)
+}
+```
+
+```{r}
+create_scatter_plot(Life_Expectancy_Data$`infant deaths`)
+```
+
+I cant figure out the titles in a function.
+
+```{r}
+
+ggplot(data = Life_Expectancy_Data, mapping = aes(y= Life_Expectancy_Data$`Life expectancy`, x = Life_Expectancy_Data$`Adult Mortality`)) +
+  geom_point()
+
+ggplot(data = Life_Expectancy_Data, mapping = aes(y= Life_Expectancy_Data$`Life expectancy`, x = Life_Expectancy_Data$`infant deaths`)) +
+  geom_point()
+
+ggplot(data = Life_Expectancy_Data, mapping = aes(y= Life_Expectancy_Data$`Life expectancy`, x = Life_Expectancy_Data$Alcohol)) +
+  geom_point()
+
+ggplot(data = Life_Expectancy_Data, mapping = aes(y= Life_Expectancy_Data$`Life expectancy`, x = Life_Expectancy_Data$`percentage expenditure`)) +
+  geom_point()
+
+ggplot(data = Life_Expectancy_Data, mapping = aes(y= Life_Expectancy_Data$`Life expectancy`, x = Life_Expectancy_Data$`Hepatitis B`)) +
+  geom_point()
+
+ggplot(data = Life_Expectancy_Data, mapping = aes(y= Life_Expectancy_Data$`Life expectancy`, x = Life_Expectancy_Data$Measles)) +
+  geom_point()
+
+ggplot(data = Life_Expectancy_Data, mapping = aes(y= Life_Expectancy_Data$`Life expectancy`, x = Life_Expectancy_Data$BMI)) +
+  geom_point()
+
+ggplot(data = Life_Expectancy_Data, mapping = aes(y= Life_Expectancy_Data$`Life expectancy`, x = Life_Expectancy_Data$`under-five deaths`)) +
+  geom_point()
+
+ggplot(data = Life_Expectancy_Data, mapping = aes(y= Life_Expectancy_Data$`Life expectancy`, x = Life_Expectancy_Data$Polio)) +
+  geom_point()
+
+ggplot(data = Life_Expectancy_Data, mapping = aes(y= Life_Expectancy_Data$`Life expectancy`, x = Life_Expectancy_Data$`Total expenditure`)) +
+  geom_point()
+
+ggplot(data = Life_Expectancy_Data, mapping = aes(y= Life_Expectancy_Data$`Life expectancy`, x = Life_Expectancy_Data$Diphtheria)) +
+  geom_point()
+
+ggplot(data = Life_Expectancy_Data, mapping = aes(y= Life_Expectancy_Data$`Life expectancy`, x = Life_Expectancy_Data$`HIV/AIDS`)) +
+  geom_point()
+
+ggplot(data = Life_Expectancy_Data, mapping = aes(y= Life_Expectancy_Data$`Life expectancy`, x = Life_Expectancy_Data$Population)) +
+  geom_point()
+
+ggplot(data = Life_Expectancy_Data, mapping = aes(y= Life_Expectancy_Data$`Life expectancy`, x = Life_Expectancy_Data$`thinness  1-19 years`)) +
+  geom_point()
+
+ggplot(data = Life_Expectancy_Data, mapping = aes(y= Life_Expectancy_Data$`Life expectancy`, x = Life_Expectancy_Data$`thinness 5-9 years`)) +
+  geom_point()
+
+ggplot(data = Life_Expectancy_Data, mapping = aes(y= Life_Expectancy_Data$`Life expectancy`, x = Life_Expectancy_Data$`Income composition of resources`)) +
+  geom_point()
+
+ggplot(data = Life_Expectancy_Data, mapping = aes(y= Life_Expectancy_Data$`Life expectancy`, x = Life_Expectancy_Data$Schooling)) +
+  geom_point()
+
+ggplot(data = Life_Expectancy_Data, mapping = aes(y= Life_Expectancy_Data$`Life expectancy`, x = Life_Expectancy_Data$GDP)) +
+  geom_point()
+```
+
+Variance and Coveraince
+
+```{r}
+LifeExpNAO <- na.omit(Life_Expectancy_Data)
+
+cov(LifeExpNAO$`Life expectancy`, LifeExpNAO$`Adult Mortality` )
+
+
+
+
+cov(LifeExpNAO$`Life expectancy`, LifeExpNAO$`Alchohol` )
+
+cov(LifeExpNAO$`Life expectancy`, LifeExpNAO$`percentage expenditure` )
+
+cov(LifeExpNAO$`Life expectancy`, LifeExpNAO$`Hepatitis B` )
+
+cov(LifeExpNAO$`Life expectancy`, LifeExpNAO$Measles )
+
+cov(LifeExpNAO$`Life expectancy`, LifeExpNAO$BMI)
+
+cov(LifeExpNAO$`Life expectancy`, LifeExpNAO$`under-five deaths` )
+
+cov(LifeExpNAO$`Life expectancy`, LifeExpNAO$Polio)
+
+cov(LifeExpNAO$`Life expectancy`, LifeExpNAO$`Total expenditure`)
+
+cov(LifeExpNAO$`Life expectancy`, LifeExpNAO$Diphtheria)
+
+cov(LifeExpNAO$`Life expectancy`, LifeExpNAO$`HIV/AIDS`)
+
+cov(LifeExpNAO$`Life expectancy`, LifeExpNAO$GDP)
+
+cov(LifeExpNAO$`Life expectancy`, LifeExpNAO$GDP)
+
+
+cov(LifeExpNAO$`Life expectancy`, LifeExpNAO$Population)
+
+
+cov(LifeExpNAO$`Life expectancy`, LifeExpNAO$`thinness  1-19 years`)
+
+
+cov(LifeExpNAO$`Life expectancy`, LifeExpNAO$`thinness 5-9 years` )
+
+
+cov(LifeExpNAO$`Life expectancy`, LifeExpNAO$`Income composition of resources`)
+
+cov(LifeExpNAO$`Life expectancy`, LifeExpNAO$Schooling )
+```
+
+```{r}
+# Subset numeric variables
+numeric_data <- LifeExpNAO[, sapply(LifeExpNAO, is.numeric)]
+
+var(numeric_data)
+```
+
+```{r}
+# Subset numeric variables
+numeric_data <- LifeExpNAO[, sapply(LifeExpNAO, is.numeric)]
+
+# Compute covariance matrix
+ cov(numeric_data)
+```
+
+Mack Found a cleaned dataset
+
+```{r}
+view(Life_Expectancy_Data_Updated)
+```
+
+```{r}
+summary(Life_Expectancy_Data_Updated)
+```
+
+```{r}
+var(Life_Expectancy_Data_Updated)
+```
+
+Make a numeric only
+
+```{r}
+# Subset numeric variables
+numeric_data_Updated <- Life_Expectancy_Data_Updated[, sapply(Life_Expectancy_Data_Updated, is.numeric)] 
+cov(numeric_data_Updated)
+```
+
+```{r}
+
+ggplot(Life_Expectancy_Data_Updated, aes(x = Life_Expectancy_Data_Updated$Infant_deaths )) +
+  geom_histogram()
+
+ggplot(Life_Expectancy_Data_Updated, aes(x = Life_Expectancy_Data_Updated$Under_five_deaths )) +
+  geom_histogram()
+
+ggplot(Life_Expectancy_Data_Updated, aes(x = Life_Expectancy_Data_Updated$Adult_mortality )) +
+  geom_histogram()
+
+ggplot(Life_Expectancy_Data_Updated, aes(x = Life_Expectancy_Data_Updated$Alcohol_consumption )) + geom_histogram()
+
+
+ggplot(Life_Expectancy_Data_Updated, aes(x = Life_Expectancy_Data_Updated$Hepatitis_B )) +
+  geom_histogram() 
+
+ggplot(Life_Expectancy_Data_Updated, aes(x = Life_Expectancy_Data_Updated$Measles)) +
+  geom_histogram()
+
+ggplot(Life_Expectancy_Data_Updated, aes(x = Life_Expectancy_Data_Updated$BMI )) +
+  geom_histogram()
+
+ggplot(Life_Expectancy_Data_Updated, aes(x = Life_Expectancy_Data_Updated$Polio )) +
+  geom_histogram()
+
+ggplot(Life_Expectancy_Data_Updated, aes(x = Life_Expectancy_Data_Updated$Diphtheria )) +
+  geom_histogram()
+
+
+ggplot(Life_Expectancy_Data_Updated, aes(x = Life_Expectancy_Data_Updated$Incidents_HIV )) +
+  geom_histogram()
+
+
+ggplot(Life_Expectancy_Data_Updated, aes(x = Life_Expectancy_Data_Updated$GDP_per_capita)) +
+  geom_histogram()
+
+
+ggplot(Life_Expectancy_Data_Updated, aes(x = Life_Expectancy_Data_Updated$Population_mln )) +
+  geom_histogram()
+
+
+ggplot(Life_Expectancy_Data_Updated, aes(x = Life_Expectancy_Data_Updated$Thinness_ten_nineteen_years )) +
+  geom_histogram()
+
+
+ggplot(Life_Expectancy_Data_Updated, aes(x = Life_Expectancy_Data_Updated$Thinness_five_nine_years )) +
+  geom_histogram()
+
+
+ggplot(Life_Expectancy_Data_Updated, aes(x = Life_Expectancy_Data_Updated$Schooling )) +
+  geom_histogram()
+
+
+ggplot(Life_Expectancy_Data_Updated, aes(x = Life_Expectancy_Data_Updated$Economy_status_Developed )) +
+  geom_histogram()
+
+
+ggplot(Life_Expectancy_Data_Updated, aes(x = Life_Expectancy_Data_Updated$Economy_status_Developing )) +
+  geom_histogram()
+
+
+ggplot(Life_Expectancy_Data_Updated, aes(x = Life_Expectancy_Data_Updated$Life_expectancy )) +
+  geom_histogram()
+```
+
+So it looks like we will need to standardize every variable
+
+```{r}
+numeric_data_Up <- Life_Expectancy_Data_Updated[, sapply(Life_Expectancy_Data_Updated, is.numeric)]
+
+stand_num_data <- scale(numeric_data_Up)
+
+# Select non-numeric columns
+non_numeric_columns <- !sapply(Life_Expectancy_Data_Updated, is.numeric)
+
+# Combine standardized numeric data with non-numeric data
+stand_LifeExp <- cbind(stand_num_data, Life_Expectancy_Data_Updated[non_numeric_columns])
+
+# View the standardized data
+print(stand_LifeExp)
+```
+
+Now we have a standardized set of data for anything that needs it.
+
+Next up, exploring the updated dataset.
+
+First up Life Expectancy, as its the core of the dataset
+
+```{r}
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Life_expectancy, x = Adult_mortality, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Life_expectancy, x = Infant_deaths, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Life_expectancy, x = Under_five_deaths, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Life_expectancy, x = Alcohol_consumption, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Life_expectancy, x = Hepatitis_B, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Life_expectancy, x = Measles,color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Life_expectancy, x =  BMI, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Life_expectancy, x = Polio, color = Region)) +
+  geom_point()
+
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Life_expectancy, x = Diphtheria, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Life_expectancy, x = Incidents_HIV, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Life_expectancy, x = GDP_per_capita, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Life_expectancy, x = Population_mln, color = Region))   +
+  geom_point()
+  
+  Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Life_expectancy, x = Thinness_ten_nineteen_years, color = Region)) +
+  geom_point()
+  
+  Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Life_expectancy, x = Thinness_five_nine_years, color = Region))   +
+  geom_point()
+  
+  Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Life_expectancy, x = Schooling, color = Region))   +
+  geom_point()
+  
+
+  
+```
+
+These graphs show us some interesting trends, for many of these graphs, the regions tend to stick together.
+
+Alchohol
+
+```{r}
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Alcohol_consumption, x = Adult_mortality, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Alcohol_consumption, x = Infant_deaths, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Alcohol_consumption, x = Hepatitis_B, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Alcohol_consumption, x = Measles, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Alcohol_consumption, x = BMI, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Alcohol_consumption, x = Polio, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Alcohol_consumption, x = Diphtheria, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Alcohol_consumption, x = Incidents_HIV, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Alcohol_consumption, x = GDP_per_capita, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Alcohol_consumption, x = Population_mln, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Alcohol_consumption, x = Schooling, color = Region)) +
+  geom_point()
+```
+
+GDP
+
+```{r}
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = GDP_per_capita, x = Adult_mortality, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = GDP_per_capita, x = Life_expectancy, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = GDP_per_capita, x = Infant_deaths, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = GDP_per_capita, x = Under_five_deaths, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = GDP_per_capita, x = Alcohol_consumption, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = GDP_per_capita, x = Hepatitis_B, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = GDP_per_capita, x = Adult_mortality, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = GDP_per_capita, x = Hepatitis_B, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = Population_mln, x = Adult_mortality, color = Region)) +
+  geom_point()
+
+Life_Expectancy_Data_Updated |>
+  ggplot(aes(y = GDP_per_capita, x = Schooling, color = Region)) +
+  geom_point()
+```
