@@ -7,7 +7,7 @@ editor: visual
 ## First Import Life Expectancy Data Set
 
 ```{r}
-data <- Life_Expectancy_Data_Updated
+data <- Life_Expectancy_Data_Updated.
 ```
 
 ## Find Number of Outliers and Plot:
