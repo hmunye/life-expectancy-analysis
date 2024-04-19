@@ -67,7 +67,26 @@ library(tidyverse)
 
 #### Importing Libraries
 
+```{r}
+library(tidyverse)
+
+```
+
 #### Loading and Understanding the Data
+
+Load the dataset from our groups github. Orignal Dataset information can be found here: <https://www.kaggle.com/datasets/lashagoch/life-expectancy-who-updated>
+
+```{r}
+
+df <- read_csv("https://raw.githubusercontent.com/hmunye/life-expectancy-analysis/main/data/Life-Expectancy-Data-Updated.csv", show_col_types = FALSE)
+
+```
+
+Display the first 5 rows of the dataset
+
+```{r}
+head(df, 5)
+```
 
 #### Categorizing the Datasets Attributes
 
@@ -96,6 +115,71 @@ library(tidyverse)
 #### Variance Analysis
 
 #### Covariance Analysis
+
+Life Expectancy
+
+```{r}
+df |>
+  ggplot(aes(y = Life_expectancy, x = Adult_mortality, color = Region)) +
+  geom_point()
+
+df |>
+  ggplot(aes(y = Life_expectancy, x = Infant_deaths, color = Region)) +
+  geom_point()
+
+df |>
+  ggplot(aes(y = Life_expectancy, x = Under_five_deaths, color = Region)) +
+  geom_point()
+
+df |>
+  ggplot(aes(y = Life_expectancy, x = Alcohol_consumption, color = Region)) +
+  geom_point()
+
+df |>
+  ggplot(aes(y = Life_expectancy, x = Hepatitis_B, color = Region)) +
+  geom_point()
+
+df |>
+  ggplot(aes(y = Life_expectancy, x = Measles,color = Region)) +
+  geom_point()
+
+df |>
+  ggplot(aes(y = Life_expectancy, x =  BMI, color = Region)) +
+  geom_point()
+
+df |>
+  ggplot(aes(y = Life_expectancy, x = Polio, color = Region)) +
+  geom_point()
+
+
+df |>
+  ggplot(aes(y = Life_expectancy, x = Diphtheria, color = Region)) +
+  geom_point()
+
+df |>
+  ggplot(aes(y = Life_expectancy, x = Incidents_HIV, color = Region)) +
+  geom_point()
+
+df |>
+  ggplot(aes(y = Life_expectancy, x = GDP_per_capita, color = Region)) +
+  geom_point()
+
+df |>
+  ggplot(aes(y = Life_expectancy, x = Population_mln, color = Region))   +
+  geom_point()
+  
+  df |>
+  ggplot(aes(y = Life_expectancy, x = Thinness_ten_nineteen_years, color = Region)) +
+  geom_point()
+  
+  df |>
+  ggplot(aes(y = Life_expectancy, x = Thinness_five_nine_years, color = Region))   +
+  geom_point()
+  
+  df |>
+  ggplot(aes(y = Life_expectancy, x = Schooling, color = Region))   +
+  geom_point()
+```
 
 ## Final Conclusions
 
