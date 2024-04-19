@@ -1,0 +1,9 @@
+[
+  {
+    "objectID": "Project-Draft.html",
+    "href": "Project-Draft.html",
+    "title": "Report Draft",
+    "section": "",
+    "text": "1 Introduction\n\n1.1 Data Understanding\n1.2 Data Source\n\n2 Data Loading\n\n2.1 Importing Libraries\n2.2 Loading & Understanding the Data\n2.3 Categorizing Datasets Attributes\n\n3 Data Cleaning\n\n3.1 Handling Null Values\n\n3.1.1 Treating Null Values\n3.1.2 Decision for Treating Null Values\n3.1.3 Approach\n\n3.2 Handling Outliers\n\n3.2.1 Treating Outliers\n3.2.2 Decision for Treating Outliers\n3.2.3 Approach\n\n\n4 Data Analysis\n\n4.1 Plots\n4.2 Variance Analysis\n4.3 Covariance Analysis\n\n5 Final Conclusions\n\n5.1 Variance Analysis\n5.2 Covariance Analysis"
+  }
+]
