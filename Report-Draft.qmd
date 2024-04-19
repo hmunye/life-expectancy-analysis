@@ -57,6 +57,10 @@ author: Group 5
 
 #### Data Understanding
 
+```{r}
+library(tidyverse)
+```
+
 #### Data Source
 
 ## Data Loading
