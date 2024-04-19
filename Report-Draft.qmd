@@ -57,11 +57,13 @@ author: Group 5
 
 #### Data Understanding
 
-```{r}
-library(tidyverse)
-```
-
 #### Data Source
+
+Orignal Dataset information can be found here: <https://www.kaggle.com/datasets/lashagoch/life-expectancy-who-updated>
+
+For ease of use we have re uploaded the dataset to the Github created for the group project
+
+<https://raw.githubusercontent.com/hmunye/life-expectancy-analysis/main/data/Life-Expectancy-Data-Updated.csv>
 
 ## Data Loading
 
@@ -74,7 +76,7 @@ library(tidyverse)
 
 #### Loading and Understanding the Data
 
-Load the dataset from our groups github. Orignal Dataset information can be found here: <https://www.kaggle.com/datasets/lashagoch/life-expectancy-who-updated>
+Load the dataset from our groups github.
 
 ```{r}
 
