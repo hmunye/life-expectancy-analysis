@@ -59,7 +59,7 @@ author: Group 5
 
 #### Data Source
 
-Orignal Dataset information can be found here: <https://www.kaggle.com/datasets/lashagoch/life-expectancy-who-updated>
+Original Dataset information can be found here: <https://www.kaggle.com/datasets/lashagoch/life-expectancy-who-updated>
 
 For ease of use we have re uploaded the dataset to the Github created for the group project
 
@@ -80,34 +80,34 @@ Load the dataset from our groups github.
 
 ```{r}
 
-df <- read_csv("https://raw.githubusercontent.com/hmunye/life-expectancy-analysis/main/data/Life-Expectancy-Data-Updated.csv", show_col_types = FALSE)
+data <- read_csv("https://raw.githubusercontent.com/hmunye/life-expectancy-analysis/main/data/Life-Expectancy-Data-Updated.csv", show_col_types = FALSE)
 
 ```
 
 Display the first 5 rows of the dataset
 
 ```{r}
-head(df, 5)
+head(data, 5)
 ```
 
-The shape of the dataframe
+The shape of the data frame
 
 ```{r}
 # Get the number of rows
-num_rows <- nrow(df)
+num_rows <- nrow(data)
 
 # Get the number of columns
-num_cols <- ncol(df)
+num_cols <- ncol(data)
 
 # Print the results
 cat("Number of rows:", num_rows, "\n")
 cat("Number of columns:", num_cols, "\n")
 ```
 
-Summary of the Dataframe
+Summary of the Data Frame
 
 ```{r}
-summary(df)
+summary(data)
 
 ```
 
@@ -137,11 +137,11 @@ summary(df)
 
 ------------------------------------------------------------------------
 
-For the purpose of data analaytics in R Studio, it is a good practice to change the categorical variables into factors
+For the purpose of data analytics in R Studio, it is a good practice to change the categorical variables into factors
 
 ```{r}
-df$Country <- factor(df$Country)
-df$Region <- factor(df$Region)
+data$Country <- factor(data$Country)
+data$Region <- factor(data$Region)
 ```
 
 ## Data Cleaning
@@ -175,64 +175,64 @@ The original dataset had several hundred missing values.
 Life Expectancy
 
 ```{r}
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x = Adult_mortality, color = Region)) +
   geom_point()
 
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x = Infant_deaths, color = Region)) +
   geom_point()
 
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x = Under_five_deaths, color = Region)) +
   geom_point()
 
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x = Alcohol_consumption, color = Region)) +
   geom_point()
 
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x = Hepatitis_B, color = Region)) +
   geom_point()
 
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x = Measles,color = Region)) +
   geom_point()
 
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x =  BMI, color = Region)) +
   geom_point()
 
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x = Polio, color = Region)) +
   geom_point()
 
 
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x = Diphtheria, color = Region)) +
   geom_point()
 
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x = Incidents_HIV, color = Region)) +
   geom_point()
 
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x = GDP_per_capita, color = Region)) +
   geom_point()
 
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x = Population_mln, color = Region))   +
   geom_point()
   
-  df |>
+  data |>
   ggplot(aes(y = Life_expectancy, x = Thinness_ten_nineteen_years, color = Region)) +
   geom_point()
   
-  df |>
+  data |>
   ggplot(aes(y = Life_expectancy, x = Thinness_five_nine_years, color = Region))   +
   geom_point()
   
-  df |>
+  data |>
   ggplot(aes(y = Life_expectancy, x = Schooling, color = Region))   +
   geom_point()
 ```
