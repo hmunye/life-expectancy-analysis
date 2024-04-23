@@ -90,11 +90,65 @@ Display the first 5 rows of the dataset
 head(df, 5)
 ```
 
+The shape of the dataframe
+
+```{r}
+# Get the number of rows
+num_rows <- nrow(df)
+
+# Get the number of columns
+num_cols <- ncol(df)
+
+# Print the results
+cat("Number of rows:", num_rows, "\n")
+cat("Number of columns:", num_cols, "\n")
+```
+
+Summary of the Dataframe
+
+```{r}
+summary(df)
+
+```
+
 #### Categorizing the Datasets Attributes
+
+-   Categorical (nominal):
+
+    -   
+
+-   Numerical (Nominal):
+
+    -   
+
+-   Numerical (discrete):
+
+    -   
+
+-   Numerical (Interval)
+
+    -   
+
+-   Numerical (Ratio)
+
+    -   a
+
+-   Put Reasoning here (Why each is what it is)
+
+------------------------------------------------------------------------
+
+For the purpose of data analaytics in R Studio, it is a good practice to change the categorical variables into factors
+
+```{r}
+df$Country <- factor(df$Country)
+df$Region <- factor(df$Region)
+```
 
 ## Data Cleaning
 
 ### Handling Null Values
+
+The original dataset had several hundred missing values.
 
 #### Treating Null Values
 
