@@ -159,10 +159,13 @@ summary(data)
 
 #### 2.3 Categorizing the Datasets Attributes
 
+```         
+-   Country
 
-    -   Country
 -   Region
 
+-   Economic Status
+```
 
 -   Numerical (Nominal):
 
@@ -220,11 +223,12 @@ data |>
 distinct(Year)
 ```
 
-For the purpose of analaysis in R Studio, it is a good practice to change the categorical variables into factors
+For the purpose of analaysis in R, it is a good practice to change the categorical variables into factors
 
 ```{r}
 data$Country <- factor(data$Country)
 data()$Region <- factor(data$Region)
+data$Region <- factor(data$Region)
 data$Year <- factor(data$Year)
 
 glimpse(data)
@@ -277,6 +281,65 @@ When doing research on how to handle the missing values, Our group leader found 
 The group moved forward with the "Fixed" dataset.
 
 ### 3.2 Handling Outliers
+
+**Writing Function to find Number of Outliers:**
+
+```{r}
+num_outliers <- function(data_set, column) {
+  q1 <- quantile(column, 0.25)
+  q3 <- quantile(column, 0.75)
+  iqr <- q3 -q1
+  
+  upper_bound <- q3 + 1.5 * iqr
+  lower_bound <- q1 - 1.5 * iqr
+  
+  outliers <- column[column < lower_bound | column > upper_bound]
+  
+  plot <- ggplot(data_set) + geom_boxplot(aes(x = "", y = column))
+  
+  print(plot)
+  
+  return(length(outliers))
+}
+```
+
+**Number of Outliers:**
+
+Life Expectancy
+
+```{r}
+num_outliers(data, data$Life_expectancy)
+```
+
+Adult Mortality: 112
+
+Alcohol Consumption: 2
+
+Hepatitis B: 164
+
+Measles: 35
+
+Polio: 190
+
+Diphtheria: 187
+
+HIV/AIDS: 461
+
+GDP: 425
+
+Population: 362
+
+Thinness Five-Nine: 95
+
+Thinness Ten-Nineteen: 89
+
+Schooling: 0
+
+BMI: 25
+
+Infant Deaths: 29
+
+Under-Five deaths: 102
 
 #### 3.2.1 Treating Outliers
 
@@ -357,6 +420,8 @@ data |>
   geom_point()
 ```
 
+Alcohol:
+
 ```{r}
 data |>
   ggplot(aes(y = Alcohol_consumption, x = Adult_mortality, color = Region)) +
@@ -403,7 +468,7 @@ data |>
   geom_point()
 ```
 
-GDP
+GDP:
 
 ```{r}
 data |>
