@@ -23,9 +23,9 @@ num_outliers <- function(data_set, column) {
   
   outliers <- column[column < lower_bound | column > upper_bound]
   
-  #plot <- ggplot(data_set) + geom_boxplot(aes(x = "", y = column))
+  plot <- ggplot(data_set) + geom_boxplot(aes(x = "", y = column))
   
-  #print(plot)
+  print(plot)
   
   return(length(outliers))
 }

@@ -228,11 +228,11 @@ data |>
 distinct(Year)
 ```
 
-For the purpose of analaysis in R Studio, it is a good practice to change the categorical variables into factors
+For the purpose of analaysis in R, it is a good practice to change the categorical variables into factors
 
 ```{r}
 data$Country <- factor(data$Country)
-data()$Region <- factor(data$Region)
+data$Region <- factor(data$Region)
 data$Year <- factor(data$Year)
 
 glimpse(data)
@@ -313,7 +313,11 @@ num_outliers <- function(data_set, column) {
 
 **Number of Outliers:**
 
-Life Expectancy: 19
+Life Expectancy
+
+```{r}
+num_outliers(data, data$Life_expectancy)
+```
 
 Adult Mortality: 112
 
@@ -340,8 +344,6 @@ Thinness Ten-Nineteen: 89
 Schooling: 0
 
 BMI: 25
-
-Year:
 
 Infant Deaths: 29
 
@@ -426,7 +428,7 @@ data |>
   geom_point()
 ```
 
-Alcohol
+Alcohol:
 
 ```{r}
 data |>
@@ -474,7 +476,7 @@ data |>
   geom_point()
 ```
 
-GDP
+GDP:
 
 ```{r}
 data |>
