@@ -228,14 +228,14 @@ data |>
 distinct(Year)
 ```
 
-For the purpose of data analaytics in R Studio, it is a good practice to change the categorical variables into factors
+For the purpose of analaysis in R Studio, it is a good practice to change the categorical variables into factors
 
 ```{r}
-data$Country <- factor(df$Country)
-data()$Region <- factor(df$Region)
-data$Year <- factor(df$Year)
+data$Country <- factor(data$Country)
+data()$Region <- factor(data$Region)
+data$Year <- factor(data$Year)
 
-glimpse(df)
+glimpse(data)
 ```
 
 ## 3 Data Cleaning
@@ -244,7 +244,7 @@ glimpse(df)
 
 The original data set had several hundred missing values. While the data is publicly available as it is all published by the various nations of the world and the World Heath Organization , it is not feasible with our teams man hours to manually enter each missing value.
 
-Number of Missing Values
+**Number of Missing Values:**
 
 Life Expectancy: 10
 
@@ -280,25 +280,25 @@ Schooling: 163
 
 #### 3.1.1 Treating Null Values
 
-1\) Delete the row: possible for datasets with small number of NA's, sadly that is not our dataset
+1\) Delete the row: Possible for datasets with small number of NA's, sadly that is not our dataset.
 
 2\) Fill in with mean/median/mode: For numerical colloumns, which all of are missing values are, it is possible to calcualte the mean, median, or mode of the dataset and replace the missing values with one them.
 
-#### Decision for Treating Null Values
+#### 3.1.2 Decision for Treating Null Values
 
 When doing research on how to handle the missing values, Our group leader found a data set that has already "fixed" the missing values. This new data set first grouped each country into regions, from there the average value of each column was found by region. This is a very clean way to ensure that different regions do not effect each other, while still filling in the missing values.
 
-#### Approach
+#### 3.1.3 Approach
 
 The group moved forward with the "Fixed" dataset.
 
-### Handling Outliers
+### 3.2 Handling Outliers
 
-#### 3.1.1 Treating Outliers
+#### 3.2.1 Treating Outliers
 
-#### 3.1.2 Decision for Treating Outliers
+#### 3.2.2 Decision for Treating Outliers
 
-#### 3.1.3 Approach
+#### 3.2.3 Approach
 
 ## 4 Data Analysis
 
@@ -308,7 +308,7 @@ The group moved forward with the "Fixed" dataset.
 
 #### 4.3 Covariance Analysis
 
-Life Expectancy
+Life Expectancy:
 
 ```{r}
 data |>
