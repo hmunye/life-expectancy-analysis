@@ -159,17 +159,17 @@ summary(data)
 
 #### 2.3 Categorizing the Datasets Attributes
 
+```         
+-   Country
 
-    -   Country
+-   Region
 
-    -   Region
-
-    -   Economic Status
+-   Economic Status
+```
 
 -   Numerical (Nominal):
 
     -   None
-
 
     -   Year
 
@@ -247,7 +247,6 @@ Adult Morality: 10
 
 Infant Deaths: 0
 
-
 Hepatitis B: 553
 
 Measles: 0
@@ -258,13 +257,11 @@ Under-five deaths: 0
 
 Polio: 19
 
-
 HIV/AIDS: 0
 
 GDP: 448
 
 Population: 652
-
 
 Thinness 5-9: 34
 
@@ -273,7 +270,6 @@ Schooling: 163
 #### 3.1.1 Treating Null Values
 
 1\) Delete the row: Possible for datasets with small number of NA's, sadly that is not our dataset.
-
 
 #### 3.1.2 Decision for Treating Null Values
 
@@ -285,7 +281,6 @@ The group moved forward with the "Fixed" dataset.
 
 ### 3.2 Handling Outliers
 
-<<<<<<< HEAD
 **Writing Function to find Number of Outliers:**
 
 ```{r}
@@ -298,6 +293,10 @@ num_outliers <- function(data_set, column) {
   lower_bound <- q1 - 1.5 * iqr
   
   outliers <- column[column < lower_bound | column > upper_bound]
+  
+  plot <- ggplot(data_set) + geom_boxplot(aes(x = "", y = column))
+  
+  print(plot)
   
   return(length(outliers))
 }
@@ -341,8 +340,6 @@ Infant Deaths: 29
 
 Under-Five deaths: 102
 
-=======
->>>>>>> 78a6bb3e7d55016b4dc2df163b9392ea6a6c9aad
 #### 3.2.1 Treating Outliers
 
 #### 3.2.2 Decision for Treating Outliers
@@ -422,10 +419,7 @@ data |>
   geom_point()
 ```
 
-<<<<<<< HEAD
 Alcohol:
-=======
->>>>>>> 78a6bb3e7d55016b4dc2df163b9392ea6a6c9aad
 
 ```{r}
 data |>
