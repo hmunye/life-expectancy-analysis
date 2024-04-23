@@ -191,7 +191,7 @@ summary(data)
     -   Hepatitis B
     -   Measles
     -   Polio
-    -   Diptheria
+    -   Diphtheria
     -   HIV/AIDS
     -   GDP
     -   Population
@@ -252,7 +252,7 @@ Adult Morality: 10
 
 Infant Deaths: 0
 
-Alchohol: 194
+Alcohol: 194
 
 Hepatitis B: 553
 
@@ -264,7 +264,7 @@ Under-five deaths: 0
 
 Polio: 19
 
-Diptheria: 19
+Diphtheria: 19
 
 HIV/AIDS: 0
 
@@ -282,7 +282,7 @@ Schooling: 163
 
 1\) Delete the row: Possible for datasets with small number of NA's, sadly that is not our dataset.
 
-2\) Fill in with mean/median/mode: For numerical colloumns, which all of are missing values are, it is possible to calcualte the mean, median, or mode of the dataset and replace the missing values with one them.
+2\) Fill in with mean/median/mode: For numerical columns, which all of are missing values are, it is possible to calculate the mean, median, or mode of the dataset and replace the missing values with one them.
 
 #### 3.1.2 Decision for Treating Null Values
 
@@ -325,7 +325,7 @@ Measles: 35
 
 Polio: 190
 
-Diptheria: 187
+Diphtheria: 187
 
 HIV/AIDS: 461
 
@@ -426,7 +426,7 @@ data |>
   geom_point()
 ```
 
-Alchohol
+Alcohol
 
 ```{r}
 data |>
