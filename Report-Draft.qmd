@@ -281,7 +281,7 @@ The group moved forward with the "Fixed" dataset.
 
 ### 3.2 Handling Outliers
 
-**Writing Function to find Number of Outliers:**
+**Writing Function to find Number of Outliers and Print Box Plot:**
 
 ```{r}
 num_outliers <- function(data_set, column) {
@@ -304,41 +304,101 @@ num_outliers <- function(data_set, column) {
 
 **Number of Outliers:**
 
-Life Expectancy
+Life Expectancy:
 
 ```{r}
 num_outliers(data, data$Life_expectancy)
 ```
 
-Adult Mortality: 112
+Adult Mortality:
 
-Alcohol Consumption: 2
+```{r}
+num_outliers(data, data$Adult_mortality)
+```
 
-Hepatitis B: 164
+Alcohol Consumption:
 
-Measles: 35
+```{r}
+num_outliers(data, data$Alcohol_consumption)
+```
 
-Polio: 190
+Hepatitis B:
 
-Diphtheria: 187
+```{r}
+num_outliers(data, data$Hepatitis_B)
+```
 
-HIV/AIDS: 461
+Measles:
 
-GDP: 425
+```{r}
+num_outliers(data, data$Measles)
+```
 
-Population: 362
+Polio:
 
-Thinness Five-Nine: 95
+```{r}
+num_outliers(data, data$Polio)
+```
 
-Thinness Ten-Nineteen: 89
+Diphtheria:
 
-Schooling: 0
+```{r}
+num_outliers(data, data$Diphtheria)
+```
 
-BMI: 25
+HIV/AIDS:
 
-Infant Deaths: 29
+```{r}
+num_outliers(data, data$Incidents_HIV)
+```
 
-Under-Five deaths: 102
+GDP:
+
+```{r}
+num_outliers(data, data$GDP_per_capita)
+```
+
+Population:
+
+```{r}
+num_outliers(data, data$Population_mln)
+```
+
+Thinness Five-Nine:
+
+```{r}
+num_outliers(data, data$Thinness_five_nine_years)
+```
+
+Thinness Ten-Nineteen:
+
+```{r}
+num_outliers(data, data$Thinness_ten_nineteen_years)
+```
+
+Schooling:
+
+```{r}
+num_outliers(data, data$Schooling)
+```
+
+BMI:
+
+```{r}
+num_outliers(data, data$BMI)
+```
+
+Infant Deaths:
+
+```{r}
+num_outliers(data, data$Infant_deaths)
+```
+
+Under-Five deaths:
+
+```{r}
+num_outliers(data, data$Under_five_deaths)
+```
 
 #### 3.2.1 Treating Outliers
 
