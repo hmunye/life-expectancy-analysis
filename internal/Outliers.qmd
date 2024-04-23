@@ -23,9 +23,9 @@ num_outliers <- function(data_set, column) {
   
   outliers <- column[column < lower_bound | column > upper_bound]
   
-  plot <- ggplot(data_set) + geom_boxplot(aes(x = "", y = column))
+  #plot <- ggplot(data_set) + geom_boxplot(aes(x = "", y = column))
   
-  print(plot)
+  #print(plot)
   
   return(length(outliers))
 }
@@ -167,7 +167,7 @@ filter_out_region("Oceania")
 filter_out_region("North America")
 ```
 
-## Filter Out Non-Numeric: 
+## Filter Out Non-Numeric:
 
 ```{r}
 numeric_data <- data[, sapply(data, is.numeric)]

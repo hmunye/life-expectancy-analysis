@@ -159,7 +159,7 @@ summary(data)
 
 #### 2.3 Categorizing the Datasets Attributes
 
--   Categorical (nominal):
+-   Categorical (Nominal):
 
     -   Country
 
@@ -171,7 +171,7 @@ summary(data)
 
     -   None
 
--   Numerical (discrete):
+-   Numerical (Discrete):
 
     -   Year
 
@@ -187,7 +187,7 @@ summary(data)
 
     -   Life Expectancy
     -   Adult Mortality
-    -   Alchol
+    -   Alcohol Consumption
     -   Hepatitis B
     -   Measles
     -   Polio
@@ -196,7 +196,7 @@ summary(data)
     -   GDP
     -   Population
     -   Thinness 5-9
-    -   Thinness 10-9
+    -   Thinness 10-19
     -   Schooling
 
 -   Put Reasoning here (Why each is what it is)
@@ -272,7 +272,7 @@ GDP: 448
 
 Population: 652
 
-thinness 1-19 : 34
+Thinness 10-19 : 34
 
 Thinness 5-9: 34
 
@@ -293,6 +293,59 @@ When doing research on how to handle the missing values, Our group leader found 
 The group moved forward with the "Fixed" dataset.
 
 ### 3.2 Handling Outliers
+
+**Writing Function to find Number of Outliers:**
+
+```{r}
+num_outliers <- function(data_set, column) {
+  q1 <- quantile(column, 0.25)
+  q3 <- quantile(column, 0.75)
+  iqr <- q3 -q1
+  
+  upper_bound <- q3 + 1.5 * iqr
+  lower_bound <- q1 - 1.5 * iqr
+  
+  outliers <- column[column < lower_bound | column > upper_bound]
+  
+  return(length(outliers))
+}
+```
+
+**Number of Outliers:**
+
+Life Expectancy: 19
+
+Adult Mortality: 112
+
+Alcohol Consumption: 2
+
+Hepatitis B: 164
+
+Measles: 35
+
+Polio: 190
+
+Diptheria: 187
+
+HIV/AIDS: 461
+
+GDP: 425
+
+Population: 362
+
+Thinness Five-Nine: 95
+
+Thinness Ten-Nineteen: 89
+
+Schooling: 0
+
+BMI: 25
+
+Year:
+
+Infant Deaths: 29
+
+Under-Five deaths: 102
 
 #### 3.2.1 Treating Outliers
 
