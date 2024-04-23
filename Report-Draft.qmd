@@ -159,7 +159,6 @@ summary(data)
 
 #### 2.3 Categorizing the Datasets Attributes
 
--   Categorical (Nominal):
 
     -   Country
 
@@ -171,7 +170,6 @@ summary(data)
 
     -   None
 
--   Numerical (Discrete):
 
     -   Year
 
@@ -187,16 +185,13 @@ summary(data)
 
     -   Life Expectancy
     -   Adult Mortality
-    -   Alcohol Consumption
     -   Hepatitis B
     -   Measles
     -   Polio
-    -   Diphtheria
     -   HIV/AIDS
     -   GDP
     -   Population
     -   Thinness 5-9
-    -   Thinness 10-19
     -   Schooling
 
 -   Put Reasoning here (Why each is what it is)
@@ -252,7 +247,6 @@ Adult Morality: 10
 
 Infant Deaths: 0
 
-Alcohol: 194
 
 Hepatitis B: 553
 
@@ -264,7 +258,6 @@ Under-five deaths: 0
 
 Polio: 19
 
-Diphtheria: 19
 
 HIV/AIDS: 0
 
@@ -272,7 +265,6 @@ GDP: 448
 
 Population: 652
 
-Thinness 10-19 : 34
 
 Thinness 5-9: 34
 
@@ -282,7 +274,6 @@ Schooling: 163
 
 1\) Delete the row: Possible for datasets with small number of NA's, sadly that is not our dataset.
 
-2\) Fill in with mean/median/mode: For numerical columns, which all of are missing values are, it is possible to calculate the mean, median, or mode of the dataset and replace the missing values with one them.
 
 #### 3.1.2 Decision for Treating Null Values
 
@@ -293,59 +284,6 @@ When doing research on how to handle the missing values, Our group leader found 
 The group moved forward with the "Fixed" dataset.
 
 ### 3.2 Handling Outliers
-
-**Writing Function to find Number of Outliers:**
-
-```{r}
-num_outliers <- function(data_set, column) {
-  q1 <- quantile(column, 0.25)
-  q3 <- quantile(column, 0.75)
-  iqr <- q3 -q1
-  
-  upper_bound <- q3 + 1.5 * iqr
-  lower_bound <- q1 - 1.5 * iqr
-  
-  outliers <- column[column < lower_bound | column > upper_bound]
-  
-  return(length(outliers))
-}
-```
-
-**Number of Outliers:**
-
-Life Expectancy: 19
-
-Adult Mortality: 112
-
-Alcohol Consumption: 2
-
-Hepatitis B: 164
-
-Measles: 35
-
-Polio: 190
-
-Diphtheria: 187
-
-HIV/AIDS: 461
-
-GDP: 425
-
-Population: 362
-
-Thinness Five-Nine: 95
-
-Thinness Ten-Nineteen: 89
-
-Schooling: 0
-
-BMI: 25
-
-Year:
-
-Infant Deaths: 29
-
-Under-Five deaths: 102
 
 #### 3.2.1 Treating Outliers
 
@@ -426,7 +364,6 @@ data |>
   geom_point()
 ```
 
-Alcohol
 
 ```{r}
 data |>
@@ -515,6 +452,398 @@ data |>
 
 data |>
   ggplot(aes(y = GDP_per_capita, x = Schooling, color = Region)) +
+  geom_point()
+```
+
+Adult Mortality
+
+```{r}
+data |>
+  ggplot(aes(y = Adult_mortality, x = Life_expectancy, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Adult_mortality, x = Infant_deaths, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Adult_mortality, x = Under_five_deaths, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Adult_mortality, x = Alcohol_consumption, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Adult_mortality, x = Hepatitis_B, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Adult_mortality, x = Measles,color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Adult_mortality, x =  BMI, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Adult_mortality, x = Polio, color = Region)) +
+  geom_point()
+
+
+data |>
+  ggplot(aes(y = Adult_mortality, x = Diphtheria, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Adult_mortality, x = Incidents_HIV, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Adult_mortality, x = GDP_per_capita, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Adult_mortality, x = Population_mln, color = Region))   +
+  geom_point()
+  
+  data |>
+  ggplot(aes(y = Adult_mortality, x = Thinness_ten_nineteen_years, color = Region)) +
+  geom_point()
+  
+  data |>
+  ggplot(aes(y = Adult_mortality, x = Thinness_five_nine_years, color = Region))   +
+  geom_point()
+  
+  data |>
+  ggplot(aes(y = Adult_mortality, x = Schooling, color = Region))   +
+  geom_point()
+```
+
+Hepatitis B
+
+```{r}
+
+data |>
+  ggplot(aes(y =  Hepatitis_B, x = Life_expectancy, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Hepatitis_B, x = Infant_deaths, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Hepatitis_B, x = Under_five_deaths, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Hepatitis_B, x = Alcohol_consumption, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Hepatitis_B, x = Adult_mortality, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Hepatitis_B, x = Measles,color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Hepatitis_B, x =  BMI, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Hepatitis_B, x = Polio, color = Region)) +
+  geom_point()
+
+
+data |>
+  ggplot(aes(y = Hepatitis_B, x = Diphtheria, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Hepatitis_B, x = Incidents_HIV, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Hepatitis_B, x = GDP_per_capita, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Hepatitis_B, x = Population_mln, color = Region))   +
+  geom_point()
+  
+  data |>
+  ggplot(aes(y = Hepatitis_B, x = Thinness_ten_nineteen_years, color = Region)) +
+  geom_point()
+  
+  data |>
+  ggplot(aes(y = Hepatitis_B, x = Thinness_five_nine_years, color = Region))   +
+  geom_point()
+  
+  data |>
+  ggplot(aes(y = Hepatitis_B, x = Schooling, color = Region))   +
+  geom_point()
+```
+
+Measles
+
+```{r}
+data |>
+  ggplot(aes(y =  Measles, x = Life_expectancy, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Measles, x = Infant_deaths, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Measles, x = Under_five_deaths, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Measles, x = Alcohol_consumption, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Measles, x = Adult_mortality, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Measles, x = Hepatitis_B,color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Measles, x =  BMI, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Measles, x = Polio, color = Region)) +
+  geom_point()
+
+
+data |>
+  ggplot(aes(y = Measles, x = Diphtheria, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Measles, x = Incidents_HIV, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Measles, x = GDP_per_capita, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Measles, x = Population_mln, color = Region))   +
+  geom_point()
+  
+  data |>
+  ggplot(aes(y = Measles, x = Thinness_ten_nineteen_years, color = Region)) +
+  geom_point()
+  
+  data |>
+  ggplot(aes(y = Measles, x = Thinness_five_nine_years, color = Region))   +
+  geom_point()
+  
+  data |>
+  ggplot(aes(y = Measles, x = Schooling, color = Region))   +
+  geom_point()
+```
+
+BMI
+
+```{r}
+data |>
+  ggplot(aes(y =  BMI, x = Life_expectancy, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = BMI, x = Infant_deaths, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = BMI, x = Under_five_deaths, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = BMI, x = Alcohol_consumption, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = BMI, x = Adult_mortality, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = BMI, x = Hepatitis_B,color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = BMI, x =  Measles, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = BMI, x = Polio, color = Region)) +
+  geom_point()
+
+
+data |>
+  ggplot(aes(y = BMI, x = Diphtheria, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = BMI, x = Incidents_HIV, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = BMI, x = GDP_per_capita, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = BMI, x = Population_mln, color = Region))   +
+  geom_point()
+  
+  data |>
+  ggplot(aes(y = BMI, x = Thinness_ten_nineteen_years, color = Region)) +
+  geom_point()
+  
+  data |>
+  ggplot(aes(y = BMI, x = Thinness_five_nine_years, color = Region))   +
+  geom_point()
+  
+  data |>
+  ggplot(aes(y = BMI, x = Schooling, color = Region))   +
+  geom_point()
+```
+
+Polio
+
+```{r}
+
+data |>
+  ggplot(aes(y = Polio, x = Life_expectancy, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Polio, x = Infant_deaths, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Polio, x = Under_five_deaths, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Polio, x = Alcohol_consumption, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Polio, x = Adult_mortality, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Polio, x = Hepatitis_B,color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Polio, x =  Measles, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Polio, x = BMI, color = Region)) +
+  geom_point()
+
+
+data |>
+  ggplot(aes(y = Polio, x = Diphtheria, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Polio, x = Incidents_HIV, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Polio, x = GDP_per_capita, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Polio, x = Population_mln, color = Region))   +
+  geom_point()
+  
+  data |>
+  ggplot(aes(y = Polio, x = Thinness_ten_nineteen_years, color = Region)) +
+  geom_point()
+  
+  data |>
+  ggplot(aes(y = Polio, x = Thinness_five_nine_years, color = Region))   +
+  geom_point()
+  
+  data |>
+  ggplot(aes(y = Polio, x = Schooling, color = Region))   +
+  geom_point()
+```
+
+Diphtheria
+
+```{r}
+data |>
+  ggplot(aes(y = Diphtheria, x = Life_expectancy, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Diphtheria, x = Infant_deaths, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Diphtheria, x = Under_five_deaths, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Diphtheria, x = Alcohol_consumption, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Diphtheria, x = Adult_mortality, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Diphtheria, x = Hepatitis_B,color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Diphtheria, x =  Measles, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Diphtheria, x = BMI, color = Region)) +
+  geom_point()
+
+
+data |>
+  ggplot(aes(y = Diphtheria, x = Polio, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Diphtheria, x = Incidents_HIV, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Diphtheria, x = GDP_per_capita, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Diphtheria, x = Population_mln, color = Region))   +
+  geom_point()
+  
+  data |>
+  ggplot(aes(y = Diphtheria, x = Thinness_ten_nineteen_years, color = Region)) +
+  geom_point()
+  
+  data |>
+  ggplot(aes(y = Diphtheria, x = Thinness_five_nine_years, color = Region))   +
+  geom_point()
+  
+  data |>
+  ggplot(aes(y = Diphtheria, x = Schooling, color = Region))   +
   geom_point()
 ```
 
