@@ -53,107 +53,111 @@ author: Group 5
 
     -   5.2 Covariance Analysis
 
-## Introduction
+## 1 Introduction
 
-#### Data Understanding
+This dataset includes comprehensive information on 179 countries spanning from 2000 to 2015, covering aspects like life expectancy, health indicators, immunization rates, and economic and demographic data. Originally sourced from Kaggle, it underwent updates to rectify inaccuracies and missing values. Population, GDP, and life expectancy figures were updated from World Bank data, while data on vaccinations, alcohol consumption, BMI, HIV rates, mortality, and other health metrics were sourced from the World Health Organization. Additional information on schooling was gathered from the University of Oxford's Our World in Data project. Missing values were addressed using strategies such as filling with the closest three-year average or the regional average. Countries with significant missing data were excluded, and the remaining countries were categorized based on their Gross National Income per capita into developed vs developing economies, following guidelines from organizations like the World Trade Organization and the UN.
 
-Columns in the Dataset
+#### 1.1 Data Understanding
 
--    Country: The Country
+Columns in the dataset:
 
--   Year: Year
+-   **Country:** List of the 179 countries
 
--   Region: Africa, Asia, European Union, Middle East, South America, Central America, Rest of Europe, Oceania, North America
+-   **Region:** 179 countries are distributed in 9 regions. E.g. Africa, Asia, Oceania, European Union, Rest of Europe and etc.
 
--   Life Expectancy: Life Expectancy in age
+-   **Year:** Years observed from 2000 to 2015
 
--    Adult Mortality: Adult Mortality Rates of both sexes (probability of dying between 15 and 60 years per 1000 population)
+-   **Infant_deaths:** Represents infant deaths per 1000 population
 
--    Infant Deaths: Number of Infant Deaths per 1000 population
+-   **Under_five_deaths:** Represents deaths of children under five years old per 1000 population
 
--    Alcohol:  Alcohol, recorded per capita (15+) consumption (in liters of pure alcohol)
+-   **Adult_mortality:** Represents deaths of adults per 1000 population
 
--    Percentage Expenditure: Expenditure on health as a percentage of Gross Domestic Product per capita (%)
+-   **Alcohol_consumption:** Represents alcohol consumption that is recorded in liters of pure alcohol per capita with 15+ years old
 
--   Hepatitis B: HepB immunization coverage among 1-year-olds (%)
+-   **Hepatitis_B:** Represents % of coverage of Hepatitis B (HepB3) immunization among 1-year-olds
 
--    Measles: number of reported cases per 1000 population
+-   **Measles:** Represents % of coverage of Measles containing vaccine first dose (MCV1) immunization among 1-year-olds
 
--   BMI: Average Body Mass Index of the whole population
+-   **BMI:** BMI is a measure of nutritional status in adults. It is defined as a person's weight in kilograms divided by the square of that person's height in meters (kg/m2)
 
--    Under-five deaths: Number of deaths under the age of 5 per 1000 population
+-   **Polio:** Represents % of coverage of Polio (Pol3) immunization among 1-year-olds
 
--    Polio: Immunization coverage among 1-year-olds (%)
+-   **Diphtheria:** Represents % of coverage of Diphtheria tetanus toxoid and pertussis (DTP3) immunization among 1-year-olds
 
--    Diphtheria (TDP immunization coverage among 1-year-olds)
+-   **Incidents_HIV:** Incidents of HIV per 1000 population aged 15-49
 
--    HIV/AIDS: Deaths per 1000 live births HIV/Aids (0-4 years)
+-   **GDP_per_capita:** GDP per capita in current USD
 
--   GDP: Gross Domestic Product per capita (USD)
+-   **Population_mln:** Total population in millions
 
--    Population: Total Population of the country in millions
+-   **Thinness_ten_nineteen_years:** Prevalence of thinness among adolescents aged 10-19 years. BMI \< -2 standard deviations below the median
 
--   Thinness 10-19 and 5-9: Prevalence of thinness among children and adolescents for the given ages, in %
+-   **Thinness_five_nine_years:** Prevalence of thinness among children aged 5-9 years. BMI \< -2 standard deviations below the median
 
--   Schooling: Number of years of Schooling(years)
+-   **Schooling:** Average years that people aged 25+ spent in formal education
 
--   Economic status: developing or developed countries
+-   **Economy_status_Developed:** Developed country
 
-#### Data Source
+-   **Economy_status_Developing:** Developing county
 
-Orignal Dataset information can be found here: <https://www.kaggle.com/datasets/lashagoch/life-expectancy-who-updated>
+-   **Life_expectancy:** Average life expectancy of both genders in different years from 2010 to 2015
 
-For ease of use we have re uploaded the dataset to the Github created for the group project
+#### 1.2 Data Source
+
+Original dataset can be found here: <https://www.kaggle.com/datasets/lashagoch/life-expectancy-who-updated>
+
+For ease of use we have re-uploaded the dataset to this Github repository created for this group project:
 
 <https://raw.githubusercontent.com/hmunye/life-expectancy-analysis/main/data/Life-Expectancy-Data-Updated.csv>
 
-## Data Loading
+## 2 Data Loading
 
-#### Importing Libraries
+#### 2.1 Importing Libraries
 
 ```{r}
 library(tidyverse)
 
 ```
 
-#### Loading and Understanding the Data
+#### 2.2 Loading and Understanding the Data
 
 Load the dataset from our groups github.
 
 ```{r}
 
-df <- read_csv("https://raw.githubusercontent.com/hmunye/life-expectancy-analysis/main/data/Life-Expectancy-Data-Updated.csv", show_col_types = FALSE)
+data <- read_csv("https://raw.githubusercontent.com/hmunye/life-expectancy-analysis/main/data/Life-Expectancy-Data-Updated.csv", show_col_types = FALSE)
 
 ```
 
 Display the first 5 rows of the dataset
 
 ```{r}
-head(df, 5)
+head(data, 5)
 ```
 
-The shape of the dataframe
+The shape of the data frame
 
 ```{r}
 # Get the number of rows
-num_rows <- nrow(df)
+num_rows <- nrow(data)
 
 # Get the number of columns
-num_cols <- ncol(df)
+num_cols <- ncol(data)
 
 # Print the results
 cat("Number of rows:", num_rows, "\n")
 cat("Number of columns:", num_cols, "\n")
 ```
 
-Summary of the Dataframe
+Summary of the Data Frame
 
 ```{r}
-summary(df)
+summary(data)
 
 ```
 
-#### Categorizing the Datasets Attributes
+#### 2.3 Categorizing the Datasets Attributes
 
 -   Categorical (nominal):
 
@@ -234,13 +238,13 @@ df$Year <- factor(df$Year)
 glimpse(df)
 ```
 
-## Data Cleaning
+## 3 Data Cleaning
 
-### Handling Null Values
+### 3.1 Handling Null Values
 
 The original data set had several hundred missing values. While the data is publicly available as it is all published by the various nations of the world and the World Heath Organization , it is not feasible with our teams man hours to manually enter each missing value.
 
-#### Treating Null Values
+#### 3.1.1 Treating Null Values
 
 There were several options when it came to the missing values, We could ignore years with a high amount of them (Such as 2015), we could simple exclude them from the data set, or put in the average value of the column for the missing value.
 
@@ -254,87 +258,87 @@ The group moved forward with the "Fixed" dataset.
 
 ### Handling Outliers
 
-#### Treating Outliers
+#### 3.1.1 Treating Outliers
 
-#### Decision for Treating Outliers
+#### 3.1.2 Decision for Treating Outliers
 
-#### Approach
+#### 3.1.3 Approach
 
-## Data Analysis
+## 4 Data Analysis
 
-#### Plots
+#### 4.1 Plots
 
-#### Variance Analysis
+#### 4.2 Variance Analysis
 
-#### Covariance Analysis
+#### 4.3 Covariance Analysis
 
 Life Expectancy
 
 ```{r}
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x = Adult_mortality, color = Region)) +
   geom_point()
 
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x = Infant_deaths, color = Region)) +
   geom_point()
 
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x = Under_five_deaths, color = Region)) +
   geom_point()
 
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x = Alcohol_consumption, color = Region)) +
   geom_point()
 
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x = Hepatitis_B, color = Region)) +
   geom_point()
 
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x = Measles,color = Region)) +
   geom_point()
 
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x =  BMI, color = Region)) +
   geom_point()
 
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x = Polio, color = Region)) +
   geom_point()
 
 
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x = Diphtheria, color = Region)) +
   geom_point()
 
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x = Incidents_HIV, color = Region)) +
   geom_point()
 
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x = GDP_per_capita, color = Region)) +
   geom_point()
 
-df |>
+data |>
   ggplot(aes(y = Life_expectancy, x = Population_mln, color = Region))   +
   geom_point()
   
-  df |>
+  data |>
   ggplot(aes(y = Life_expectancy, x = Thinness_ten_nineteen_years, color = Region)) +
   geom_point()
   
-  df |>
+  data |>
   ggplot(aes(y = Life_expectancy, x = Thinness_five_nine_years, color = Region))   +
   geom_point()
   
-  df |>
+  data |>
   ggplot(aes(y = Life_expectancy, x = Schooling, color = Region))   +
   geom_point()
 ```
 
-## Final Conclusions
+## 5 Final Conclusions
 
-#### Variance Analysis
+#### 5.1 Variance Analysis
 
-#### Covariance Analysis
+#### 5.2 Covariance Analysis
