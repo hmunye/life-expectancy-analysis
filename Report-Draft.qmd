@@ -426,6 +426,98 @@ data |>
   geom_point()
 ```
 
+Alchohol
+
+```{r}
+data |>
+  ggplot(aes(y = Alcohol_consumption, x = Adult_mortality, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Alcohol_consumption, x = Infant_deaths, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Alcohol_consumption, x = Hepatitis_B, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Alcohol_consumption, x = Measles, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Alcohol_consumption, x = BMI, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Alcohol_consumption, x = Polio, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Alcohol_consumption, x = Diphtheria, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Alcohol_consumption, x = Incidents_HIV, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Alcohol_consumption, x = GDP_per_capita, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Alcohol_consumption, x = Population_mln, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Alcohol_consumption, x = Schooling, color = Region)) +
+  geom_point()
+```
+
+GDP
+
+```{r}
+data |>
+  ggplot(aes(y = GDP_per_capita, x = Adult_mortality, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = GDP_per_capita, x = Life_expectancy, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = GDP_per_capita, x = Infant_deaths, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = GDP_per_capita, x = Under_five_deaths, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = GDP_per_capita, x = Alcohol_consumption, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = GDP_per_capita, x = Hepatitis_B, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = GDP_per_capita, x = Adult_mortality, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = GDP_per_capita, x = Hepatitis_B, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = Population_mln, x = Adult_mortality, color = Region)) +
+  geom_point()
+
+data |>
+  ggplot(aes(y = GDP_per_capita, x = Schooling, color = Region)) +
+  geom_point()
+```
+
 ## 5 Final Conclusions
 
 #### 5.1 Variance Analysis
