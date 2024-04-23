@@ -57,6 +57,48 @@ author: Group 5
 
 #### Data Understanding
 
+Columns in the Dataset
+
+-    Country: The Country
+
+-   Year: Year
+
+-   Region: Africa, Asia, European Union, Middle East, South America, Central America, Rest of Europe, Oceania, North America
+
+-   Life Expectancy: Life Expectancy in age
+
+-    Adult Mortality: Adult Mortality Rates of both sexes (probability of dying between 15 and 60 years per 1000 population)
+
+-    Infant Deaths: Number of Infant Deaths per 1000 population
+
+-    Alcohol:  Alcohol, recorded per capita (15+) consumption (in liters of pure alcohol)
+
+-    Percentage Expenditure: Expenditure on health as a percentage of Gross Domestic Product per capita (%)
+
+-   Hepatitis B: HepB immunization coverage among 1-year-olds (%)
+
+-    Measles: number of reported cases per 1000 population
+
+-   BMI: Average Body Mass Index of the whole population
+
+-    Under-five deaths: Number of deaths under the age of 5 per 1000 population
+
+-    Polio: Immunization coverage among 1-year-olds (%)
+
+-    Diphtheria (TDP immunization coverage among 1-year-olds)
+
+-    HIV/AIDS: Deaths per 1000 live births HIV/Aids (0-4 years)
+
+-   GDP: Gross Domestic Product per capita (USD)
+
+-    Population: Total Population of the country in millions
+
+-   Thinness 10-19 and 5-9: Prevalence of thinness among children and adolescents for the given ages, in %
+
+-   Schooling: Number of years of Schooling(years)
+
+-   Economic status: developing or developed countries
+
 #### Data Source
 
 Orignal Dataset information can be found here: <https://www.kaggle.com/datasets/lashagoch/life-expectancy-who-updated>
@@ -115,46 +157,100 @@ summary(df)
 
 -   Categorical (nominal):
 
-    -   
+    -   Country
+
+    -   Region
+
+    -   Economic Status
 
 -   Numerical (Nominal):
 
-    -   
+    -   None
 
 -   Numerical (discrete):
 
-    -   
+    -   Year
+
+    -   Infant Deaths
+
+    -   Under-Five deaths
 
 -   Numerical (Interval)
 
-    -   
+    -   BMI
 
 -   Numerical (Ratio)
 
-    -   a
+    -   Life Expectancy
+    -   Adult Mortality
+    -   Alchol
+    -   Hepatitis B
+    -   Measles
+    -   Polio
+    -   Diptheria
+    -   HIV/AIDS
+    -   GDP
+    -   Population
+    -   Thinness 5-9
+    -   Thinness 10-9
+    -   Schooling
 
 -   Put Reasoning here (Why each is what it is)
 
+    -   **Someone please double check me.**
+
 ------------------------------------------------------------------------
+
+Creating a list of all nominal/factors
+
+Regions
+
+```{r}
+df |>
+distinct(Region)
+```
+
+Country
+
+```{r}
+df |>
+  distinct(Country)
+```
+
+Year
+
+```{r}
+df |>
+distinct(Year)
+```
 
 For the purpose of data analaytics in R Studio, it is a good practice to change the categorical variables into factors
 
 ```{r}
 df$Country <- factor(df$Country)
 df$Region <- factor(df$Region)
+df$Year <- factor(df$Year)
+
+glimpse(df)
 ```
 
 ## Data Cleaning
 
 ### Handling Null Values
 
-The original dataset had several hundred missing values.
+The original data set had several hundred missing values. While the data is publicly available as it is all published by the various nations of the world and the World Heath Organization , it is not feasible with our teams man hours to manually enter each missing value.
 
 #### Treating Null Values
 
+There were several options when it came to the missing values, We could ignore years with a high amount of them (Such as 2015), we could simple exclude them from the data set, or put in the average value of the column for the missing value.
+
 #### Decision for Treating Null Values
 
+When doing research on how to handle the missing values, Our group leader found a data set that has already "fixed" the missing values. This new data set first grouped each country into regions, from there the average value of each column was found by region. This is a very clean way to ensure that different regions do not effect each other, while still filling in the missing values.
+
 #### Approach
+
+The group moved forward with the "Fixed" dataset.
 
 ### Handling Outliers
 
