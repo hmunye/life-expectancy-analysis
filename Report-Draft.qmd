@@ -53,28 +53,74 @@ author: Group 5
 
     -   5.2 Covariance Analysis
 
-## Introduction
+## 1 Introduction
 
-#### Data Understanding
+This dataset includes comprehensive information on 179 countries spanning from 2000 to 2015, covering aspects like life expectancy, health indicators, immunization rates, and economic and demographic data. Originally sourced from Kaggle, it underwent updates to rectify inaccuracies and missing values. Population, GDP, and life expectancy figures were updated from World Bank data, while data on vaccinations, alcohol consumption, BMI, HIV rates, mortality, and other health metrics were sourced from the World Health Organization. Additional information on schooling was gathered from the University of Oxford's Our World in Data project. Missing values were addressed using strategies such as filling with the closest three-year average or the regional average. Countries with significant missing data were excluded, and the remaining countries were categorized based on their Gross National Income per capita into developed vs developing economies, following guidelines from organizations like the World Trade Organization and the UN.
 
-#### Data Source
+#### 1.1 Data Understanding
 
-Original Dataset information can be found here: <https://www.kaggle.com/datasets/lashagoch/life-expectancy-who-updated>
+Columns in the dataset:
 
-For ease of use we have re uploaded the dataset to the Github created for the group project
+-   **Country:** List of the 179 countries
+
+-   **Region:** 179 countries are distributed in 9 regions. E.g. Africa, Asia, Oceania, European Union, Rest of Europe and etc.
+
+-   **Year:** Years observed from 2000 to 2015
+
+-   **Infant_deaths:** Represents infant deaths per 1000 population
+
+-   **Under_five_deaths:** Represents deaths of children under five years old per 1000 population
+
+-   **Adult_mortality:** Represents deaths of adults per 1000 population
+
+-   **Alcohol_consumption:** Represents alcohol consumption that is recorded in liters of pure alcohol per capita with 15+ years old
+
+-   **Hepatitis_B:** Represents % of coverage of Hepatitis B (HepB3) immunization among 1-year-olds
+
+-   **Measles:** Represents % of coverage of Measles containing vaccine first dose (MCV1) immunization among 1-year-olds
+
+-   **BMI:** BMI is a measure of nutritional status in adults. It is defined as a person's weight in kilograms divided by the square of that person's height in meters (kg/m2)
+
+-   **Polio:** Represents % of coverage of Polio (Pol3) immunization among 1-year-olds
+
+-   **Diphtheria:** Represents % of coverage of Diphtheria tetanus toxoid and pertussis (DTP3) immunization among 1-year-olds
+
+-   **Incidents_HIV:** Incidents of HIV per 1000 population aged 15-49
+
+-   **GDP_per_capita:** GDP per capita in current USD
+
+-   **Population_mln:** Total population in millions
+
+-   **Thinness_ten_nineteen_years:** Prevalence of thinness among adolescents aged 10-19 years. BMI \< -2 standard deviations below the median
+
+-   **Thinness_five_nine_years:** Prevalence of thinness among children aged 5-9 years. BMI \< -2 standard deviations below the median
+
+-   **Schooling:** Average years that people aged 25+ spent in formal education
+
+-   **Economy_status_Developed:** Developed country
+
+-   **Economy_status_Developing:** Developing county
+
+-   **Life_expectancy:** Average life expectancy of both genders in different years from 2010 to 2015
+
+#### 1.2 Data Source
+
+Original dataset can be found here: <https://www.kaggle.com/datasets/lashagoch/life-expectancy-who-updated>
+
+For ease of use we have re-uploaded the dataset to this Github repository created for this group project:
 
 <https://raw.githubusercontent.com/hmunye/life-expectancy-analysis/main/data/Life-Expectancy-Data-Updated.csv>
 
-## Data Loading
+## 2 Data Loading
 
-#### Importing Libraries
+#### 2.1 Importing Libraries
 
 ```{r}
 library(tidyverse)
 
 ```
 
-#### Loading and Understanding the Data
+#### 2.2 Loading and Understanding the Data
 
 Load the dataset from our groups github.
 
@@ -111,7 +157,7 @@ summary(data)
 
 ```
 
-#### Categorizing the Datasets Attributes
+#### 2.3 Categorizing the Datasets Attributes
 
 -   Categorical (nominal):
 
@@ -144,33 +190,33 @@ data$Country <- factor(data$Country)
 data$Region <- factor(data$Region)
 ```
 
-## Data Cleaning
+## 3 Data Cleaning
 
-### Handling Null Values
+### 3.1 Handling Null Values
 
 The original dataset had several hundred missing values.
 
-#### Treating Null Values
+#### 3.1.1 Treating Null Values
 
-#### Decision for Treating Null Values
+#### 3.1.2 Decision for Treating Null Values
 
-#### Approach
+#### 3.1.3 Approach
 
-### Handling Outliers
+### 3.2 Handling Outliers
 
-#### Treating Outliers
+#### 3.1.1 Treating Outliers
 
-#### Decision for Treating Outliers
+#### 3.1.2 Decision for Treating Outliers
 
-#### Approach
+#### 3.1.3 Approach
 
-## Data Analysis
+## 4 Data Analysis
 
-#### Plots
+#### 4.1 Plots
 
-#### Variance Analysis
+#### 4.2 Variance Analysis
 
-#### Covariance Analysis
+#### 4.3 Covariance Analysis
 
 Life Expectancy
 
@@ -237,8 +283,8 @@ data |>
   geom_point()
 ```
 
-## Final Conclusions
+## 5 Final Conclusions
 
-#### Variance Analysis
+#### 5.1 Variance Analysis
 
-#### Covariance Analysis
+#### 5.2 Covariance Analysis
