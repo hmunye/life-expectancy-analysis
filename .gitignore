@@ -2,3 +2,5 @@
 .Rproj.user
 life-expectancy-analysis.Rproj
 .Rhistory
+.RData
+/.vscode/
