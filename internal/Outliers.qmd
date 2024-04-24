@@ -4,20 +4,22 @@ format: html
 editor: visual
 ---
 
-## Import Life Expectancy Data Set
+# Outliers Analysis
 
-```{r}
-df <- read_csv("https://raw.githubusercontent.com/hmunye/life-expectancy-analysis/main/data/Life-Expectancy-Data-Updated.csv", show_col_types = FALSE)
-```
-
-## Importing Libraries
+## Importing Libraries:
 
 ```{r}
 library(tidyverse)
 library(DescTools)
 ```
 
-## Find Number of Outliers and Plot:
+## Loading the Data:
+
+```{r}
+df <- read_csv("https://raw.githubusercontent.com/hmunye/life-expectancy-analysis/main/data/Life-Expectancy-Data-Updated.csv", show_col_types = FALSE)
+```
+
+## Function to Find Number of Outliers (IQR Method):
 
 ```{r}
 num_outliers <- function(data_set, column) {
@@ -29,10 +31,6 @@ num_outliers <- function(data_set, column) {
   lower_bound <- q1 - 1.5 * iqr
   
   outliers <- column[column < lower_bound | column > upper_bound]
-  
-  plot <- ggplot(data_set) + geom_boxplot(aes(x = "", y = column))
-  
-  print(plot)
   
   return(length(outliers))
 }
@@ -102,6 +100,43 @@ num_outliers(df, df$Schooling)
 num_outliers(df, df$Life_expectancy)
 ```
 
+## Identify Outliers:
+
+### Create Dataset with only numeric columns:
+
+```{r}
+numeric_columns <- df[, sapply(df, is.numeric)]
+df_numeric <- data.frame(numeric_columns)
+```
+
+### Function to return a list of outlier values for each column:
+
+```{r}
+identify_outliers <- function(data) {
+  outliers <- list()
+  
+  for (i in which(sapply(data, is.numeric))) {
+    col_name <- names(data)[i]
+    
+    perc <- quantile(data[, i], c(.25, .75 ), na.rm =TRUE)
+    lower_fence <- perc[1] - 1.5 * IQR(data[, i])
+    upper_fence <- perc[2] + 1.5 * IQR(data[, i])
+    
+    outlier_indices <- which(data[, i] < lower_fence | data[, i] > upper_fence)
+    outliers[[col_name]] <- data[outlier_indices, i]
+  }
+  
+  outliers2 <- outliers[sapply(outliers, length)>0]
+  
+  return(outliers2)
+}
+```
+
+```{r}
+outliers_vars <- identify_outliers(df_numeric)
+outliers_vars
+```
+
 ## Facet By Region:
 
 ```{r}
@@ -113,21 +148,7 @@ outlier_by_regions <- function(data_set, column) {
 }
 ```
 
-## Extreme Outliers:
-
-```{r}
-outlier_by_regions(df, df$Incidents_HIV)
-```
-
-```{r}
-outlier_by_regions(df, df$GDP_per_capita)
-```
-
-```{r}
-outlier_by_regions(df, df$Population_mln)
-```
-
-## Filter Original Data Set by Region (Create Data Frame with Chosen Region Only Included):
+## Filter Original Data Set by Region:
 
 ```{r}
 filter_out_region <- function(region) {
@@ -174,30 +195,35 @@ filter_out_region("Oceania")
 filter_out_region("North America")
 ```
 
-## Comparing Columns by Region:
+## Explanation & Insights:
+
+### Note: 
+
+The variation in outlier counts between our analytical methods (IQR Method, identify_outliers function) and boxplot visualization likely comes from differing definitions of outliers. While the analytical methods stick to strict statistical criteria, boxplots visually show points beyond the data's central range, potentially capturing more extreme values.
 
 ```{r}
-ggplot(df, aes(x = Region, y = Incidents_HIV)) +
+ggplot(df, aes(x = Region, y = Infant_deaths)) +
 geom_boxplot() +
-ggtitle("Comparison of HIV Incidence by Region")
+ggtitle("Comparison of Infant Deaths Incidence by Region")
 ```
 
-```{r}
-ggplot(df, aes(x = Region, y = GDP_per_capita)) +
-geom_boxplot() +
-ggtitle("Comparison of GDP by Region")
-```
+The "Infant_deaths" column represents the number of infant deaths per 1000 population. The IQR method identifies 29 outliers. The regions with outliers include Africa, Central America and Caribbean, European Union, Middle East, Rest of Europe, and South America. Outliers in infant deaths may indicate regions with unusually high infant mortality rates, potentially reflecting poor healthcare access and quality.
 
 ```{r}
-ggplot(df, aes(x = Region, y = Population_mln)) +
+ggplot(df, aes(x = Region, y = Under_five_deaths
+)) +
 geom_boxplot() +
-ggtitle("Comparison of Population by Region")
+ggtitle("Comparison of Under Five Deaths:
+ by Region")
 ```
 
+The "Under_five_deaths" column represents deaths of children under five years old per 1000 population. The IQR method identifies 102 outliers. The regions with outliers include Africa, Asia, Central America and Caribbean, European Union, Middle East, Rest of Europe, and South America. High rates of under-five deaths may indicate challenges related to healthcare access, quality, and availability of essential services such as maternal and child healthcare and vaccinations.
+
 ```{r}
-ggplot(df, aes(x = Region, y = Life_expectancy)) +
+ggplot(df, aes(x = Region, y = Adult_mortality)) +
 geom_boxplot() +
-ggtitle("Comparison of Life Expectancy by Region")
+ggtitle("Comparison of Adult M
+        ortality by Region")
 ```
 
 ```{r}
@@ -219,6 +245,12 @@ ggtitle("Comparison of Measles by Region")
 ```
 
 ```{r}
+ggplot(df, aes(x = Region, y = BMI)) +
+geom_boxplot() +
+ggtitle("Comparison of BMI by Region")
+```
+
+```{r}
 ggplot(df, aes(x = Region, y = Polio)) +
 geom_boxplot() +
 ggtitle("Comparison of Polio by Region")
@@ -231,9 +263,21 @@ ggtitle("Comparison of Diphtheria by Region")
 ```
 
 ```{r}
-ggplot(df, aes(x = Region, y = Thinness_five_nine_years)) +
+ggplot(df, aes(x = Region, y = Incidents_HIV)) +
 geom_boxplot() +
-ggtitle("Comparison of Thinness Five to Nine Years by Region")
+ggtitle("Comparison of Incidents HIV by Region")
+```
+
+```{r}
+ggplot(df, aes(x = Region, y = GDP_per_capita)) +
+geom_boxplot() +
+ggtitle("Comparison of GDP Per Capita by Region")
+```
+
+```{r}
+ggplot(df, aes(x = Region, y = Population_mln)) +
+geom_boxplot() +
+ggtitle("Comparison of Population by Region")
 ```
 
 ```{r}
@@ -243,75 +287,24 @@ ggtitle("Comparison of Thinness Ten to Nineteen Years by Region")
 ```
 
 ```{r}
+ggplot(df, aes(x = Region, y = Thinness_five_nine_years)) +
+geom_boxplot() +
+ggtitle("Comparison of Thinness Five to Nine Years by Region")
+```
+
+```{r}
 ggplot(df, aes(x = Region, y = Schooling)) +
 geom_boxplot() +
 ggtitle("Comparison of Schooling by Region")
 ```
 
 ```{r}
-ggplot(df, aes(x = Region, y = BMI)) +
+ggplot(df, aes(x = Region, y = Life_expectancy)) +
 geom_boxplot() +
-ggtitle("Comparison of BMI by Region")
+ggtitle("Comparison of Life Expectancy by Region")
 ```
 
-```{r}
-ggplot(df, aes(x = Region, y = Infant_deaths)) +
-geom_boxplot() +
-ggtitle("Comparison of Infant Deaths by Region")
-```
-
-```{r}
-ggplot(df, aes(x = Region, y = Under_five_deaths)) +
-geom_boxplot() +
-ggtitle("Comparison of Under Five Deaths by Region")
-```
-
-```{r}
-ggplot(df, aes(x = Region, y = Adult_mortality)) +
-geom_boxplot() +
-ggtitle("Comparison of Adult Mortality by Region")
-```
-
-## Treating Outliers:
-
-### Identify Outliers:
-
-#### Create Dataset with only numeric columns:
-
-```{r}
-numeric_columns <- df[, sapply(df, is.numeric)]
-numeric_data <- data.frame(numeric_columns)
-```
-
-#### Function to return a list of outlier values for each column:
-
-```{r}
-identify_outliers <- function(data) {
-  outliers <- list()
-  
-  for (i in which(sapply(data, is.numeric))) {
-    col_name <- names(data)[i]
-    
-    perc <- quantile(data[, i], c(.25, .75 ), na.rm =TRUE)
-    lower_fence <- perc[1] - 1.5 * IQR(data[, i])
-    upper_fence <- perc[2] + 1.5 * IQR(data[, i])
-    
-    outlier_indices <- which(data[, i] < lower_fence | data[, i] > upper_fence)
-    outliers[[col_name]] <- data[outlier_indices, i]
-  }
-  
-  outliers2 <- outliers[sapply(outliers, length)>0]
-  
-  return(outliers2)
-}
-```
-
-```{r}
-outliers_vars <- identify_outliers(numeric_data)
-outliers_vars
-```
-
-#### Function to Winsorize a column:
+## Function to Winsorize a column:
 
 ```{r}
 df2 <- df
@@ -322,7 +315,24 @@ GDP_per_capita_win <- Winsorize(df2$GDP_per_capita, minval = NULL, maxval = NULL
 df2$GDP_per_capita <- GDP_per_capita_win
 ```
 
-#### Validate Winsorization:
+### Arguments
+
++----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `x`      | a numeric vector to be winsorized.                                                                                                                                         |
++----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `minval` | the low border, all values being lower than this will be replaced by this value. The default is set to the 5%-quantile of x.                                               |
++----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `maxval` | the high border, all values being larger than this will be replaced by this value. The default is set to the 95%-quantile of x.                                            |
++----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `probs`  | numeric vector of probabilities with values in \[0,1\] as used in [`quantile`](http://127.0.0.1:27431/help/library/DescTools/help/quantile).                               |
++----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `na.rm`  | should NAs be omitted to calculate the quantiles?\                                                                                                                         |
+|          | Note that NAs in x are preserved and left unchanged anyway.                                                                                                                |
++----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `type`   | an integer between 1 and 9 selecting one of the nine quantile algorithms detailed in [`quantile`](http://127.0.0.1:27431/help/library/DescTools/help/quantile) to be used. |
++----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+## Validate Winsorization:
 
 ```{r}
 # Compare outliers and boxplots before and after Winsorization

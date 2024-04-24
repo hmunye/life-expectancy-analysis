@@ -283,7 +283,7 @@ The group moved forward with the "Fixed" dataset.
 
 ### 3.2 Handling Outliers
 
-**Writing Function to find Number of Outliers and Print Box Plot:**
+Function to Find Number of Outliers and Plot:
 
 ```{r}
 num_outliers <- function(data_set, column) {
