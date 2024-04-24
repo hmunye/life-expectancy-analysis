@@ -1699,3 +1699,9 @@ df |>
 #### 5.1 Variance Analysis
 
 #### 5.2 Covariance Analysis
+
+Inference: Both European regions have higher rates of alcohol consumption
+
+                       Both European regions have higher life expectancy rates
+
+Conclusion: Alcohol consumption does not greatly affect life expectancy
