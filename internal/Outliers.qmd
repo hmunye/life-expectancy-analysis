@@ -314,16 +314,20 @@ outliers_vars
 #### Function to Winsorize a column:
 
 ```{r}
-Under_five_deaths_win <- Winsorize(numeric_data$Under_five_deaths, minval = NULL, maxval = NULL, probs = c(0.01, 0.99), na.rm = TRUE, type = 1)
-numeric_data$Under_five_deaths <- Under_five_deaths_win
+df2 <- df
+```
+
+```{r}
+GDP_per_capita_win <- Winsorize(df2$GDP_per_capita, minval = NULL, maxval = NULL, probs = c(0.05, 0.95), na.rm = TRUE, type = 1)
+df2$GDP_per_capita <- GDP_per_capita_win
 ```
 
 #### Validate Winsorization:
 
 ```{r}
 # Compare outliers and boxplots before and after Winsorization
-num_outliers(df, df$Under_five_deaths)
-num_outliers(numeric_data, numeric_data$Under_five_deaths)
+num_outliers(df, df$GDP_per_capita)
+num_outliers(df2, df2$GDP_per_capita)
 
 
 ```
