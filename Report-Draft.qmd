@@ -802,6 +802,12 @@ df |>
 
 ```
 
+Inference:
+
+Adult Mortality, Infant Deaths, Under 5 deaths all have a strong negative relationships with Life Expectancy.
+
+Alcohol Consumption, BMI, Polio, Diphteria, and Schooling all have positive relationships with Life Expectancy
+
 Alcohol:
 
 ```{r}
