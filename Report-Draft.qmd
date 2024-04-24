@@ -404,7 +404,13 @@ num_outliers(data, data$Under_five_deaths)
 
 #### 3.2.1 Treating Outliers
 
+**1) Trimming**: Remove outliers from the dataset. This approach can be appropriate if the outliers are deemed to be data entry errors or highly improbable values. Due to the high number of outliers in the dataset, this is not a viable option.
+
+**2) Winsorization**: Replace outliers with values at a specified percentile (e.g., replacing values above the 95th percentile with the 95th percentile value, replacing values below the 5th percentile with the 5th percentile value).
+
 #### 3.2.2 Decision for Treating Outliers
+
+After doing research on how to identify and treat outliers in R, we decided to utilized the third method rather than trimming or capping/flooring the outliers. Winsorization allows us to control the impact of the outliers without completely disregarding them. Given our dataset centers around life expectancy, health indicators, immunization rates, and economic and demographic data, this method allows us to address the outliers while still including them in the analysis.
 
 #### 3.2.3 Approach
 

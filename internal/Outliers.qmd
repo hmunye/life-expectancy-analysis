@@ -7,7 +7,7 @@ editor: visual
 ## First Import Life Expectancy Data Set
 
 ```{r}
-data <- Life_Expectancy_Data_Updated.
+df <- Life_Expectancy_Data_Updated.
 ```
 
 ## Find Number of Outliers and Plot:
@@ -32,67 +32,67 @@ num_outliers <- function(data_set, column) {
 ```
 
 ```{r}
-num_outliers(data, data$Infant_deaths)
+num_outliers(df, df$Infant_deaths)
 ```
 
 ```{r}
-num_outliers(data, data$Under_five_deaths)
+num_outliers(df, df$Under_five_deaths)
 ```
 
 ```{r}
-num_outliers(data, data$Adult_mortality)
+num_outliers(df, df$Adult_mortality)
 ```
 
 ```{r}
-num_outliers(data, data$Alcohol_consumption)
+num_outliers(df, df$Alcohol_consumption)
 ```
 
 ```{r}
-num_outliers(data, data$Hepatitis_B)
+num_outliers(df, df$Hepatitis_B)
 ```
 
 ```{r}
-num_outliers(data, data$Measles)
+num_outliers(df, df$Measles)
 ```
 
 ```{r}
-num_outliers(data, data$BMI)
+num_outliers(df, df$BMI)
 ```
 
 ```{r}
-num_outliers(data, data$Polio)
+num_outliers(df, df$Polio)
 ```
 
 ```{r}
-num_outliers(data, data$Diphtheria)
+num_outliers(df, df$Diphtheria)
 ```
 
 ```{r}
-num_outliers(data, data$Incidents_HIV)
+num_outliers(df, df$Incidents_HIV)
 ```
 
 ```{r}
-num_outliers(data, data$GDP_per_capita)
+num_outliers(df, df$GDP_per_capita)
 ```
 
 ```{r}
-num_outliers(data, data$Population_mln)
+num_outliers(df, df$Population_mln)
 ```
 
 ```{r}
-num_outliers(data, data$Thinness_ten_nineteen_years)
+num_outliers(df, df$Thinness_ten_nineteen_years)
 ```
 
 ```{r}
-num_outliers(data, data$Thinness_five_nine_years)
+num_outliers(df, df$Thinness_five_nine_years)
 ```
 
 ```{r}
-num_outliers(data, data$Schooling)
+num_outliers(df, df$Schooling)
 ```
 
 ```{r}
-num_outliers(data, data$Life_expectancy)
+num_outliers(df, df$Life_expectancy)
 ```
 
 ## Facet By Region:
@@ -106,25 +106,25 @@ outlier_by_regions <- function(data_set, column) {
 }
 ```
 
-## High Outliers:
+## Extreme Outliers:
 
 ```{r}
-outlier_by_regions(data, data$Incidents_HIV)
+outlier_by_regions(df, df$Incidents_HIV)
 ```
 
 ```{r}
-outlier_by_regions(data, data$GDP_per_capita)
+outlier_by_regions(df, df$GDP_per_capita)
 ```
 
 ```{r}
-outlier_by_regions(data, data$Population_mln)
+outlier_by_regions(df, df$Population_mln)
 ```
 
 ## Filter Original Data Set by Region:
 
 ```{r}
 filter_out_region <- function(region) {
-  var_name <- paste("filtered_out_", region, sep = "")
+  var_name <- paste("df_with_", region, sep = "")
   assign(var_name, data %>%
            filter(Region == region), envir = .GlobalEnv)
 }
@@ -167,121 +167,100 @@ filter_out_region("Oceania")
 filter_out_region("North America")
 ```
 
-## Filter Out Non-Numeric:
+## Comparing Columns by Region:
 
 ```{r}
-numeric_data <- data[, sapply(data, is.numeric)]
-```
-
-## Find Variance for Each Column:
-
-```{r}
-for (col in names(numeric_data)) {
-  if (is.numeric(numeric_data[[col]])) {
-    var_value <- var(numeric_data[[col]])
-    
-    cat("Variance of column", col, ":", var_value, "\n")
-    
-  }
-}
-```
-
-## Find Covariance:
-
-```{r}
-cov(numeric_data)
-```
-
-Add Explanation and Insights
-
-### Comparing Columns by Region:
-
-```{r}
-ggplot(data, aes(x = Region, y = Incidents_HIV)) +
+ggplot(df, aes(x = Region, y = Incidents_HIV)) +
 geom_boxplot() +
 ggtitle("Comparison of HIV Incidence by Region")
 ```
 
 ```{r}
-ggplot(data, aes(x = Region, y = GDP_per_capita)) +
+ggplot(df, aes(x = Region, y = GDP_per_capita)) +
 geom_boxplot() +
 ggtitle("Comparison of GDP by Region")
 ```
 
 ```{r}
-ggplot(data, aes(x = Region, y = Population_mln)) +
+ggplot(df, aes(x = Region, y = Population_mln)) +
 geom_boxplot() +
 ggtitle("Comparison of Population by Region")
 ```
 
 ```{r}
-ggplot(data, aes(x = Region, y = Life_expectancy)) +
+ggplot(df, aes(x = Region, y = Life_expectancy)) +
 geom_boxplot() +
 ggtitle("Comparison of Life Expectancy by Region")
 ```
 
 ```{r}
-ggplot(data, aes(x = Region, y = Alcohol_consumption)) +
+ggplot(df, aes(x = Region, y = Alcohol_consumption)) +
 geom_boxplot() +
 ggtitle("Comparison of Alcohol Consumption by Region")
 ```
 
 ```{r}
-ggplot(data, aes(x = Region, y = Hepatitis_B)) +
+ggplot(df, aes(x = Region, y = Hepatitis_B)) +
 geom_boxplot() +
 ggtitle("Comparison of Hepatitis B by Region")
 ```
 
 ```{r}
-ggplot(data, aes(x = Region, y = Measles)) +
+ggplot(df, aes(x = Region, y = Measles)) +
 geom_boxplot() +
 ggtitle("Comparison of Measles by Region")
 ```
 
 ```{r}
-ggplot(data, aes(x = Region, y = Polio)) +
+ggplot(df, aes(x = Region, y = Polio)) +
 geom_boxplot() +
 ggtitle("Comparison of Polio by Region")
 ```
 
 ```{r}
-ggplot(data, aes(x = Region, y = Diphtheria)) +
+ggplot(df, aes(x = Region, y = Diphtheria)) +
 geom_boxplot() +
 ggtitle("Comparison of Diphtheria by Region")
 ```
 
 ```{r}
-ggplot(data, aes(x = Region, y = Thinness_five_nine_years)) +
+ggplot(df, aes(x = Region, y = Thinness_five_nine_years)) +
 geom_boxplot() +
 ggtitle("Comparison of Thinness Five to Nine Years by Region")
 ```
 
 ```{r}
-ggplot(data, aes(x = Region, y = Thinness_ten_nineteen_years)) +
+ggplot(df, aes(x = Region, y = Thinness_ten_nineteen_years)) +
 geom_boxplot() +
 ggtitle("Comparison of Thinness Ten to Nineteen Years by Region")
 ```
 
 ```{r}
-ggplot(data, aes(x = Region, y = Schooling)) +
+ggplot(df, aes(x = Region, y = Schooling)) +
 geom_boxplot() +
 ggtitle("Comparison of Schooling by Region")
 ```
 
 ```{r}
-ggplot(data, aes(x = Region, y = BMI)) +
+ggplot(df, aes(x = Region, y = BMI)) +
 geom_boxplot() +
 ggtitle("Comparison of BMI by Region")
 ```
 
 ```{r}
-ggplot(data, aes(x = Region, y = Infant_deaths)) +
+ggplot(df, aes(x = Region, y = Infant_deaths)) +
 geom_boxplot() +
 ggtitle("Comparison of Infant Deaths by Region")
 ```
 
 ```{r}
-ggplot(data, aes(x = Region, y = Under_five_deaths)) +
+ggplot(df, aes(x = Region, y = Under_five_deaths)) +
 geom_boxplot() +
 ggtitle("Comparison of Under Five Deaths by Region")
+```
+
+```{r}
+ggplot(df, aes(x = Region, y = Adult_mortality)) +
+geom_boxplot() +
+ggtitle("Comparison of Adult Mortality by Region")
 ```
