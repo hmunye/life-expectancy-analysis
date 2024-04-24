@@ -4,10 +4,17 @@ format: html
 editor: visual
 ---
 
-## First Import Life Expectancy Data Set
+## Import Life Expectancy Data Set
 
 ```{r}
-df <- Life_Expectancy_Data_Updated.
+df <- read_csv("https://raw.githubusercontent.com/hmunye/life-expectancy-analysis/main/data/Life-Expectancy-Data-Updated.csv", show_col_types = FALSE)
+```
+
+## Importing Libraries
+
+```{r}
+library(tidyverse)
+library(DescTools)
 ```
 
 ## Find Number of Outliers and Plot:
@@ -120,7 +127,7 @@ outlier_by_regions(df, df$GDP_per_capita)
 outlier_by_regions(df, df$Population_mln)
 ```
 
-## Filter Original Data Set by Region:
+## Filter Original Data Set by Region (Create Data Frame with Chosen Region Only Included):
 
 ```{r}
 filter_out_region <- function(region) {
@@ -263,4 +270,60 @@ ggtitle("Comparison of Under Five Deaths by Region")
 ggplot(df, aes(x = Region, y = Adult_mortality)) +
 geom_boxplot() +
 ggtitle("Comparison of Adult Mortality by Region")
+```
+
+## Treating Outliers:
+
+### Identify Outliers:
+
+#### Create Dataset with only numeric columns:
+
+```{r}
+numeric_columns <- df[, sapply(df, is.numeric)]
+numeric_data <- data.frame(numeric_columns)
+```
+
+#### Function to return a list of outlier values for each column:
+
+```{r}
+identify_outliers <- function(data) {
+  outliers <- list()
+  
+  for (i in which(sapply(data, is.numeric))) {
+    col_name <- names(data)[i]
+    
+    perc <- quantile(data[, i], c(.25, .75 ), na.rm =TRUE)
+    lower_fence <- perc[1] - 1.5 * IQR(data[, i])
+    upper_fence <- perc[2] + 1.5 * IQR(data[, i])
+    
+    outlier_indices <- which(data[, i] < lower_fence | data[, i] > upper_fence)
+    outliers[[col_name]] <- data[outlier_indices, i]
+  }
+  
+  outliers2 <- outliers[sapply(outliers, length)>0]
+  
+  return(outliers2)
+}
+```
+
+```{r}
+outliers_vars <- identify_outliers(numeric_data)
+outliers_vars
+```
+
+#### Function to Winsorize a column:
+
+```{r}
+Under_five_deaths_win <- Winsorize(numeric_data$Under_five_deaths, minval = NULL, maxval = NULL, probs = c(0.01, 0.99), na.rm = TRUE, type = 1)
+numeric_data$Under_five_deaths <- Under_five_deaths_win
+```
+
+#### Validate Winsorization:
+
+```{r}
+# Compare outliers and boxplots before and after Winsorization
+num_outliers(df, df$Under_five_deaths)
+num_outliers(numeric_data, numeric_data$Under_five_deaths)
+
+
 ```

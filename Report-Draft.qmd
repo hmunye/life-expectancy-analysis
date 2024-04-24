@@ -159,7 +159,7 @@ summary(df)
 
 #### 2.3 Categorizing the Datasets Attributes
 
--   Categorical
+-   Nominal (Factors)
 
     -   Country
 
@@ -239,7 +239,7 @@ glimpse(df)
 
 ### 3.1 Handling Null Values
 
-The original data set had several hundred missing values. While the data is publicly available as it is all published by the various nations of the world and the World Heath Organization , it is not feasible with our teams man hours to manually enter each missing value.
+The original data set had several hundred missing values. While the data is publicly available as it is all published by the various nations of the world and the World Heath Organization, it is not feasible with our teams man hours to manually enter each missing value.
 
 **Number of Missing Values:**
 
@@ -410,7 +410,7 @@ num_outliers(df, df$Under_five_deaths)
 
 #### 3.2.2 Decision for Treating Outliers
 
-After doing research on how to identify and treat outliers in R, we decided to utilized the third method rather than trimming or capping/flooring the outliers. Winsorization allows us to control the impact of the outliers without completely disregarding them. Given our dataset centers around life expectancy, health indicators, immunization rates, and economic and demographic data, this method allows us to address the outliers while still including them in the analysis.
+After doing research on how to identify and treat outliers in R,
 
 #### 3.2.3 Approach
 
