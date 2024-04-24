@@ -420,6 +420,11 @@ After doing research on how to identify and treat outliers in R,
 
 #### 4.2 Variance Analysis
 
+```{r}
+#Find Z score
+LE_z_score <- round((df$Life_expectancy - mean(df$Life_expectancy))/sd(df$Life_expectancy), digits=2)
+```
+
 #### 4.3 Covariance Analysis
 
 For Covariance Analysis we need a subset of the data that only has the numeric variables
