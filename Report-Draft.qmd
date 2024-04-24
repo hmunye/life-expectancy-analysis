@@ -420,9 +420,236 @@ After doing research on how to identify and treat outliers in R,
 
 #### 4.2 Variance Analysis
 
+Life Expectancy
+
 ```{r}
-#Find Z score
-LE_z_score <- round((df$Life_expectancy - mean(df$Life_expectancy))/sd(df$Life_expectancy), digits=2)
+df |>
+ggplot() +
+    geom_boxplot(aes(x=0, y=df$Life_expectancy))
+
+df |>
+ggplot() +
+    geom_histogram(aes(x=df$Life_expectancy), bins = 30)
+
+summary(df$Life_expectancy)
+```
+
+------------------------------------------------------------------------
+
+Inference:
+
+Life Expectancy is not evenly distributed,
+
+Life Expectancy peaks \~71
+
+The minimum is 39.40, the max is 83.8
+
+Conclusion:
+
+------------------------------------------------------------------------
+
+Infant Deaths
+
+```{r}
+df |>
+ggplot() +
+    geom_boxplot(aes(x=0, y=df$Infant_deaths))
+
+df |>
+ggplot() +
+    geom_histogram(aes(x=df$Infant_deaths), bins = 30)
+
+summary(df$Infant_deaths)
+```
+
+Under_five_deaths
+
+```{r}
+df |>
+ggplot() +
+    geom_boxplot(aes(x=0, y=df$Under_five_deaths))
+
+df |>
+ggplot() +
+    geom_histogram(aes(x=df$Under_five_deaths), bins = 30)
+
+summary(df$Under_five_deaths)
+```
+
+Adult_mortality
+
+```{r}
+df |>
+ggplot() +
+    geom_boxplot(aes(x=0, y=df$Adult_mortality))
+
+df |>
+ggplot() +
+    geom_histogram(aes(x=df$Adult_mortality), bins = 30)
+
+summary(df$Adult_mortality)
+```
+
+```{r}
+df |>
+ggplot() +
+    geom_boxplot(aes(x=0, y=df$Alcohol_consumption))
+
+df |>
+ggplot() +
+    geom_histogram(aes(x=df$Alcohol_consumption), bins = 30)
+
+summary(df$Alcohol_consumption)
+```
+
+\$Hepatitis_B
+
+```{r}
+df |>
+ggplot() +
+    geom_boxplot(aes(x=0, y=df$Hepatitis_B))
+
+df |>
+ggplot() +
+    geom_histogram(aes(x=df$Hepatitis_B), bins = 30)
+
+summary(df$Hepatitis_B)
+```
+
+```{r}
+df |>
+ggplot() +
+    geom_boxplot(aes(x=0, y=df$Measles))
+
+df |>
+ggplot() +
+    geom_histogram(aes(x=df$Measles), bins = 30)
+
+summary(df$Measles)
+```
+
+BMI
+
+```{r}
+df |>
+ggplot() +
+    geom_boxplot(aes(x=0, y=df$BMI))
+
+df |>
+ggplot() +
+    geom_histogram(aes(x=df$BMI), bins = 30)
+
+summary(df$Polio)
+```
+
+```{r}
+df |>
+ggplot() +
+    geom_boxplot(aes(x=0, y=df$Polio))
+
+df |>
+ggplot() +
+    geom_histogram(aes(x=df$Polio), bins = 30)
+
+summary(df$Polio)
+```
+
+Diphtheria
+
+```{r}
+df |>
+ggplot() +
+    geom_boxplot(aes(x=0, y=df$Diphtheria))
+
+df |>
+ggplot() +
+    geom_histogram(aes(x=df$Diphtheria), bins = 30)
+
+summary(df$Diphtheria)
+```
+
+HIV
+
+```{r}
+df |>
+ggplot() +
+    geom_boxplot(aes(x=0, y=df$Incidents_HIV))
+
+df |>
+ggplot() +
+    geom_histogram(aes(x=df$Incidents_HIV), bins = 30)
+
+summary(df$Incidents_HIV)
+```
+
+```{r}
+df |>
+ggplot() +
+    geom_boxplot(aes(x=0, y=df$GDP_per_capita))
+
+df |>
+ggplot() +
+    geom_histogram(aes(x=df$GDP_per_capita), bins = 30)
+
+summary(df$GDP_per_capita)
+```
+
+Population
+
+```{r}
+df |>
+ggplot() +
+    geom_boxplot(aes(x=0, y=df$Population_mln))
+
+df |>
+ggplot() +
+    geom_histogram(aes(x=df$Population_mln), bins = 100) 
+
+#re-do of the graph with xlim to exclude the outliers 
+df |>
+ggplot() +
+    geom_histogram(aes(x=df$Population_mln), bins = 30) +
+  xlim(0,350)
+
+summary(df$Population_mln)
+```
+
+Thinness 10 to 19
+
+```{r}
+df |>
+ggplot() +
+    geom_boxplot(aes(x=0, y=df$Thinness_ten_nineteen_years))
+
+df |>
+ggplot() +
+    geom_histogram(aes(x=df$Thinness_ten_nineteen_years), bins = 30)
+
+summary(df$Thinness_ten_nineteen_years)
+```
+
+```{r}
+df |>
+ggplot() +
+    geom_boxplot(aes(x=0, y=df$Thinness_five_nine_years))
+
+df |>
+ggplot() +
+    geom_histogram(aes(x=df$Thinness_five_nine_years), bins = 30)
+
+summary(df$Thinness_five_nine_years)
+```
+
+```{r}
+df |>
+ggplot() +
+    geom_boxplot(aes(x=0, y=df$Schooling))
+
+df |>
+ggplot() +
+    geom_histogram(aes(x=df$Schooling), bins = 30)
+
+summary(df$Schooling)
 ```
 
 #### 4.3 Covariance Analysis
