@@ -228,7 +228,7 @@ For the purpose of analysis in R, it is a good practice to change the categorica
 
 ```{r}
 data$Country <- factor(data$Country)
-data()$Region <- factor(data$Region)
+data$Region <- factor(data$Region)
 data$Region <- factor(data$Region)
 data$Year <- factor(data$Year)
 
