@@ -197,7 +197,7 @@ filter_out_region("North America")
 
 ## Explanation & Insights:
 
-### Note: 
+### Note:
 
 The variation in outlier counts between our analytical methods (IQR Method, identify_outliers function) and boxplot visualization likely comes from differing definitions of outliers. While the analytical methods stick to strict statistical criteria, boxplots visually show points beyond the data's central range, potentially capturing more extreme values.
 
@@ -226,11 +226,15 @@ ggtitle("Comparison of Adult M
         ortality by Region")
 ```
 
+The "Adult_mortality" column represents the probability of dying between 15 and 60 per 1000 population. The IQR method identifies 112 outliers. The only region with outliers is Africa. High rates of adult mortality may indicate challenges related to healthcare access, quality, and availability of essential services such as vaccinations.
+
 ```{r}
 ggplot(df, aes(x = Region, y = Alcohol_consumption)) +
 geom_boxplot() +
 ggtitle("Comparison of Alcohol Consumption by Region")
 ```
+
+The "Alcohol_consumption" column represents alcohol consumption per capita by liter. The IQR method identifies 2 outliers.
 
 ```{r}
 ggplot(df, aes(x = Region, y = Hepatitis_B)) +
@@ -238,72 +242,76 @@ geom_boxplot() +
 ggtitle("Comparison of Hepatitis B by Region")
 ```
 
+The "Hepatitas_B" column represents Hepatitis B immunization coverage in 1-year olds. The IQR method identifies 164 outliers.
+
 ```{r}
 ggplot(df, aes(x = Region, y = Measles)) +
 geom_boxplot() +
 ggtitle("Comparison of Measles by Region")
 ```
 
+The "Measles" column represents number of measles cases reported per 1000 population. The IQR method identifies 35 outliers. The regions with outliers include Indonesia(Asia), Philippines(Asia), Afghanistan(Asia), and Suriname(South America). High rates of measles may indicate challenges related to healthcare access.
+
 ```{r}
 ggplot(df, aes(x = Region, y = BMI)) +
 geom_boxplot() +
 ggtitle("Comparison of BMI by Region")
 ```
-
+The "BMI" column represents the body mass index of the entire population. The IQR method identifies 25 outliers. The regions with outliers are Samoa and Tonga. Higher BMI may indicate genetic predispositions and fattier diets. 
 ```{r}
 ggplot(df, aes(x = Region, y = Polio)) +
 geom_boxplot() +
 ggtitle("Comparison of Polio by Region")
 ```
-
+The "Polio" column represents the polio immunization records among 1-year olds. The IQR method identifies 190 outliers. The regions with outliers include Africa and Oceania. Lower polio vaccination rates may indicate challenges related to healthcare access.
 ```{r}
 ggplot(df, aes(x = Region, y = Diphtheria)) +
 geom_boxplot() +
 ggtitle("Comparison of Diphtheria by Region")
 ```
-
+The "Diphtheria" column represents the TDP immunization records among 1-year olds. The IQR method identifies 187 outliers. The regions with outliers include Africa and Asia. Lower diphtheria vaccination rates may indicate challenges related to healthcare access. 
 ```{r}
 ggplot(df, aes(x = Region, y = Incidents_HIV)) +
 geom_boxplot() +
 ggtitle("Comparison of Incidents HIV by Region")
 ```
-
+The "Incidents_HIV" column represents the deaths per 1000 live births due to HIV/AIDS. The IQR method identifies 461 outliers. The region with outliers is Africa. Higher HIV rates may indicate challenges related to healthcare access.
 ```{r}
 ggplot(df, aes(x = Region, y = GDP_per_capita)) +
 geom_boxplot() +
 ggtitle("Comparison of GDP Per Capita by Region")
 ```
-
+The "GDP_per_capita' column represents the gross domestic product per capita. The IQR method identifies 425 outliers. The regions with outliers includes France and Austria. Higher GDP may indicate a more developed economy. 
 ```{r}
 ggplot(df, aes(x = Region, y = Population_mln)) +
 geom_boxplot() +
 ggtitle("Comparison of Population by Region")
 ```
-
+The "Population_mln" column represents the total population in millions. The IQR method identifies 362 outliers. The regions with outliers include India, China, and the United States. 
 ```{r}
 ggplot(df, aes(x = Region, y = Thinness_ten_nineteen_years)) +
 geom_boxplot() +
 ggtitle("Comparison of Thinness Ten to Nineteen Years by Region")
 ```
-
+The "Thinness_ten_nineteen_years" column represents the prevalence of thinness among 10 to 19 year olds. The IQR method identifies 89 outliers. The regions with outliers include Asia and Africa. Higher rates of thinness may indicate challenges related to healthcare access, diet, and cultural values.
 ```{r}
 ggplot(df, aes(x = Region, y = Thinness_five_nine_years)) +
 geom_boxplot() +
 ggtitle("Comparison of Thinness Five to Nine Years by Region")
 ```
-
+The "Thinness_five_nine_years" column represents the prevalence of thinness among 5 to 9 year olds. The IQR method identifies 95 outliers. The regions with outliers include Asia and Africa. Higher rates of thinness may indicate challenges related to healthcare access, diet, and cultural values.
 ```{r}
 ggplot(df, aes(x = Region, y = Schooling)) +
 geom_boxplot() +
 ggtitle("Comparison of Schooling by Region")
 ```
-
+There are no outliers
 ```{r}
 ggplot(df, aes(x = Region, y = Life_expectancy)) +
 geom_boxplot() +
 ggtitle("Comparison of Life Expectancy by Region")
 ```
-
+The "Life_expectancy" represents the average life expectancy in age. The IQR method identifies 19 outliers. The region with outliers include Africa. Lower life expectancy rates may indicate challenges related to healthcare access.
 ## Function to Winsorize a column:
 
 ```{r}
