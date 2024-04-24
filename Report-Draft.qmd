@@ -846,6 +846,12 @@ df |>
 
 ```
 
+Inference:
+
+Adult Mortality, Infant Deaths, Under 5 deaths all have a strong negative relationships with Life Expectancy.
+
+Alcohol Consumption, BMI, Polio, Diphteria, and Schooling all have positive relationships with Life Expectancy
+
 Alcohol:
 
 ```{r}
@@ -915,6 +921,12 @@ df |>
   geom_text(aes(label = paste("Covariance:", round(cov(Alcohol_consumption, Schooling), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 ```
+
+Inferences:
+
+There is a positive relationship between Schooling and alcohol consumption,
+
+Other variables have some covariance, but it dose not seem to be strongly related.
 
 GDP:
 
@@ -987,6 +999,10 @@ df |>
   geom_text(aes(label = paste("Covariance:", round(cov(GDP_per_capita, Schooling), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 ```
+
+Inference:
+
+There appears to be a positive relationship between Schooling and GDP, as well as a slight positive relationship between Alcohol Consumption and GDP
 
 Adult Mortality
 
@@ -1096,6 +1112,14 @@ df |>
 
 ```
 
+Inferences:
+
+There is a strong negative correlation between Adult Mortality and life expectancy.
+
+There are negative correlations between Adult Mortality and BMI, Diptheria, and schooling.
+
+There are strong positive correlations between Adult Morality and Adult Mortality, Infant Deaths, and Under Five Deaths
+
 Hepatitis B
 
 ```{r}
@@ -1192,6 +1216,14 @@ df |>
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 ```
 
+Hepatitis B Inferences:
+
+Strong Positive: Diphtheria,
+
+Positive: Life Expectancy, Alcohol Consumption, Polio
+
+Negative: Infant Deaths, Under Five Deaths, Adult mortality,
+
 Measles
 
 ```{r}
@@ -1286,6 +1318,12 @@ df |>
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 ```
 
+Measles Inferences:
+
+Positive: Life Expectancy, Schooling
+
+Negative: Infant Deaths, Under Five Deaths
+
 BMI
 
 ```{r}
@@ -1379,6 +1417,16 @@ df |>
   geom_text(aes(label = paste("Covariance:", round(cov(BMI, Schooling), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 ```
+
+BMI Inferences:
+
+Strong Positive: Life Expectancy, Schooling
+
+Positive: Diphtheria, GDP
+
+Negative: Thinness
+
+Strong Negative: Infant Deaths, Under Five Deaths, Adult Mortality,
 
 Polio
 
@@ -1479,6 +1527,16 @@ df |>
 
 ```
 
+Polio Inferences:
+
+Strong Positive, Hepatitis B, Diphtheria,
+
+Positive: Polio, BMI, Schooling
+
+Negative, Thinness
+
+Strong Negative: Infant Deaths, Under Five deaths,
+
 Diphtheria
 
 ```{r}
@@ -1491,7 +1549,7 @@ df |>
 df |>
   ggplot(aes(y = Diphtheria, x = Infant_deaths, color = Region)) +
   geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(Diphtheria, Life_expInfant_deathsectancy), 2))),
+  geom_text(aes(label = paste("Covariance:", round(cov(Diphtheria, Infant_deaths), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 
 df |>
@@ -1572,6 +1630,16 @@ df |>
   geom_text(aes(label = paste("Covariance:", round(cov(Diphtheria, Schooling), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 ```
+
+Diphtheria Inferences:
+
+Strong Positive: Hepatitis B, Polio
+
+Positive: Life Expectancy, Measles, BMI, Schooling
+
+Negative, Thinness
+
+Strong Negative: Infant Deaths, Under Five Deaths, Diphtheria
 
 HIV
 
@@ -1666,6 +1734,10 @@ df |>
   geom_text(aes(label = paste("Covariance:", round(cov(Incidents_HIV, Schooling), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 ```
+
+HIV Inferences:
+
+Conclusion: We may want to separate out Africa for this one, as it seems to be skewing the data.
 
 Population
 
@@ -1775,7 +1847,9 @@ df |>
 
 ```
 
-Note, Try this again without Asia.
+Population Inferences:
+
+We may want to do this again without China and India, as they seems to be skewing the data
 
 Thinness
 
@@ -1870,6 +1944,16 @@ df |>
   geom_text(aes(label = paste("Covariance:", round(cov(Thinness_ten_nineteen_years, Schooling), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 ```
+
+Thinness:
+
+Strong positive:
+
+Positive: Infant deaths, under five deaths, adult mortality, HIV, population
+
+Negative: Life expectancy, alcohol consumption, Hepatitis B, measles, BMI, polio, diphtheria, schooling
+
+Strong negative: GDP
 
 No surprise that the two thinness are basically one to one.
 
@@ -1966,6 +2050,36 @@ df |>
   geom_text(aes(label = paste("Covariance:", round(cov(Schooling, Thinness_ten_nineteen_years), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 ```
+
+Inferences:
+
+There is a positive relationship between life expectancy and schooling so the higher the number of years in school, the higher the life expectancy.
+
+There is a negative correlation between infant deaths and schooling so the higher the number of years in school, the lower the amount of infant deaths.
+
+There is a negative correlation between under 5 deaths and schooling so the higher the number of years in school, the lower the amount of under 5 deaths.
+
+There is a positive correlation between alcohol consumption and schooling so the higher the number of years in school, the higher the amount of alcohol consumption.
+
+There is a negative correlation between adult mortality and schooling so the higher the number of years in school, the lower the adult mortality rates.
+
+There is a positive correlation between hepatitis B and schooling so the higher the number of years in school, the higher the hepatitis B immunization coverage.
+
+There is a positive correlation between measles and schooling so the higher the number of years in school, the higher the measles immunization coverage.
+
+There is a slight positive correlation between BMI and schooling so the higher the number of years in school, the higher the average BMI.
+
+There is a positive correlation between polio and schooling so the higher the number of years in school, the higher the polio immunization coverage.
+
+Positive correlation for diphtheria.
+
+Positive correlation for GDP.
+
+Negative correlation for HIV.
+
+Negative correlation for population.
+
+Negative correlation for thinness.
 
 ## 5 Final Conclusions
 
