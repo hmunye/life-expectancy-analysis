@@ -1833,6 +1833,16 @@ df |>
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 ```
 
+Thinness:
+
+Strong positive:
+
+Positive: Infant deaths, under five deaths, adult mortality, HIV, population
+
+Negative: Life expectancy, alcohol consumption, Hepatitis B, measles, BMI, polio, diphtheria, schooling
+
+Strong negative: GDP
+
 No surprise that the two thinness are basically one to one.
 
 Schooling
@@ -1928,6 +1938,36 @@ df |>
   geom_text(aes(label = paste("Covariance:", round(cov(Schooling, Thinness_ten_nineteen_years), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 ```
+
+Inferences:
+
+There is a positive relationship between life expectancy and schooling so the higher the number of years in school, the higher the life expectancy.
+
+There is a negative correlation between infant deaths and schooling so the higher the number of years in school, the lower the amount of infant deaths.
+
+There is a negative correlation between under 5 deaths and schooling so the higher the number of years in school, the lower the amount of under 5 deaths.
+
+There is a positive correlation between alcohol consumption and schooling so the higher the number of years in school, the higher the amount of alcohol consumption.
+
+There is a negative correlation between adult mortality and schooling so the higher the number of years in school, the lower the adult mortality rates.
+
+There is a positive correlation between hepatitis B and schooling so the higher the number of years in school, the higher the hepatitis B immunization coverage.
+
+There is a positive correlation between measles and schooling so the higher the number of years in school, the higher the measles immunization coverage.
+
+There is a slight positive correlation between BMI and schooling so the higher the number of years in school, the higher the average BMI.
+
+There is a positive correlation between polio and schooling so the higher the number of years in school, the higher the polio immunization coverage.
+
+Positive correlation for diphtheria.
+
+Positive correlation for GDP.
+
+Negative correlation for HIV.
+
+Negative correlation for population.
+
+Negative correlation for thinness.
 
 ## 5 Final Conclusions
 
