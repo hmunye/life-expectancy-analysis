@@ -464,6 +464,20 @@ ggplot() +
 summary(df$Infant_deaths)
 ```
 
+Inference:
+
+It represents the Infant Deaths in the given country
+
+Life Expectancy is not evenly distributed,
+
+Life Expectancy peaks \~20
+
+The minimum is 1.80, the max is 138.10
+
+Conclusion:
+
+------------------------------------------------------------------------
+
 Under_five_deaths
 
 ```{r}
@@ -478,6 +492,20 @@ ggplot() +
 summary(df$Under_five_deaths)
 ```
 
+Inference:
+
+Life Expectancy represents the average deaths under five (age) in the given country
+
+Life Expectancy is not evenly distributed,
+
+Life Expectancy peaks \~23
+
+The minimum is 2.30, the max is 224.90
+
+Conclusion:
+
+------------------------------------------------------------------------
+
 Adult_mortality
 
 ```{r}
@@ -491,6 +519,22 @@ ggplot() +
 
 summary(df$Adult_mortality)
 ```
+
+Inference:
+
+Adult mortality represents the adult deaths in the given country
+
+Life Expectancy is not evenly distributed,
+
+Adult mortality peaks \~164
+
+The minimum is 49.38, the max is 719.36
+
+Conclusion:
+
+------------------------------------------------------------------------
+
+Alcohol Consumption
 
 ```{r}
 df |>
