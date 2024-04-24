@@ -438,6 +438,8 @@ summary(df$Life_expectancy)
 
 Inference:
 
+Life Expectancy represents the average years lived in the given country
+
 Life Expectancy is not evenly distributed,
 
 Life Expectancy peaks \~71
