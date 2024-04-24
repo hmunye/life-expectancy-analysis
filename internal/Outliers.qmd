@@ -193,3 +193,95 @@ cov(numeric_data)
 ```
 
 Add Explanation and Insights
+
+### Comparing Columns by Region:
+
+```{r}
+ggplot(data, aes(x = Region, y = Incidents_HIV)) +
+geom_boxplot() +
+ggtitle("Comparison of HIV Incidence by Region")
+```
+
+```{r}
+ggplot(data, aes(x = Region, y = GDP_per_capita)) +
+geom_boxplot() +
+ggtitle("Comparison of GDP by Region")
+```
+
+```{r}
+ggplot(data, aes(x = Region, y = Population_mln)) +
+geom_boxplot() +
+ggtitle("Comparison of Population by Region")
+```
+
+```{r}
+ggplot(data, aes(x = Region, y = Life_expectancy)) +
+geom_boxplot() +
+ggtitle("Comparison of Life Expectancy by Region")
+```
+
+```{r}
+ggplot(data, aes(x = Region, y = Alcohol_consumption)) +
+geom_boxplot() +
+ggtitle("Comparison of Alcohol Consumption by Region")
+```
+
+```{r}
+ggplot(data, aes(x = Region, y = Hepatitis_B)) +
+geom_boxplot() +
+ggtitle("Comparison of Hepatitis B by Region")
+```
+
+```{r}
+ggplot(data, aes(x = Region, y = Measles)) +
+geom_boxplot() +
+ggtitle("Comparison of Measles by Region")
+```
+
+```{r}
+ggplot(data, aes(x = Region, y = Polio)) +
+geom_boxplot() +
+ggtitle("Comparison of Polio by Region")
+```
+
+```{r}
+ggplot(data, aes(x = Region, y = Diphtheria)) +
+geom_boxplot() +
+ggtitle("Comparison of Diphtheria by Region")
+```
+
+```{r}
+ggplot(data, aes(x = Region, y = Thinness_five_nine_years)) +
+geom_boxplot() +
+ggtitle("Comparison of Thinness Five to Nine Years by Region")
+```
+
+```{r}
+ggplot(data, aes(x = Region, y = Thinness_ten_nineteen_years)) +
+geom_boxplot() +
+ggtitle("Comparison of Thinness Ten to Nineteen Years by Region")
+```
+
+```{r}
+ggplot(data, aes(x = Region, y = Schooling)) +
+geom_boxplot() +
+ggtitle("Comparison of Schooling by Region")
+```
+
+```{r}
+ggplot(data, aes(x = Region, y = BMI)) +
+geom_boxplot() +
+ggtitle("Comparison of BMI by Region")
+```
+
+```{r}
+ggplot(data, aes(x = Region, y = Infant_deaths)) +
+geom_boxplot() +
+ggtitle("Comparison of Infant Deaths by Region")
+```
+
+```{r}
+ggplot(data, aes(x = Region, y = Under_five_deaths)) +
+geom_boxplot() +
+ggtitle("Comparison of Under Five Deaths by Region")
+```
