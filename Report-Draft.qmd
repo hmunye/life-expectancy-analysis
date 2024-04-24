@@ -548,6 +548,22 @@ ggplot() +
 summary(df$Alcohol_consumption)
 ```
 
+Inference:
+
+Alcohol consumption is recorded per capita (15+) consumption (in litres of pure alcohol)
+
+Min is 0 litres
+
+Max is 17.87
+
+Alcohol consumption is not evenly distrusted.
+
+Alchohol Consumption peaks at 0
+
+Conclusion:
+
+------------------------------------------------------------------------
+
 \$Hepatitis_B
 
 ```{r}
@@ -562,6 +578,22 @@ ggplot() +
 summary(df$Hepatitis_B)
 ```
 
+Hepatitis Inferences:
+
+Hepatitis B represents the immunization coverage among 1-year olds(%)
+
+It is not evenly distrusted
+
+min: 12
+
+Max 99.9
+
+It peaks around 90%
+
+------------------------------------------------------------------------
+
+Measles
+
 ```{r}
 df |>
 ggplot() +
@@ -572,7 +604,22 @@ ggplot() +
     geom_histogram(aes(x=df$Measles), bins = 30)
 
 summary(df$Measles)
+
 ```
+
+Measles Influences:
+
+Measles represents the percentage of 1 year olds who have been immunized
+
+It is not evenly distrusted
+
+Min 10
+
+Max 99
+
+It peaks around 62%
+
+------------------------------------------------------------------------
 
 BMI
 
@@ -587,6 +634,16 @@ ggplot() +
 
 summary(df$Polio)
 ```
+
+BMI Inferences:
+
+BMI represents the nutritional status of the adult population
+
+It is not evenly distributed
+
+Min 8
+
+Max 99
 
 ```{r}
 df |>
