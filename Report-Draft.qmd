@@ -878,6 +878,12 @@ df |>
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 ```
 
+Inferences:
+
+There is a positive relationship between Schooling and alcohol consumption,
+
+Other variables have some covariance, but it dose not seem to be strongly related.
+
 GDP:
 
 ```{r}
@@ -949,6 +955,10 @@ df |>
   geom_text(aes(label = paste("Covariance:", round(cov(GDP_per_capita, Schooling), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 ```
+
+Inference:
+
+There appears to be a positive relationship between Schooling and GDP, as well as a slight positive relationship Alchohol Consumption and GDP
 
 Adult Mortality
 
@@ -1057,6 +1067,14 @@ df |>
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 
 ```
+
+Inferences:
+
+There is a strong negative correlation between Adult Mortality and life expectancy.
+
+There are negative correlations between Adult Mortality and BMI, Diptheria, and schooling.
+
+There are strong positive correlations between Adult Morality and
 
 Hepatitis B
 
