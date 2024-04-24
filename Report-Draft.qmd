@@ -122,7 +122,7 @@ library(tidyverse)
 
 #### 2.2 Loading and Understanding the Data
 
-Load the dataset from our groups github.
+Load the dataset from the group GitHub repository:
 
 ```{r}
 
@@ -130,7 +130,7 @@ data <- read_csv("https://raw.githubusercontent.com/hmunye/life-expectancy-analy
 
 ```
 
-Display the first 5 rows of the dataset
+Display the first 5 rows of the dataset:
 
 ```{r}
 head(data, 5)
@@ -150,7 +150,7 @@ cat("Number of rows:", num_rows, "\n")
 cat("Number of columns:", num_cols, "\n")
 ```
 
-Summary of the Data Frame
+Summary of the Data Frame:
 
 ```{r}
 summary(data)
@@ -159,23 +159,23 @@ summary(data)
 
 #### 2.3 Categorizing the Datasets Attributes
 
-```         
--   Country
+-   Categorical
 
--   Region
+    -   Country
 
--   Economic Status
-```
+    -   Region
+
+    -   Economy_status_Developed
+
+    -   Economy_status_Developing
 
 -   Numerical (Nominal):
 
-    -   None
-
     -   Year
 
-    -   Infant Deaths
+    -   Infant_deaths
 
-    -   Under-Five deaths
+    -   Under_five_deaths
 
 -   Numerical (Interval)
 
@@ -183,15 +183,16 @@ summary(data)
 
 -   Numerical (Ratio)
 
-    -   Life Expectancy
-    -   Adult Mortality
-    -   Hepatitis B
+    -   Life_expectancy
+    -   Adult_mortality
+    -   Hepatitis_B
     -   Measles
     -   Polio
-    -   HIV/AIDS
-    -   GDP
-    -   Population
-    -   Thinness 5-9
+    -   Incidents_HIV
+    -   GDP_per_capita
+    -   Population_mln
+    -   Thinness_five_nine_years
+    -   Thinness_ten_nineteen_years
     -   Schooling
 
 -   Put Reasoning here (Why each is what it is)
@@ -223,7 +224,7 @@ data |>
 distinct(Year)
 ```
 
-For the purpose of analaysis in R, it is a good practice to change the categorical variables into factors
+For the purpose of analysis in R, it is a good practice to change the categorical variables into factors
 
 ```{r}
 data$Country <- factor(data$Country)
@@ -241,29 +242,29 @@ The original data set had several hundred missing values. While the data is publ
 
 **Number of Missing Values:**
 
-Life Expectancy: 10
+Life_expectancy: 10
 
-Adult Morality: 10
+Adult_mortality: 10
 
-Infant Deaths: 0
+Infant_deaths: 0
 
-Hepatitis B: 553
+Hepatitis_B: 553
 
 Measles: 0
 
 BMI: 34
 
-Under-five deaths: 0
+Under_five_deaths: 0
 
 Polio: 19
 
-HIV/AIDS: 0
+Incidents_HIV: 0
 
-GDP: 448
+GDP_per_capita: 448
 
-Population: 652
+Population_mln: 652
 
-Thinness 5-9: 34
+Thinness_five_nine_years: 34
 
 Schooling: 163
 
@@ -304,25 +305,25 @@ num_outliers <- function(data_set, column) {
 
 **Number of Outliers:**
 
-Life Expectancy:
+Life_expectancy:
 
 ```{r}
 num_outliers(data, data$Life_expectancy)
 ```
 
-Adult Mortality:
+Adult_mortality:
 
 ```{r}
 num_outliers(data, data$Adult_mortality)
 ```
 
-Alcohol Consumption:
+Alcohol_consumption:
 
 ```{r}
 num_outliers(data, data$Alcohol_consumption)
 ```
 
-Hepatitis B:
+Hepatitis_B:
 
 ```{r}
 num_outliers(data, data$Hepatitis_B)
@@ -346,31 +347,31 @@ Diphtheria:
 num_outliers(data, data$Diphtheria)
 ```
 
-HIV/AIDS:
+Incidents_HIV:
 
 ```{r}
 num_outliers(data, data$Incidents_HIV)
 ```
 
-GDP:
+GDP_per_capita:
 
 ```{r}
 num_outliers(data, data$GDP_per_capita)
 ```
 
-Population:
+Population_mln:
 
 ```{r}
 num_outliers(data, data$Population_mln)
 ```
 
-Thinness Five-Nine:
+Thinness_five_nine_years:
 
 ```{r}
 num_outliers(data, data$Thinness_five_nine_years)
 ```
 
-Thinness Ten-Nineteen:
+Thinness_ten_nineteen_years:
 
 ```{r}
 num_outliers(data, data$Thinness_ten_nineteen_years)
@@ -388,13 +389,13 @@ BMI:
 num_outliers(data, data$BMI)
 ```
 
-Infant Deaths:
+Infant_deaths:
 
 ```{r}
 num_outliers(data, data$Infant_deaths)
 ```
 
-Under-Five deaths:
+Under_five_deaths:
 
 ```{r}
 num_outliers(data, data$Under_five_deaths)
