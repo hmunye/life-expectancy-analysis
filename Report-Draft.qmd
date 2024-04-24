@@ -958,7 +958,7 @@ df |>
 
 Inference:
 
-There appears to be a positive relationship between Schooling and GDP, as well as a slight positive relationship Alchohol Consumption and GDP
+There appears to be a positive relationship between Schooling and GDP, as well as a slight positive relationship between Alcohol Consumption and GDP
 
 Adult Mortality
 
@@ -1074,7 +1074,7 @@ There is a strong negative correlation between Adult Mortality and life expectan
 
 There are negative correlations between Adult Mortality and BMI, Diptheria, and schooling.
 
-There are strong positive correlations between Adult Morality and
+There are strong positive correlations between Adult Morality and Adult Mortality, Infant Deaths, and Under Five Deaths
 
 Hepatitis B
 
@@ -1172,6 +1172,14 @@ df |>
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 ```
 
+Hepatitis B Inferences:
+
+Strong Positive: Diphtheria,
+
+Positive: Life Expectancy, Alcohol Consumption, Polio
+
+Negative: Infant Deaths, Under Five Deaths, Adult mortality,
+
 Measles
 
 ```{r}
@@ -1266,6 +1274,12 @@ df |>
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 ```
 
+Measles Inferences:
+
+Positive: Life Expectancy, Schooling
+
+Negative: Infant Deaths, Under Five Deaths
+
 BMI
 
 ```{r}
@@ -1359,6 +1373,16 @@ df |>
   geom_text(aes(label = paste("Covariance:", round(cov(BMI, Schooling), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 ```
+
+BMI Inferences:
+
+Strong Positive: Life Expectancy, Schooling
+
+Positive: Diphtheria, GDP
+
+Negative: Thinness
+
+Strong Negative: Infant Deaths, Under Five Deaths, Adult Mortality,
 
 Polio
 
@@ -1459,6 +1483,16 @@ df |>
 
 ```
 
+Polio Inferences:
+
+Strong Positive, Hepatitis B, Diphtheria,
+
+Positive: Polio, BMI, Schooling
+
+Negative, Thinness
+
+Strong Negative: Infant Deaths, Under Five deaths,
+
 Diphtheria
 
 ```{r}
@@ -1471,7 +1505,7 @@ df |>
 df |>
   ggplot(aes(y = Diphtheria, x = Infant_deaths, color = Region)) +
   geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(Diphtheria, Life_expInfant_deathsectancy), 2))),
+  geom_text(aes(label = paste("Covariance:", round(cov(Diphtheria, Infant_deaths), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 
 df |>
@@ -1552,6 +1586,16 @@ df |>
   geom_text(aes(label = paste("Covariance:", round(cov(Diphtheria, Schooling), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 ```
+
+Diphtheria Inferences:
+
+Strong Positive: Hepatitis B, Polio
+
+Positive: Life Expectancy, Measles, BMI, Schooling
+
+Negative, Thinness
+
+Strong Negative: Infant Deaths, Under Five Deaths, Diphtheria
 
 HIV
 
@@ -1646,6 +1690,10 @@ df |>
   geom_text(aes(label = paste("Covariance:", round(cov(Incidents_HIV, Schooling), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 ```
+
+HIV Inferences:
+
+Conclusion: We may want to separate out Africa for this one, as it seems to be skewing the data.
 
 Population
 
@@ -1755,7 +1803,9 @@ df |>
 
 ```
 
-Note, Try this again without Asia.
+Population Inferences:
+
+We may want to do this again without China and India, as they seems to be skewing the data
 
 Thinness
 
