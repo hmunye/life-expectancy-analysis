@@ -530,6 +530,10 @@ Adult mortality peaks \~164
 
 The minimum is 49.38, the max is 719.36
 
+Possible questions:
+
+Why is there a spike in adult mortality rates around 150?
+
 Conclusion:
 
 ------------------------------------------------------------------------
@@ -619,6 +623,8 @@ Max 99
 
 It peaks around 62%
 
+Possible questions: Why is there a large spike at 62%
+
 ------------------------------------------------------------------------
 
 BMI
@@ -644,6 +650,8 @@ It is not evenly distributed
 Min 8
 
 Max 99
+
+Possible questions: Why are there two groups, one with a peak at 23 and one with a peak at 26?
 
 ```{r}
 df |>
@@ -731,6 +739,8 @@ ggplot() +
 summary(df$Thinness_ten_nineteen_years)
 ```
 
+Possible questions: Why is there a second peak around 7?
+
 ```{r}
 df |>
 ggplot() +
@@ -754,6 +764,8 @@ ggplot() +
 
 summary(df$Schooling)
 ```
+
+Possible questions:
 
 #### 4.3 Covariance Analysis
 
@@ -2142,10 +2154,6 @@ Negative correlation for thinness.
 
 #### 5.1 Variance Analysis
 
+No attributes are evenly distributed.
+
 #### 5.2 Covariance Analysis
-
-Inference: Both European regions have higher rates of alcohol consumption
-
-                       Both European regions have higher life expectancy rates
-
-Conclusion: Alcohol consumption does not greatly affect life expectancy
