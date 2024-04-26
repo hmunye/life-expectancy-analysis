@@ -956,67 +956,67 @@ Alcohol:
 df |>
   ggplot(aes(y = Alcohol_consumption, x = Adult_mortality, color = Region)) +
   geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(Alcohol_consumption, Adult_mortality), 2))),
+  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Alcohol_consumption, sdf$Adult_mortality), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 
 df |>
   ggplot(aes(y = Alcohol_consumption, x = Infant_deaths, color = Region)) +
   geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(Alcohol_consumption, Infant_deaths), 2))),
+  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Alcohol_consumption, sdf$Infant_deaths), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 
 df |>
   ggplot(aes(y = Alcohol_consumption, x = Hepatitis_B, color = Region)) +
   geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(Alcohol_consumption, Hepatitis_B), 2))),
+  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Alcohol_consumption, sdf$Hepatitis_B), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 
 df |>
   ggplot(aes(y = Alcohol_consumption, x = Measles, color = Region)) +
   geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(Alcohol_consumption, Measles), 2))),
+  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Alcohol_consumption, sdf$Measles), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 
 df |>
   ggplot(aes(y = Alcohol_consumption, x = BMI, color = Region)) +
   geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(Alcohol_consumption, BMI), 2))),
+  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Alcohol_consumption, sdf$BMI), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 
 df |>
   ggplot(aes(y = Alcohol_consumption, x = Polio, color = Region)) +
   geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(Alcohol_consumption, Polio), 2))),
+  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Alcohol_consumption, sdf$Polio), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 
 df |>
   ggplot(aes(y = Alcohol_consumption, x = Diphtheria, color = Region)) +
   geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(Alcohol_consumption, Diphtheria), 2))),
+  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Alcohol_consumption, sdf$Diphtheria), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 
 df |>
   ggplot(aes(y = Alcohol_consumption, x = Incidents_HIV, color = Region)) +
   geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(Alcohol_consumption, Incidents_HIV), 2))),
+  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Alcohol_consumption, sdf$Incidents_HIV), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 
 df |>
   ggplot(aes(y = Alcohol_consumption, x = GDP_per_capita, color = Region)) +
   geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(Alcohol_consumption, GDP_per_capita), 2))),
+  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Alcohol_consumption, sdf$GDP_per_capita), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 
 df |>
   ggplot(aes(y = Alcohol_consumption, x = Population_mln, color = Region)) +
   geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(Alcohol_consumption, Population_mln), 2))),
+  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Alcohol_consumption, Population_mln), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 
 df |>
   ggplot(aes(y = Alcohol_consumption, x = Schooling, color = Region)) +
   geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(Alcohol_consumption, Schooling), 2))),
+  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Alcohol_consumption, sdf$Schooling), 2))),
             x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 ```
 
@@ -2191,7 +2191,7 @@ For testing purposes, we must separate out a portion of the data now. We will be
 set.seed(333)
 
 #create ID variable
-df$
+
 ```
 
 #### 5.2 ???
