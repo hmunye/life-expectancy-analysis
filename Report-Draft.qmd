@@ -131,39 +131,7 @@ For ease of use we have re-uploaded the dataset to this Github repository create
 
 <https://raw.githubusercontent.com/hmunye/life-expectancy-analysis/main/data/Life-Expectancy-Data-Updated.csv>
 
-### 1.3 Initial Questions 
-
-·        What are the predicting variables affecting life expectancy? - multiple regression
-
-o   (Use 3 different , MR, Forest, SVR, XG Boost, ANN (Not deep) )
-
-·       How does Infant and Adult mortality rates affect life expectancy?
-
-·       Does Life Expectancy have a positive or negative correlation with
-
-o    BMI,
-
-o   disease,
-
-o   drinking alcohol, immunizations, etc.?
-
-·       What is the impact of schooling on the lifespan of humans?
-
-·       Does Life Expectancy have a positive or negative relationship with drinking alcohol?
-
-·        Do densely populated countries tend to have lower life expectancy?
-
-·        What is the impact of Immunization coverage on life Expectancy?
-
-·       Will there be an increase in life expectancy in the next 10 years?
-
-·       Will the rate of infant deaths go down over the next 5 years?
-
-·       Is there a correlation between economic status and Life expectancy?
-
-·       Do certain regions have higher vaccination rates? SVN DECESION TREE/FOREST XG BOOST)
-
-·       (Make one for Binary CLASSIFICATION) Logistic Regression Model
+### 1.3 Initial Questions
 
 ## 2 Data Loading
 
@@ -2211,9 +2179,9 @@ Negative correlation for population.
 
 Negative correlation for thinness.
 
-## 5 Models 
+## 5 Models
 
-#### 5.1 Multiple Regression of Life Expectancy 
+#### 5.1 Multiple Regression of Life Expectancy
 
 For testing purposes, we must separate out a portion of the data now. We will be using a 70/30 split. 70% Training, 30% testing.
 
