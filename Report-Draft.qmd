@@ -141,14 +141,9 @@ Install the packages if not already installed on your machine
 
 ```{r}
 install.packages("tidyverse")
-```
-
-```{r}
-install.packages("caret")
-```
-
-```{r}
 install.packages("car")
+install.packages("caret")
+install.packages("neuralnet")
 ```
 
 ```{r}
@@ -156,6 +151,7 @@ install.packages("car")
 library(tidyverse)
 library(caret)
 library(car)
+library(neuralnet)
 ```
 
 #### 2.2 Loading and Understanding the Data
@@ -2274,7 +2270,7 @@ LE_MR2 <- lm(Life_expectancy ~ . - Country - Region -Year -Economy_status_Develo
 summary(LE_MR2)
 ```
 
-Next remove
+Next remove measles
 
 ```{r}
 #make the multiple Regression model for Life Expectancy 
@@ -2283,6 +2279,8 @@ LE_MR3 <- lm(Life_expectancy ~ . - Country - Region -Year -Economy_status_Develo
 #print summary of the model
 summary(LE_MR3)
 ```
+
+next remove population
 
 ```{r}
 #make the multiple Regression model for Life Expectancy 
@@ -2301,6 +2299,55 @@ summary(LE_MR5)
 ```
 
 **\*I don't know when to stop.**\*
+
+```{r}
+ggplot(df, aes(x = Under_five_deaths, y = Life_expectancy)) +
+  geom_point() +              
+  geom_smooth(method = "lm") + 
+  labs(title = "Life Expectancy vs Under Five Deaths")
+
+# Scatterplot for Adult_mortality
+ggplot(df, aes(x = Adult_mortality, y = Life_expectancy)) +
+  geom_point() +               
+  geom_smooth(method = "lm") +
+  labs(title = "Life Expectancy vs Adult Mortality")
+
+# Scatterplot for Alcohol_consumption
+ggplot(df, aes(x = Alcohol_consumption, y = Life_expectancy)) +
+  geom_point() +              
+  geom_smooth(method = "lm") + 
+  labs(title = "Life Expectancy vs Alcohol Consumption")
+
+# Scatterplot for BMI
+ggplot(df, aes(x = BMI, y = Life_expectancy)) +
+  geom_point() +              
+  geom_smooth(method = "lm") + 
+  labs(title = "Life Expectancy vs BMI")
+
+# Scatterplot for Incidents_HIV
+ggplot(df, aes(x = Incidents_HIV, y = Life_expectancy)) +
+  geom_point() +               
+  geom_smooth(method = "lm") + 
+  labs(title = "Life Expectancy vs Incidents HIV")
+
+# Scatterplot for GDP_per_capita
+ggplot(df, aes(x = GDP_per_capita, y = Life_expectancy)) +
+  geom_point() +               
+  geom_smooth(method = "lm") + 
+  labs(title = "Life Expectancy vs GDP per Capita")
+
+# Scatterplot for Thinness_ten_nineteen_years
+ggplot(df, aes(x = Thinness_ten_nineteen_years, y = Life_expectancy)) +
+  geom_point() +               
+  geom_smooth(method = "lm") + 
+  labs(title = "Life Expectancy vs Thinness (10-19 years)")
+
+# Scatterplot for Schooling
+ggplot(df, aes(x = Schooling, y = Life_expectancy)) +
+  geom_point() +              
+  geom_smooth(method = "lm") + 
+  labs(title = "Life Expectancy vs Schooling")
+```
 
 ##### 5.1.4 Testing the data
 
@@ -2335,6 +2382,72 @@ print("RMSE 5")
 rmse
 ```
 
-#### 5.2 ???
+#### 5.2 Neural Network of Life Expectancy 
+
+###### 5.2.1 Splitting the data set 
+
+```{r}
+glimpse(sdf)
+```
+
+```{r}
+sdf_num <- sdf %>% select_if(is.numeric)
+```
+
+```{r}
+#seed to make this reproducible 
+set.seed(444)
+
+#split the data
+training.samples. <- sdf$Life_expectancy |> createDataPartition(p = 0.8, list = FALSE)
+
+train_data_nn <- sdf_num[training.samples, ]
+test_data_nn <- sdf_num[-training.samples, ]
+```
+
+```{r}
+
+
+
+# Train the neural network
+nn <- neuralnet(Life_expectancy ~ . -Diphtheria  - Infant_deaths - Thinness_ten_nineteen_years 
+, data = train_data_nn, hidden = 3,
+ linear.output = FALSE)
+plot(nn)
+```
+
+Testing
+
+```{r}
+# Prediction #
+output <- compute(nn, test_data_nn[, !(names(test_data_nn) %in% c("Life_expectancy"))])
+
+# Extracting predicted values
+predicted_values <- output$net.result
+
+# Combining predicted values with actual values
+results <- data.frame(Actual = test_data_nn$Life_expectancy, Predicted = predicted_values)
+
+
+rounded_results <- sapply(results, round, digits = 0)
+
+# Display the results
+head(rounded_results)
+```
+
+Confusion Matrix
+
+```{r}
+# Ensure that unique levels in actual and prediction vectors match
+all_levels <- unique(c(actual, prediction))
+
+# Convert actual and prediction vectors to factors with the same levels
+actual_factor <- factor(actual, levels = all_levels)
+prediction_factor <- factor(prediction, levels = all_levels)
+
+# Generate and display confusion matrix plot
+library(caret)
+confusionMatrix(actual_factor, prediction_factor)
+```
 
 #### 5.3 ????
