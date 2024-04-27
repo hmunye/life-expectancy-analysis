@@ -967,10 +967,13 @@ df |>
 
 Inference:
 
-Adult Mortality, Infant Deaths, Under 5 deaths all have a strong negative relationships with Life Expectancy.
+Strong negative: adult mortality, infant deaths, under five deaths
 
-Alcohol Consumption, BMI, Polio, Diphteria, and Schooling all have positive relationships with Life Expectancy
+Negative: HIV, thinness
 
+Slight positive: Alcohol consumption, Hepatitas B, measles
+
+Positive: BMI, Polio, Diphteria, Schooling
 Alcohol:
 
 ```{r}
@@ -1045,7 +1048,13 @@ Inferences:
 
 There is a positive relationship between Schooling and alcohol consumption,
 
-Other variables have some covariance, but it dose not seem to be strongly related.
+Some positive relationship: GDP
+
+Some negative relationship: Infant deaths
+
+Strong negative relationship: Population
+
+Other variables have some covariance, but it does not seem to be strongly related.
 
 GDP:
 
@@ -1121,7 +1130,10 @@ df |>
 
 Inference:
 
-There appears to be a positive relationship between Schooling and GDP, as well as a slight positive relationship between Alcohol Consumption and GDP
+Some positive relationship: Life expectancy, alcohol consumption, schooling
+
+Some negative relationship: Infant deaths, under  five deaths, adult mortality
+
 
 Adult Mortality
 
@@ -1233,11 +1245,14 @@ df |>
 
 Inferences:
 
-There is a strong negative correlation between Adult Mortality and life expectancy.
+Strong negative: Life expectancy
 
-There are negative correlations between Adult Mortality and BMI, Diptheria, and schooling.
+Negative: BMI, polio Diphtheria, schooling
 
-There are strong positive correlations between Adult Morality and Adult Mortality, Infant Deaths, and Under Five Deaths
+Positive: HIV
+
+Strong positive: infant deaths, under five deaths
+
 
 Hepatitis B
 
@@ -1337,11 +1352,9 @@ df |>
 
 Hepatitis B Inferences:
 
-Strong Positive: Diphtheria,
+Positive: Life Expectancy, Alcohol Consumption, Polio, Measles, Diphtheria
 
-Positive: Life Expectancy, Alcohol Consumption, Polio
-
-Negative: Infant Deaths, Under Five Deaths, Adult mortality,
+Negative: Infant Deaths, Under Five Deaths, Adult mortality
 
 Measles
 
@@ -1439,9 +1452,9 @@ df |>
 
 Measles Inferences:
 
-Positive: Life Expectancy, Schooling
+Positive: Life Expectancy, Schooling, Hepatitis B, BMI, polio, Diphtheria 
 
-Negative: Infant Deaths, Under Five Deaths
+Negative: Infant Deaths, Under Five Deaths, adult mortality 
 
 BMI
 
@@ -1539,13 +1552,10 @@ df |>
 
 BMI Inferences:
 
-Strong Positive: Life Expectancy, Schooling
+Positive: Life Expectancy, Diphtheria, GDP, measles, polio, schooling
 
-Positive: Diphtheria, GDP
+Negative: Thinness, infant deaths, under five deaths, adult mortality
 
-Negative: Thinness
-
-Strong Negative: Infant Deaths, Under Five Deaths, Adult Mortality,
 
 Polio
 
@@ -1648,13 +1658,13 @@ df |>
 
 Polio Inferences:
 
-Strong Positive, Hepatitis B, Diphtheria,
+Strong Positive, Hepatitis B, Diphtheria
 
-Positive: Polio, BMI, Schooling
+Positive: Polio, BMI, Schooling, life expectancy, measles
 
-Negative, Thinness
+Negative: Thinness, adult mortality
 
-Strong Negative: Infant Deaths, Under Five deaths,
+Strong Negative: Infant Deaths, Under Five deaths
 
 Diphtheria
 
@@ -1756,9 +1766,9 @@ Strong Positive: Hepatitis B, Polio
 
 Positive: Life Expectancy, Measles, BMI, Schooling
 
-Negative, Thinness
+Negative: Thinness, adult mortality
 
-Strong Negative: Infant Deaths, Under Five Deaths, Diphtheria
+Strong Negative: Infant Deaths, Under Five Deaths
 
 HIV
 
@@ -1855,6 +1865,10 @@ df |>
 ```
 
 HIV Inferences:
+
+Positive: Adult mortality
+
+Negative: life expectancy
 
 Conclusion: We may want to separate out Africa for this one, as it seems to be skewing the data.
 
@@ -1968,7 +1982,7 @@ df |>
 
 Population Inferences:
 
-We may want to do this again without China and India, as they seems to be skewing the data
+Conclusion: We may want to do this again without China and India, as they seems to be skewing the data
 
 Thinness
 
@@ -2066,13 +2080,11 @@ df |>
 
 Thinness:
 
-Strong positive:
+Strong positive: Thinness
 
-Positive: Infant deaths, under five deaths, adult mortality, HIV, population
+Positive: Infant deaths, under five deaths, adult mortality
 
-Negative: Life expectancy, alcohol consumption, Hepatitis B, measles, BMI, polio, diphtheria, schooling
-
-Strong negative: GDP
+Negative: Life expectancy, alcohol consumption, BMI, schooling
 
 No surprise that the two thinness are basically one to one.
 
@@ -2172,35 +2184,9 @@ df |>
 
 Inferences:
 
-There is a positive relationship between life expectancy and schooling so the higher the number of years in school, the higher the life expectancy.
+Positive: Life expectancy, alcohol consumption, measles, BMI, polio, diphtheria, GDP
 
-There is a negative correlation between infant deaths and schooling so the higher the number of years in school, the lower the amount of infant deaths.
-
-There is a negative correlation between under 5 deaths and schooling so the higher the number of years in school, the lower the amount of under 5 deaths.
-
-There is a positive correlation between alcohol consumption and schooling so the higher the number of years in school, the higher the amount of alcohol consumption.
-
-There is a negative correlation between adult mortality and schooling so the higher the number of years in school, the lower the adult mortality rates.
-
-There is a positive correlation between hepatitis B and schooling so the higher the number of years in school, the higher the hepatitis B immunization coverage.
-
-There is a positive correlation between measles and schooling so the higher the number of years in school, the higher the measles immunization coverage.
-
-There is a slight positive correlation between BMI and schooling so the higher the number of years in school, the higher the average BMI.
-
-There is a positive correlation between polio and schooling so the higher the number of years in school, the higher the polio immunization coverage.
-
-Positive correlation for diphtheria.
-
-Positive correlation for GDP.
-
-Negative correlation for HIV.
-
-Negative correlation for population.
-
-Negative correlation for thinness.
-
-## 5 Models
+Negative: Infant deaths, under five deaths, adult mortality, thinness
 
 #### 5.1 Multiple Regression of Life Expectancy
 
