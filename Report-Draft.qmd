@@ -664,6 +664,8 @@ Max 99.9
 
 It peaks around 90%
 
+Why is there a spike around 85?
+
 ------------------------------------------------------------------------
 
 Measles
@@ -693,6 +695,8 @@ Max 99
 
 It peaks around 62%
 
+Why is there a spike around 62%?
+
 ------------------------------------------------------------------------
 
 BMI
@@ -718,6 +722,8 @@ It is not evenly distributed
 Min 8
 
 Max 99
+
+Why is there two groups?
 
 ```{r}
 df |>
@@ -804,7 +810,7 @@ ggplot() +
 
 summary(df$Thinness_ten_nineteen_years)
 ```
-
+Why are there two groups?
 ```{r}
 df |>
 ggplot() +
@@ -816,7 +822,7 @@ ggplot() +
 
 summary(df$Thinness_five_nine_years)
 ```
-
+Why are there two groups?
 ```{r}
 df |>
 ggplot() +
