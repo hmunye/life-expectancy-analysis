@@ -89,7 +89,7 @@ The group members contributing to this document include:
 
 -   Austin Perkins
 
--   Justyn Kovalsk
+-   Justyn Kovalski
 
 This dataset includes comprehensive information on 179 countries spanning from 2000 to 2015, covering aspects like life expectancy, health indicators, immunization rates, and economic and demographic data. Originally sourced from Kaggle, it underwent updates to rectify inaccuracies and missing values. Population, GDP, and life expectancy figures were updated from World Bank data, while data on vaccinations, alcohol consumption, BMI, HIV rates, mortality, and other health metrics were sourced from the World Health Organization. Additional information on schooling was gathered from the University of Oxford's Our World in Data project. Missing values were addressed using strategies such as filling with the closest three-year average or the regional average. Countries with significant missing data were excluded, and the remaining countries were categorized based on their Gross National Income per capita into developed vs developing economies, following guidelines from organizations like the World Trade Organization and the UN.
 
@@ -2619,6 +2619,10 @@ The more interesting variables of significance are **Alcohol_consumption**, **BM
 Incidents of HIV is again no surprise as HIV is a depilitating illness that if untreated will result in death, therefore the higher the rate of HIV the lower the life expectancy.
 
 The other variables in this group are more interesting, and seem to correlate with a nation being more developed, and thus having more access to healthcare, and thus a higher life expectancy.
+
+
+```
+
 
 ------------------------------------------------------------------------
 
