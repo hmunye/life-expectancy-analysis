@@ -179,7 +179,9 @@ For ease of use we have re-uploaded the dataset to this Github repository create
 
 -   \- Is there a correlation between economic status and Life expectancy?
 
--    - Can we predict countries economic status based off Life expectancy?
+-   
+
+    -   Can we predict countries economic status based off Life expectancy?
 
 -   \- Do certain regions have higher vaccination rates? SVN DECESION TREE/FOREST XG BOOST)
 
@@ -197,6 +199,9 @@ install.packages("car")
 install.packages("caret")
 install.packages("neuralnet")
 install.packages("e1071")
+install.packages("randomForest")
+install.packages("randomForest")
+install.packages("caTools")
 ```
 
 ```{r}
@@ -206,6 +211,9 @@ library(caret)
 library(car)
 library(neuralnet)
 library(e1071)
+library(randomForest)
+library(caTools)
+
 ```
 
 #### 2.2 Loading and Understanding the Data
@@ -2396,14 +2404,6 @@ ggplot(df, aes(x = Schooling, y = Life_expectancy)) +
   geom_smooth(method = "lm") + 
   labs(title = "Life Expectancy vs Schooling")
 ```
-As deaths under five go up, life expectancy goes down
-As adult mortality goes up, life expectancy goes down
-As alcohol consumption goes up, so does life expectancy
-As BMI goes up, so does life expectancy
-As incidents of HIV goes up, life expectancy goes down
-As GDP goes up, so does life expectancy
-As thinness goes up in prevalence, life expectancy goes down
-As schooling goes up, so does life expectancy
 
 ##### 5.1.4 Testing the Data
 
@@ -2508,7 +2508,7 @@ library(caret)
 confusionMatrix(actual_factor, prediction_factor)
 ```
 
-#### 5.3 SVR model for Life Expectancy 
+#### 5.3 SVR model for Life Expectancy
 
 ```{r}
 #seed to make this reproducible 
@@ -2526,3 +2526,88 @@ LE_SVR <- svm(train.data.svm$Life_expectancy ~ . , train.data.svm)
 
 LE_SVR
 ```
+
+Predict data
+
+```{r}
+predicted_Values_SVR <- predict(LE_SVR , newdata = test.data.svm)
+```
+
+Evaluate Model
+
+```{r}
+actual_values_SVR <- test.data.svm$Life_expectancy 
+mae <- mean(abs(predicted_Values_SVR - actual_values_SVR))
+mse <- mean((predicted_Values_SVR - actual_values_SVR)^2)
+rmse <- sqrt(mse)
+r_squared <- cor(predicted_Values_SVR, actual_values_SVR)^2
+
+# Print evaluation metrics
+cat("Mean Absolute Error (MAE):", mae, "\n")
+cat("Mean Squared Error (MSE):", mse, "\n")
+cat("Root Mean Squared Error (RMSE):", rmse, "\n")
+cat("R-squared:", r_squared, "\n")
+```
+
+\*I have NO CLUE how to figure out which variables are significant? Ask Prof Q-
+
+\*\* This is 100% overfitted, but again, which variable is the least significant??
+
+------------------------------------------------------------------------
+
+### 5.4 Random Forest 
+
+Why is this one giving me such a hard time...
+
+Set up the data for Random Forest
+
+```{r}
+
+RF_DF <- df[, !(names(df) %in% c("Region", "Country", "Economy_status_Developed", "Economy_status_Developing","Year"))]
+
+summary(RF_DF)
+```
+
+Split the data
+
+```{r}
+# Set seed for reproducibility
+set.seed(321)
+
+# Split the data into training and testing sets
+train_index_RF <- createDataPartition(RF_DF$Life_expectancy, p = 0.8, list = FALSE)
+train_data_RF <- RF_DF[train_index_RF, ]
+test_data_RF <- RF_DF[-train_index_RF, ]
+
+```
+
+Making the model
+
+```{r}
+
+# Train the random forest model
+rf_model <- randomForest(Life_expectancy ~ ., data = train_data_RF, ntree = 500)
+
+# Print the trained model
+print(rf_model)
+```
+
+Significance plot
+
+```{r}
+
+# Print variable importance
+print(rf_model$importance)
+```
+
+This gives us another way to answer to see which variables are significant for Life Expectancy.
+
+Interpreting these values:
+
+-   **Infant_deaths**, **Under_five_deaths**, and **Adult_mortality** have the highest importance scores, indicating that they are the most important predictors of life expectancy in your model.
+
+-   **Alcohol_consumption**, **BMI**, **Incidents_HIV**, **GDP_per_capita**, and **Schooling** also have relatively high importance scores, suggesting that they significantly contribute to the model's predictive performance.
+
+-   **Hepatitis_B**, **Measles**, **Polio**, **Diphtheria**, **Population_mln**, **Thinness_ten_nineteen_years**, and **Thinness_five_nine_years** have relatively less impact on the model compared to others
+
+------------------------------------------------------------------------
