@@ -55,21 +55,21 @@ Group Members: Adam Thomas, Yusuf Unsal, Austin Perkins, Justyn Kovalsk, Huseen 
 
 -   \[**5 Models**\]
 
-    -   [5.1 Multiple Regression of Life Expectancy]
+    -   [5.1.1 Multiple Regression of Life Expectancy]
 
-        -   [5.1.1 Splitting the Data]
+        -   [5.1.1.1 Splitting the Data]
 
-        -   [5.1.2 Making the First Model]
+        -   [5.1.1.2 Making the First Model]
 
-        -   [5.1.3 Pruning the Model]
+        -   [5.1.1.3 Pruning the Model]
 
-            -   [5.1.3.1 VIF Test]
+            -   [5.1.1.3.1 VIF Test]
 
-            -   [5.1.3.2 Removing variables one at a time]
+            -   [5.1.1.3.2 Removing variables one at a time]
 
         -   [5.1.4 Testing the Data]
 
-    -   [5.2 Neural Network of Life Expectancy]
+    -   [5.1.2 Neural Network of Life Expectancy]
 
         -   [5.2.1 Splitting the Dataset]
 
@@ -149,7 +149,7 @@ For ease of use we have re-uploaded the dataset to this Github repository create
 
 ### 1.3 Initial Questions
 
--   What are the predicting variables affecting life expectancy? - multiple regression -(Use 3 different , MR, Forest, SVR, XG Boost, ANN (Not deep) )
+-   What are the predicting variables affecting life expectancy? - [5.1.5 Conclusion of which variables most influence Life Expectancy.]
 
 -   \- How does Infant and Adult mortality rates affect life expectancy?
 
@@ -178,8 +178,6 @@ For ease of use we have re-uploaded the dataset to this Github repository create
 -   \- Will the rate of infant deaths go down over the next 5 years?
 
 -   \- Is there a correlation between economic status and Life expectancy?
-
--   
 
     -   Can we predict countries economic status based off Life expectancy?
 
@@ -2258,11 +2256,13 @@ Negative: Infant deaths, under five deaths, adult mortality, thinness
 
 ## 5 Models {data-link="1 Introduction"}
 
-#### 5.1 Multiple Regression of Life Expectancy
+#### 5.1 What varaibles most influence Life Expectancy? {data-link="5.1 Multiple Regression of Life Expectancy"}
+
+#### 5.1.1 Multiple Regression of Life Expectancy
 
 For testing purposes, we must separate out a portion of the data now. We will be using a 80/20 split. 80% Training, 20% testing.
 
-##### 5.1.1 Splitting the Data
+##### 5.1.1.1 Splitting the Data
 
 ```{r}
 
@@ -2277,7 +2277,7 @@ test.data <- sdf[-training.samples, ]
 
 ```
 
-##### 5.1.2 Making the First Model
+##### 5.1.1.2 Making the First Model
 
 ```{r}
 #make the multiple Regression model for Life Expectancy 
@@ -2291,9 +2291,7 @@ This answers one of our questions, of what variables most influence Life Expecta
 
 This model has a very high R-Squared, but we need to be wary of over-fitting as well as other potential issues sush as multicollinearity values.
 
-##### 5.1.3 Pruning the Model
-
-###### 5.1.3.1 VIF Test
+##### 5.1.1.3 Pruning the Model
 
 First performing a vif test to check for multicollinearity
 
@@ -2313,8 +2311,6 @@ For the other two pairs we will be keeping:
 -   Under Five Deaths
 
 -   Thinness_ten_nineteen
-
-###### 5.1.3.2 Removing variables one at a time
 
 First, remove the variables from the VIF test.
 
@@ -2407,7 +2403,7 @@ ggplot(df, aes(x = Schooling, y = Life_expectancy)) +
 
 As deaths under five go up, life expectancy goes down As adult mortality goes up, life expectancy goes down As alcohol consumption goes up, so does life expectancy As BMI goes up, so does life expectancy As incidents of HIV goes up, life expectancy goes down As GDP goes up, so does life expectancy As thinness goes up in prevalence, life expectancy goes down As schooling goes up, so does life expectancy
 
-##### 5.1.4 Testing the Data
+Testing the data
 
 ```{r}
 predictions <- predict(LE_MR, newdata = test.data)
@@ -2440,9 +2436,9 @@ print("RMSE 5")
 rmse
 ```
 
-#### 5.2 Neural Network of Life Expectancy
+#### 5.1.2 Neural Network of Life Expectancy
 
-###### 5.2.1 Splitting the Dataset
+Splitting the dataset
 
 ```{r}
 glimpse(sdf)
@@ -2510,7 +2506,7 @@ library(caret)
 confusionMatrix(actual_factor, prediction_factor)
 ```
 
-#### 5.3 SVR model for Life Expectancy
+#### 5.1.3 SVR model for Life Expectancy
 
 ```{r}
 #seed to make this reproducible 
@@ -2557,9 +2553,7 @@ cat("R-squared:", r_squared, "\n")
 
 ------------------------------------------------------------------------
 
-### 5.4 Random Forest 
-
-Why is this one giving me such a hard time...
+### 5.1.4 Random Forest 
 
 Set up the data for Random Forest
 
@@ -2610,6 +2604,22 @@ Interpreting these values:
 
 -   **Alcohol_consumption**, **BMI**, **Incidents_HIV**, **GDP_per_capita**, and **Schooling** also have relatively high importance scores, suggesting that they significantly contribute to the model's predictive performance.
 
--   **Hepatitis_B**, **Measles**, **Polio**, **Diphtheria**, **Population_mln**, **Thinness_ten_nineteen_years**, and **Thinness_five_nine_years** have relatively less impact on the model compared to others
+-   **Hepatitis_B**, **Measles**, **Polio**, **Diphtheria**, **Population_mln**, **Thinness_ten_nineteen_years**, and **Thinness_five_nine_years** have relatively less impact on the model compared to others.
+
+This backs up the Multiple Regression models findings.
 
 ------------------------------------------------------------------------
+
+### 5.1.5 Conclusion of which variables most influence Life Expectancy.
+
+From the various model made above, it seems conclusive that the most significant variables for Life Expectancy are **Infant_deaths**, **Under_five_deaths**, and **Adult_mortality**. This is not a surprising conclusion as all three of these variables directly relate to death at a certain age, which is what Life Expectancy is measuring.
+
+The more interesting variables of significance are **Alcohol_consumption**, **BMI**, **Incidents_HIV**, **GDP_per_capita**, and **Schooling.**
+
+Incidents of HIV is again no surprise as HIV is a depilitating illness that if untreated will result in death, therefore the higher the rate of HIV the lower the life expectancy.
+
+The other variables in this group are more interesting, and seem to correlate with a nation being more developed, and thus having more access to healthcare, and thus a higher life expectancy.
+
+------------------------------------------------------------------------
+
+### 5.2
