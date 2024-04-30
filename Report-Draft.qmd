@@ -2621,9 +2621,36 @@ Incidents of HIV is again no surprise as HIV is a depilitating illness that if u
 The other variables in this group are more interesting, and seem to correlate with a nation being more developed, and thus having more access to healthcare, and thus a higher life expectancy.
 
 
-```
 
 
 ------------------------------------------------------------------------
 
-### 5.2
+### 5.2 Deep analysis
+
+```{r}
+ggplot(df, aes(x = Under_five_deaths, y = Region)) +
+  geom_point() +              
+  labs(title = "Region vs Under Five Deaths")
+```
+```{r}
+ggplot(df, aes(x = Adult_mortality, y = Region)) +
+  geom_point() +              
+  labs(title = "Region vs Adult Mortality")
+```
+
+```{r}
+df$Mortality <- df$Under_five_deaths + df$Adult_mortality
+
+ggplot(df, aes(x = Mortality, y = Region)) +
+  geom_point() +              
+  labs(title = "Region vs Mortality")
+
+```
+```{r}
+filtered_df <- df %>%
+  filter(Region == "Africa")
+ggplot(filtered_df, aes(x = Mortality, y = Country)) +
+  geom_point() +              
+  labs(title = "Region vs Mortality")
+```
+
