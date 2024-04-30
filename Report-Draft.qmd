@@ -2405,6 +2405,8 @@ ggplot(df, aes(x = Schooling, y = Life_expectancy)) +
   labs(title = "Life Expectancy vs Schooling")
 ```
 
+As deaths under five go up, life expectancy goes down As adult mortality goes up, life expectancy goes down As alcohol consumption goes up, so does life expectancy As BMI goes up, so does life expectancy As incidents of HIV goes up, life expectancy goes down As GDP goes up, so does life expectancy As thinness goes up in prevalence, life expectancy goes down As schooling goes up, so does life expectancy
+
 ##### 5.1.4 Testing the Data
 
 ```{r}
