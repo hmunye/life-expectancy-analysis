@@ -2710,5 +2710,26 @@ filtered_df <- df %>%
 ggplot(filtered_df, aes(x = Mortality, y = Country)) +
   geom_point() +              
   labs(title = "Region vs Mortality")
-```
 
+ggplot(filtered_df, aes(x = BMI, y = Country)) +
+  geom_point() +              
+  labs(title = "African Country vs BMI")
+
+ggplot(filtered_df, aes(x = Alcohol_consumption, y = Country)) +
+  geom_point() +              
+  labs(title = "African Country vs Alcohol")
+
+ggplot(filtered_df, aes(x = Hepatitis_B, y = Country)) +
+  geom_point() +              
+  labs(title = "African Country vs Hepatitis")
+
+ggplot(filtered_df, aes(x = Measles, y = Country)) +
+  geom_point() +              
+  labs(title = "African Country vs Measles")
+
+ggplot(filtered_df, aes(x = Polio, y = Country)) +
+  geom_point() +              
+  labs(title = "African Country vs Polio")
+
+
+```
