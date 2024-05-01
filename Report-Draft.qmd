@@ -2731,5 +2731,27 @@ ggplot(filtered_df, aes(x = Polio, y = Country)) +
   geom_point() +              
   labs(title = "African Country vs Polio")
 
+ggplot(filtered_df, aes(x = Diphtheria, y = Country)) +
+  geom_point() +              
+  labs(title = "African Country vs Diphtheria")
 
+ggplot(filtered_df, aes(x = Incidents_HIV, y = Country)) +
+  geom_point() +              
+  labs(title = "African Country vs HIV")
+
+ggplot(filtered_df, aes(x = GDP_per_capita, y = Country)) +
+  geom_point() +              
+  labs(title = "African Country vs GDP")
+
+ggplot(filtered_df, aes(x = Population_mln, y = Country)) +
+  geom_point() +              
+  labs(title = "African Country vs Population")
+
+ggplot(filtered_df, aes(x = Thinness_ten_nineteen_years, y = Country)) +
+  geom_point() +              
+  labs(title = "African Country vs Thinness")
+
+ggplot(filtered_df, aes(x = Schooling, y = Country)) +
+  geom_point() +              
+  labs(title = "African Country vs Schooling")
 ```
