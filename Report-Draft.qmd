@@ -63,15 +63,15 @@ Group Members: Adam Thomas, Yusuf Unsal, Austin Perkins, Justyn Kovalsk, Huseen 
 
         -   [5.1.1.3 Pruning the Model]
 
-            -   [5.1.1.3.1 VIF Test]
+            -   \[5.1.1.3.1 VIF Test\]
 
-            -   [5.1.1.3.2 Removing variables one at a time]
+            -   \[5.1.1.3.2 Removing variables one at a time\]
 
-        -   [5.1.4 Testing the Data]
+        -   \[5.1.4 Testing the Data\]
 
     -   [5.1.2 Neural Network of Life Expectancy]
 
-        -   [5.2.1 Splitting the Dataset]
+        -   \[5.2.1 Splitting the Dataset\]
 
     -   5.3 ...
 
@@ -198,8 +198,8 @@ install.packages("caret")
 install.packages("neuralnet")
 install.packages("e1071")
 install.packages("randomForest")
-install.packages("randomForest")
 install.packages("caTools")
+install.packages("clusterGeneration")
 ```
 
 ```{r}
@@ -2279,17 +2279,41 @@ test.data <- sdf[-training.samples, ]
 
 ##### 5.1.1.2 Making the First Model
 
+We are leaving out one of the two economy status variables as they are two halves of a binary variable.
+
+We must also pick between Country and Region, as having both in the model seems to create singularities. For readability sake we will be keeping Region
+
 ```{r}
 #make the multiple Regression model for Life Expectancy 
-LE_MR <- lm(Life_expectancy ~ . - Country - Region -Year -Economy_status_Developed -Economy_status_Developing, data = train.data)
+LE_MR <- lm(Life_expectancy ~ .  -Economy_status_Developing -Country , data = train.data)
 
 #print summary of the model
 summary(LE_MR)
 ```
 
-This answers one of our questions, of what variables most influence Life Expectancy
+Each variable in the model is given a P_Value, The lower the P_Value is the more significant the attribute is, with the cutoff for significance being 0.05.
 
-This model has a very high R-Squared, but we need to be wary of over-fitting as well as other potential issues sush as multicollinearity values.
+From this first model we can see that the following attributes are significant:
+
+| Attribute            | P Value  |
+|----------------------|----------|
+| Region               | Varies   |
+| Infant Deaths        | 1.04e-15 |
+| Under Five Deaths    | 2e-16    |
+| Adult Mortality      | 2e-16    |
+| Hepatitis B          | 0.003581 |
+| BMI                  | 6.38e-09 |
+| Polio                | 0.081001 |
+| Incidents HIV        | 0.000117 |
+| GDP per Capita       | 3.78e-16 |
+| Thinness_ten_ninteen | 0.037261 |
+| Schooling            | 1.69e-09 |
+| Economy_Status       | 2e-16    |
+| Year                 | Various  |
+
+: Any attribute not on this table did not make the cut for significance.
+
+This model has a very high R-Squared, but we need to be wary of over-fitting as well as other potential issues such as multicollinearity values.
 
 ##### 5.1.1.3 Pruning the Model
 
@@ -2300,11 +2324,11 @@ vif(LE_MR)
 
 ```
 
-There are several variables that have high multicollinearity. From the co-variation analysis done in 4.3 we know that Infant deaths and under five deaths are very closly related, as well as the two thinness variables, and Polio and Diphteria are related.
+There are several variables that have high multicollinearity. From the co-variation analysis done in 4.3 we know that Infant deaths and under five deaths are very closely related, as well as the two thinness variables, and Polio and Diphteria are related.
 
 We should only pick one of the variables in these pairs in order to avoid the issues that arise from having high multicollinearity values. We will be picking the values that have more relevance to the models.
 
-As neither polio nor diphteria are significant to the model we will be dropping both.
+As neither polio nor diphtheria are significant to the model we will be dropping both.
 
 For the other two pairs we will be keeping:
 
@@ -2312,11 +2336,13 @@ For the other two pairs we will be keeping:
 
 -   Thinness_ten_nineteen
 
+We will also be dropping Region from the model due to its very high VIF test result.
+
 First, remove the variables from the VIF test.
 
 ```{r}
 #make the multiple Regression model for Life Expectancy 
-LE_MR2 <- lm(Life_expectancy ~ . - Country - Region -Year -Economy_status_Developed -Economy_status_Developing -Polio -Diphtheria -Infant_deaths -Thinness_five_nine_years, data = train.data)
+LE_MR2 <- lm(Life_expectancy ~ . - Country - Region  -Economy_status_Developed -Polio -Diphtheria -Infant_deaths -Thinness_five_nine_years, data = train.data)
 
 #print summary of the model
 summary(LE_MR2)
@@ -2326,7 +2352,7 @@ Next remove measles
 
 ```{r}
 #make the multiple Regression model for Life Expectancy 
-LE_MR3 <- lm(Life_expectancy ~ . - Country - Region -Year -Economy_status_Developed -Economy_status_Developing -Polio -Diphtheria -Infant_deaths -Thinness_five_nine_years -Measles, data = train.data)
+LE_MR3 <- lm(Life_expectancy ~ . - Country - Region  -Economy_status_Developed -Polio -Diphtheria -Infant_deaths -Thinness_five_nine_years -Measles, data = train.data)
 
 #print summary of the model
 summary(LE_MR3)
@@ -2336,21 +2362,31 @@ next remove population
 
 ```{r}
 #make the multiple Regression model for Life Expectancy 
-LE_MR4 <- lm(Life_expectancy ~ . - Country - Region -Year -Economy_status_Developed -Economy_status_Developing -Polio -Diphtheria -Infant_deaths -Thinness_five_nine_years -Measles -Population_mln, data = train.data)
+LE_MR4 <- lm(Life_expectancy ~ . - Country - Region  -Economy_status_Developed -Polio -Diphtheria -Infant_deaths -Thinness_five_nine_years -Measles -Population_mln, data = train.data)
 
 #print summary of the model
 summary(LE_MR4)
 ```
 
+Next we remove year,
+
 ```{r}
 #make the multiple Regression model for Life Expectancy 
-LE_MR5 <- lm(Life_expectancy ~ . - Country - Region -Year -Economy_status_Developed -Economy_status_Developing -Polio -Diphtheria -Infant_deaths -Thinness_five_nine_years -Measles -Population_mln -Hepatitis_B, data = train.data)
+LE_MR5 <- lm(Life_expectancy ~ . - Country - Region -Year -Economy_status_Developed  -Polio -Diphtheria -Infant_deaths -Thinness_five_nine_years -Measles -Population_mln , data = train.data)
 
 #print summary of the model
 summary(LE_MR5)
 ```
 
-**\*I don't know when to stop.**\*
+Now Hep B has the lowest P Values and is thus next to be removed
+
+```{r}
+#make the multiple Regression model for Life Expectancy 
+LE_MR6 <- lm(Life_expectancy ~ . - Country - Region -Year -Economy_status_Developed  -Polio -Diphtheria -Infant_deaths -Thinness_five_nine_years -Measles -Population_mln -Hepatitis_B, data = train.data)
+
+#print summary of the model
+summary(LE_MR6)
+```
 
 ```{r}
 ggplot(df, aes(x = Under_five_deaths, y = Life_expectancy)) +
@@ -2429,12 +2465,30 @@ predictions <- predict(LE_MR4, newdata = test.data)
 rmse <- sqrt(mean(test.data$Life_expectancy - predictions)^2)
 print("RMSE 4")
 rmse
+
 predictions <- predict(LE_MR5, newdata = test.data)
 
 rmse <- sqrt(mean(test.data$Life_expectancy - predictions)^2)
 print("RMSE 5")
 rmse
+
+predictions <- predict(LE_MR6, newdata = test.data)
+
+rmse <- sqrt(mean(test.data$Life_expectancy - predictions)^2)
+print("RMSE 6")
+rmse
 ```
+
+| Model  | RMSE         | Adjusted R\^2 |
+|--------|--------------|---------------|
+| LE_MR  | 0.0006730005 | 0.9838        |
+| LE_MR2 | 0.006045691  | 0.9785        |
+| LE_MR3 | 0.006045691  | 0.9785        |
+| LE_MR4 | 0.006292047  | 0.9785        |
+| LE_MR5 | 0.006712114  | 0.9784        |
+| LE_MR6 | 0.007220434  | 0.9784        |
+
+: Comparing the Regression Models
 
 #### 5.1.2 Neural Network of Life Expectancy
 
@@ -2506,6 +2560,10 @@ library(caret)
 confusionMatrix(actual_factor, prediction_factor)
 ```
 
+```{r}
+
+```
+
 #### 5.1.3 SVR model for Life Expectancy
 
 ```{r}
@@ -2553,7 +2611,7 @@ cat("R-squared:", r_squared, "\n")
 
 ------------------------------------------------------------------------
 
-### 5.1.4 Random Forest 
+### 5.1.4 Random Forest
 
 Set up the data for Random Forest
 
@@ -2606,7 +2664,7 @@ Interpreting these values:
 
 -   **Hepatitis_B**, **Measles**, **Polio**, **Diphtheria**, **Population_mln**, **Thinness_ten_nineteen_years**, and **Thinness_five_nine_years** have relatively less impact on the model compared to others.
 
-This backs up the Multiple Regression models findings.
+This backs up the Multiple Regression model findings.
 
 ------------------------------------------------------------------------
 
