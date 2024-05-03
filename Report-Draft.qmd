@@ -2622,7 +2622,6 @@ To establish which of the variables are significant we will be removing them one
 Recursive Feature Elimination of the SVR model
 
 ```{r}
-# Adjust cross-validation settings
 ctrl <- rfeControl(method = "cv", number = 5, verbose = FALSE)
 
 # Use parallel processing
@@ -2631,7 +2630,7 @@ cores <- parallel::detectCores()
 cl <- makeCluster(cores - 1)  # Use one less core to avoid overloading
 registerDoParallel(cl)
 
-# Perform RFE with scaled features
+# Perform RFE
 rfe_result <- rfe(x = train.data.svm_scaled, 
                   y = train.data.svm$Life_expectancy,
                   sizes = c(1:length(predictors)), rfeControl = ctrl)
@@ -2639,6 +2638,8 @@ rfe_result <- rfe(x = train.data.svm_scaled,
 # Stop parallel processing
 stopCluster(cl)
 ```
+
+RFE is not working, the code runs forever
 
 ### 5.1.4 Random Forest
 
@@ -2699,7 +2700,7 @@ This backs up the Multiple Regression model findings.
 
 ### 5.1.5 Conclusion of which variables most influence Life Expectancy.
 
-From the various model made above, it seems conclusive that the most significant variables for Life Expectancy are **Infant_deaths**, **Under_five_deaths**, and **Adult_mortality**. This is not a surprising conclusion as all three of these variables directly relate to death at a certain age, which is what Life Expectancy is measuring.
+From the various model made above, it seems conclusive that the most siLgnificant variables for Life Expectancy are **Infant_deaths**, **Under_five_deaths**, and **Adult_mortality**. This is not a surprising conclusion as all three of these variables directly relate to death at a certain age, which is what Life Expectancy is measuring.
 
 The more interesting variables of significance are **Alcohol_consumption**, **BMI**, **Incidents_HIV**, **GDP_per_capita**, and **Schooling.**
 
@@ -2707,9 +2708,50 @@ Incidents of HIV is again no surprise as HIV is a depilitating illness that if u
 
 The other variables in this group are more interesting, and seem to correlate with a nation being more developed, and thus having more access to healthcare, and thus a higher life expectancy.
 
+**\*\*ADD TABLE HERE COMPARING THE DIFFERENT MODELS R\^2 AND RMSE** ONCE YOU FIGURE OUT THE SVR
+
 ------------------------------------------------------------------------
 
-### 5.2 Deep analysis
+### 5.2 Binaray Analysis: Can we predict Economic Development from Life Expectancy
+
+#### 5.2.1 Logistic Regression: 
+
+split the data
+
+```{r}
+#seed to make this reproducible 
+set.seed(758)
+
+#split the data
+training.samples <- sdf$Life_expectancy |> createDataPartition(p = 0.8, list = FALSE)
+
+train_data_Log <- df[training.samples, ]
+test_data_Log <- df[-training.samples, ]
+```
+
+```{r}
+
+
+
+
+LE_LOG <- glm(test_data_Log$Economy_status_Developed ~ Life_expectancy, data = test_data_Log, family = binomial)
+```
+
+Next is to make the predictions
+
+```{r}
+predictions <- predict(LE_LOG, type = "response")
+
+predicted_Values_Log <- ifelse(predictions > 0.5, "Developed", "Developing")
+
+ConfusionMatrix_Log <- table(predicted_Values_Log, )
+```
+
+###  
+
+------------------------------------------------------------------------
+
+### 5.3 Deep analysis
 
 ```{r}
 ggplot(df, aes(x = Under_five_deaths, y = Region)) +
