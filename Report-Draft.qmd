@@ -913,131 +913,36 @@ print(cov_matrix)
 Life Expectancy:
 
 ```{r}
-df |>
-  ggplot(aes(y = Life_expectancy, x = Adult_mortality, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Life_expectancy, sdf$Adult_mortality), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 
+covariance_plot("Life_expectancy", "Adult_mortality", df, sdf)
 
+covariance_plot("Life_expectancy", "Infant_deaths", df, sdf)
 
-df |>
-  ggplot(aes(y = Life_expectancy, x = Infant_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Life_expectancy, sdf$Infant_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Life_expectancy", "Under_five_deaths", df, sdf)
 
+covariance_plot("Life_expectancy", "Alcohol_consumption", df, sdf)
 
+covariance_plot("Life_expectancy", "Hepatitis_B", df, sdf)
 
+covariance_plot("Life_expectancy", "Measles", df, sdf)
 
-df |>
-  ggplot(aes(y = Life_expectancy, x = Under_five_deaths, color = Region)) +
-  geom_point()  +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Life_expectancy, sdf$Under_five_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Life_expectancy", "BMI", df, sdf)
 
+covariance_plot("Life_expectancy", "Polio", df, sdf)
 
+covariance_plot("Life_expectancy", "Diphtheria", df, sdf)
 
-df |>
-  ggplot(aes(y = Life_expectancy, x = Alcohol_consumption, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Life_expectancy, sdf$Alcohol_consumption), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Life_expectancy", "Incidents_HIV", df, sdf)
 
+covariance_plot("Life_expectancy", "GDP_per_capita", df, sdf)
 
+covariance_plot("Life_expectancy", "Population_mln", df, sdf)
 
-df |>
-  ggplot(aes(y = Life_expectancy, x = Hepatitis_B, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Life_expectancy, sdf$Hepatitis_B), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Life_expectancy", "Thinness_ten_nineteen_years", df, sdf)
 
+covariance_plot("Life_expectancy", "Thinness_five_nine_years", df, sdf)
 
-
-df |>
-  ggplot(aes(y = Life_expectancy, x = Measles,color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Life_expectancy, sdf$Measles), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-
-
-
-df |>
-  ggplot(aes(y = Life_expectancy, x =  BMI, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Life_expectancy, sdf$BMI), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-
-
-
-df |>
-  ggplot(aes(y = Life_expectancy, x = Polio, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Life_expectancy, sdf$Polio), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-
-
-
-
-df |>
-  ggplot(aes(y = Life_expectancy, x = Diphtheria, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Life_expectancy, sdf$Diphtheria), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-
-
-
-df |>
-  ggplot(aes(y = Life_expectancy, x = Incidents_HIV, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Life_expectancy, sdf$Incidents_HIV), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-
-
-
-df |>
-  ggplot(aes(y = Life_expectancy, x = GDP_per_capita, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Life_expectancy, sdf$GDP_per_capita), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-
-
-
-
-df |>
-  ggplot(aes(y = Life_expectancy, x = Population_mln, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Life_expectancy, sdf$Population_mln), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-
-
-  
-df |>
-  ggplot(aes(y = Life_expectancy, x = Thinness_ten_nineteen_years, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Life_expectancy, sdf$Thinness_ten_nineteen_years), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-
-
-
-  
-df |>
-  ggplot(aes(y = Life_expectancy, x = Thinness_five_nine_years, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Life_expectancy, sdf$Thinness_five_nine_years), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-
-  
-df |>
-  ggplot(aes(y = Life_expectancy, x = Schooling, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Life_expectancy, sdf$Schooling), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-
-
-
-
-
+covariance_plot("Life_expectancy", "Schooling", df, sdf)
 
 ```
 
@@ -1049,74 +954,44 @@ Negative: HIV, thinness
 
 Slight positive: Alcohol consumption, Hepatitas B, measles
 
-Positive: BMI, Polio, Diphteria, Schooling Alcohol:
+Positive: BMI, Polio, Diphteria, Schooling
+
+------------------------------------------------------------------------
+
+Alcohol Consumption:
 
 ```{r}
-df |>
-  ggplot(aes(y = Alcohol_consumption, x = Adult_mortality, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Alcohol_consumption, sdf$Adult_mortality), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 
-df |>
-  ggplot(aes(y = Alcohol_consumption, x = Infant_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Alcohol_consumption, sdf$Infant_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Alcohol_consumption", "Adult_mortality", df, sdf)
 
-df |>
-  ggplot(aes(y = Alcohol_consumption, x = Hepatitis_B, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Alcohol_consumption, sdf$Hepatitis_B), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Alcohol_consumption", "Infant_deaths", df, sdf)
 
-df |>
-  ggplot(aes(y = Alcohol_consumption, x = Measles, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Alcohol_consumption, sdf$Measles), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Alcohol_consumption", "Under_five_deaths", df, sdf)
 
-df |>
-  ggplot(aes(y = Alcohol_consumption, x = BMI, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Alcohol_consumption, sdf$BMI), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Alcohol_consumption", "Life_expectancy", df, sdf)
 
-df |>
-  ggplot(aes(y = Alcohol_consumption, x = Polio, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Alcohol_consumption, sdf$Polio), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Alcohol_consumption", "Hepatitis_B", df, sdf)
 
-df |>
-  ggplot(aes(y = Alcohol_consumption, x = Diphtheria, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Alcohol_consumption, sdf$Diphtheria), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Alcohol_consumption", "Measles", df, sdf)
 
-df |>
-  ggplot(aes(y = Alcohol_consumption, x = Incidents_HIV, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Alcohol_consumption, sdf$Incidents_HIV), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Alcohol_consumption", "BMI", df, sdf)
 
-df |>
-  ggplot(aes(y = Alcohol_consumption, x = GDP_per_capita, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Alcohol_consumption, sdf$GDP_per_capita), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Alcohol_consumption", "Polio", df, sdf)
 
-df |>
-  ggplot(aes(y = Alcohol_consumption, x = Population_mln, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Alcohol_consumption, Population_mln), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Alcohol_consumption", "Diphtheria", df, sdf)
 
-df |>
-  ggplot(aes(y = Alcohol_consumption, x = Schooling, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Alcohol_consumption, sdf$Schooling), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Alcohol_consumption", "Incidents_HIV", df, sdf)
+
+covariance_plot("Alcohol_consumption", "GDP_per_capita", df, sdf)
+
+covariance_plot("Alcohol_consumption", "Population_mln", df, sdf)
+
+covariance_plot("Alcohol_consumption", "Thinness_ten_nineteen_years", df, sdf)
+
+covariance_plot("Alcohol_consumption", "Thinness_five_nine_years", df, sdf)
+
+covariance_plot("Alcohol_consumption", "Schooling", df, sdf)
+
 ```
 
 Inferences:
@@ -1131,76 +1006,42 @@ Strong negative relationship: Population
 
 Other variables have some covariance, but it does not seem to be strongly related.
 
+------------------------------------------------------------------------
+
 GDP:
 
 ```{r}
 
-df |>
-  ggplot(aes(y = GDP_per_capita, x = Life_expectancy, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$GDP_per_capita, sdf$Life_expectancy), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("GDP_per_capita", "Adult_mortality", df, sdf)
 
-df |>
-  ggplot(aes(y = GDP_per_capita, x = Infant_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$GDP_per_capita, sdf$Infant_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("GDP_per_capita", "Infant_deaths", df, sdf)
 
-df |>
-  ggplot(aes(y = GDP_per_capita, x = Under_five_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$GDP_per_capita, sdf$Under_five_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("GDP_per_capita", "Under_five_deaths", df, sdf)
 
-df |>
-  ggplot(aes(y = GDP_per_capita, x = Alcohol_consumption, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$GDP_per_capita, sdf$Alcohol_consumption), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("GDP_per_capita", "Life_expectancy", df, sdf)
 
-df |>
-  ggplot(aes(y = GDP_per_capita, x = Hepatitis_B, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$GDP_per_capita, sdf$Hepatitis_B), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("GDP_per_capita", "Hepatitis_B", df, sdf)
 
-df |>
-  ggplot(aes(y = GDP_per_capita, x = Adult_mortality, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$GDP_per_capita, sdf$Adult_mortality), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("GDP_per_capita", "Measles", df, sdf)
 
-df |>
-  ggplot(aes(y = GDP_per_capita, x = Hepatitis_B, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$GDP_per_capita, sdf$Hepatitis_B), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("GDP_per_capita", "BMI", df, sdf)
 
-df |>
-  ggplot(aes(y = GDP_per_capita, x = Population_mln, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$GDP_per_capita, sdf$Population_mln), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("GDP_per_capita", "Polio", df, sdf)
 
-df |>
-  ggplot(aes(y = GDP_per_capita, x = Thinness_ten_nineteen_years, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$GDP_per_capita, sdf$Thinness_ten_nineteen_years), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("GDP_per_capita", "Diphtheria", df, sdf)
 
-df |>
-  ggplot(aes(y = GDP_per_capita, x = Thinness_five_nine_years, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$GDP_per_capita, sdf$Thinness_five_nine_years), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("GDP_per_capita", "Incidents_HIV", df, sdf)
 
+covariance_plot("GDP_per_capita", "Alcohol_consumption", df, sdf)
 
-df |>
-  ggplot(aes(y = GDP_per_capita, x = Schooling, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$GDP_per_capita, sdf$Schooling), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("GDP_per_capita", "Population_mln", df, sdf)
+
+covariance_plot("GDP_per_capita", "Thinness_ten_nineteen_years", df, sdf)
+
+covariance_plot("GDP_per_capita", "Thinness_five_nine_years", df, sdf)
+
+covariance_plot("GDP_per_capita", "Schooling", df, sdf)
+
 ```
 
 Inference:
@@ -1209,111 +1050,41 @@ Some positive relationship: Life expectancy, alcohol consumption, schooling
 
 Some negative relationship: Infant deaths, under five deaths, adult mortality
 
-Adult Mortality
+------------------------------------------------------------------------
+
+Adult Mortality:
 
 ```{r}
-df |>
-  ggplot(aes(y = Adult_mortality, x = Life_expectancy, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Adult_mortality, sdf$Life_expectancy), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 
-df |>
-  ggplot(aes(y = Adult_mortality, x = Infant_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Adult_mortality, sdf$Infant_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Adult_mortality", "GDP_per_capita", df, sdf)
 
+covariance_plot("Adult_mortality", "Infant_deaths", df, sdf)
 
-df |>
-  ggplot(aes(y = Adult_mortality, x = Under_five_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Adult_mortality, sdf$Under_five_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Adult_mortality", "Under_five_deaths", df, sdf)
 
+covariance_plot("Adult_mortality", "Life_expectancy", df, sdf)
 
-df |>
-  ggplot(aes(y = Adult_mortality, x = Alcohol_consumption, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Adult_mortality, sdf$Alcohol_consumption), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Adult_mortality", "Hepatitis_B", df, sdf)
 
+covariance_plot("Adult_mortality", "Measles", df, sdf)
 
-df |>
-  ggplot(aes(y = Adult_mortality, x = Hepatitis_B, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Adult_mortality, sdf$Hepatitis_B), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Adult_mortality", "BMI", df, sdf)
 
+covariance_plot("Adult_mortality", "Polio", df, sdf)
 
-df |>
-  ggplot(aes(y = Adult_mortality, x = Measles,color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Adult_mortality, sdf$Measles), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Adult_mortality", "Diphtheria", df, sdf)
 
+covariance_plot("Adult_mortality", "Incidents_HIV", df, sdf)
 
-df |>
-  ggplot(aes(y = Adult_mortality, x =  BMI, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Adult_mortality, sdf$BMI), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Adult_mortality", "Alcohol_consumption", df, sdf)
 
+covariance_plot("Adult_mortality", "Population_mln", df, sdf)
 
-df |>
-  ggplot(aes(y = Adult_mortality, x = Polio, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Adult_mortality, sdf$Polio), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Adult_mortality", "Thinness_ten_nineteen_years", df, sdf)
 
+covariance_plot("Adult_mortality", "Thinness_five_nine_years", df, sdf)
 
-df |>
-  ggplot(aes(y = Adult_mortality, x = Diphtheria, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Adult_mortality, sdf$Diphtheria), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-
-
-df |>
-  ggplot(aes(y = Adult_mortality, x = Incidents_HIV, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Adult_mortality, sdf$Incidents_HIV), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-
-
-df |>
-  ggplot(aes(y = Adult_mortality, x = GDP_per_capita, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Adult_mortality, sdf$GDP_per_capita), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-
-
-df |>
-  ggplot(aes(y = Adult_mortality, x = Population_mln, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Adult_mortality, sdf$Population_mln), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-
-  
-df |>
-  ggplot(aes(y = Adult_mortality, x = Thinness_ten_nineteen_years, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Adult_mortality, sdf$Thinness_ten_nineteen_years), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-
-  
-df |>
-  ggplot(aes(y = Adult_mortality, x = Thinness_five_nine_years, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Adult_mortality, sdf$Thinness_five_nine_years), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-
-  
-df |>
-  ggplot(aes(y = Adult_mortality, x = Schooling, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Adult_mortality, sdf$Schooling), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Adult_mortality", "Schooling", df, sdf)
 
 ```
 
@@ -1327,100 +1098,42 @@ Positive: HIV
 
 Strong positive: infant deaths, under five deaths
 
-Hepatitis B
+------------------------------------------------------------------------
+
+Hepatitis B:
 
 ```{r}
 
-df |>
-  ggplot(aes(y =  Hepatitis_B, x = Life_expectancy, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Hepatitis_B, sdf$Life_expectancy), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Hepatitis_B", "GDP_per_capita", df, sdf)
 
-df |>
-  ggplot(aes(y = Hepatitis_B, x = Infant_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Hepatitis_B, sdf$Infant_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Hepatitis_B", "Infant_deaths", df, sdf)
 
-df |>
-  ggplot(aes(y = Hepatitis_B, x = Under_five_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Hepatitis_B, sdf$Under_five_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Hepatitis_B", "Under_five_deaths", df, sdf)
 
-df |>
-  ggplot(aes(y = Hepatitis_B, x = Alcohol_consumption, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Hepatitis_B, sdf$Alcohol_consumption), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Hepatitis_B", "Life_expectancy", df, sdf)
 
-df |>
-  ggplot(aes(y = Hepatitis_B, x = Adult_mortality, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Hepatitis_B, sdf$Adult_mortality), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Hepatitis_B", "Adult_mortality", df, sdf)
 
-df |>
-  ggplot(aes(y = Hepatitis_B, x = Measles,color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Hepatitis_B, sdf$Measles), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Hepatitis_B", "Measles", df, sdf)
 
-df |>
-  ggplot(aes(y = Hepatitis_B, x =  BMI, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Hepatitis_B, sdf$BMI), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Hepatitis_B", "BMI", df, sdf)
 
-df |>
-  ggplot(aes(y = Hepatitis_B, x = Polio, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Hepatitis_B, sdf$Polio), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Hepatitis_B", "Polio", df, sdf)
 
+covariance_plot("Hepatitis_B", "Diphtheria", df, sdf)
 
-df |>
-  ggplot(aes(y = Hepatitis_B, x = Diphtheria, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Hepatitis_B, sdf$Diphtheria), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Hepatitis_B", "Incidents_HIV", df, sdf)
 
-df |>
-  ggplot(aes(y = Hepatitis_B, x = Incidents_HIV, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Hepatitis_B, sdf$Incidents_HIV), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Hepatitis_B", "Alcohol_consumption", df, sdf)
 
-df |>
-  ggplot(aes(y = Hepatitis_B, x = GDP_per_capita, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Hepatitis_B, sdf$GDP_per_capita), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Hepatitis_B", "Population_mln", df, sdf)
 
-df |>
-  ggplot(aes(y = Hepatitis_B, x = Population_mln, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Hepatitis_B, sdf$Population_mln), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-  
-df |>
-  ggplot(aes(y = Hepatitis_B, x = Thinness_ten_nineteen_years, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Hepatitis_B, sdf$Thinness_ten_nineteen_years), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-  
-df |>
-  ggplot(aes(y = Hepatitis_B, x = Thinness_five_nine_years, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Hepatitis_B, sdf$Thinness_five_nine_years), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-  
-df |>
-  ggplot(aes(y = Hepatitis_B, x = Schooling, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Hepatitis_B, sdf$Schooling), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Hepatitis_B", "Thinness_ten_nineteen_years", df, sdf)
+
+covariance_plot("Hepatitis_B", "Thinness_five_nine_years", df, sdf)
+
+covariance_plot("Hepatitis_B", "Schooling", df, sdf)
+
 ```
 
 Hepatitis B Inferences:
@@ -1429,98 +1142,42 @@ Positive: Life Expectancy, Alcohol Consumption, Polio, Measles, Diphtheria
 
 Negative: Infant Deaths, Under Five Deaths, Adult mortality
 
-Measles
+------------------------------------------------------------------------
+
+Measles:
 
 ```{r}
-df |>
-  ggplot(aes(y =  Measles, x = Life_expectancy, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Measles, sdf$Life_expectancy), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 
-df |>
-  ggplot(aes(y = Measles, x = Infant_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Measles, sdf$Infant_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Measles", "GDP_per_capita", df, sdf)
 
-df |>
-  ggplot(aes(y = Measles, x = Under_five_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Measles, sdf$Under_five_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Measles", "Infant_deaths", df, sdf)
 
-df |>
-  ggplot(aes(y = Measles, x = Alcohol_consumption, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Measles, sdf$Alcohol_consumption), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Measles", "Under_five_deaths", df, sdf)
 
-df |>
-  ggplot(aes(y = Measles, x = Adult_mortality, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Measles, sdf$Adult_mortality), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Measles", "Life_expectancy", df, sdf)
 
-df |>
-  ggplot(aes(y = Measles, x = Hepatitis_B,color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Measles, sdf$Hepatitis_B), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Measles", "Adult_mortality", df, sdf)
 
-df |>
-  ggplot(aes(y = Measles, x =  BMI, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Measles, sdf$BMI), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Measles", "Hepatitis_B", df, sdf)
 
-df |>
-  ggplot(aes(y = Measles, x = Polio, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Measles, sdf$Polio), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Measles", "BMI", df, sdf)
 
-df |>
-  ggplot(aes(y = Measles, x = Diphtheria, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Measles, sdf$Diphtheria), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Measles", "Polio", df, sdf)
 
-df |>
-  ggplot(aes(y = Measles, x = Incidents_HIV, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Measles, sdf$Incidents_HIV), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Measles", "Diphtheria", df, sdf)
 
-df |>
-  ggplot(aes(y = Measles, x = GDP_per_capita, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Measles, sdf$GDP_per_capita), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Measles", "Incidents_HIV", df, sdf)
 
-df |>
-  ggplot(aes(y = Measles, x = Population_mln, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Measles, sdf$Population_mln), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-  
-df |>
-  ggplot(aes(y = Measles, x = Thinness_ten_nineteen_years, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Measles, sdf$Thinness_ten_nineteen_years), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-  
-df |>
-  ggplot(aes(y = Measles, x = Thinness_five_nine_years, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Measles, sdf$Thinness_five_nine_years), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-  
-df |>
-  ggplot(aes(y = Measles, x = Schooling, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Measles, sdf$Schooling), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Measles", "Alcohol_consumption", df, sdf)
+
+covariance_plot("Measles", "Population_mln", df, sdf)
+
+covariance_plot("Measles", "Thinness_ten_nineteen_years", df, sdf)
+
+covariance_plot("Measles", "Thinness_five_nine_years", df, sdf)
+
+covariance_plot("Measles", "Schooling", df, sdf)
+
 ```
 
 Measles Inferences:
@@ -1529,98 +1186,42 @@ Positive: Life Expectancy, Schooling, Hepatitis B, BMI, polio, Diphtheria
 
 Negative: Infant Deaths, Under Five Deaths, adult mortality
 
-BMI
+------------------------------------------------------------------------
+
+BMI:
 
 ```{r}
-df |>
-  ggplot(aes(y =  BMI, x = Life_expectancy, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$BMI, sdf$Life_expectancy), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 
-df |>
-  ggplot(aes(y = BMI, x = Infant_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$BMI, sdf$Infant_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("BMI", "GDP_per_capita", df, sdf)
 
-df |>
-  ggplot(aes(y = BMI, x = Under_five_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$BMI, sdf$Under_five_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("BMI", "Infant_deaths", df, sdf)
 
-df |>
-  ggplot(aes(y = BMI, x = Alcohol_consumption, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$BMI, sdf$Alcohol_consumption), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("BMI", "Under_five_deaths", df, sdf)
 
-df |>
-  ggplot(aes(y = BMI, x = Adult_mortality, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$BMI, sdf$Adult_mortality), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("BMI", "Life_expectancy", df, sdf)
 
-df |>
-  ggplot(aes(y = BMI, x = Hepatitis_B,color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$BMI, sdf$Hepatitis_B), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("BMI", "Adult_mortality", df, sdf)
 
-df |>
-  ggplot(aes(y = BMI, x =  Measles, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$BMI, sdf$Measles), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("BMI", "Hepatitis_B", df, sdf)
 
-df |>
-  ggplot(aes(y = BMI, x = Polio, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$BMI, sdf$Polio), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("BMI", "Measles", df, sdf)
 
-df |>
-  ggplot(aes(y = BMI, x = Diphtheria, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$BMI, sdf$Diphtheria), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("BMI", "Polio", df, sdf)
 
-df |>
-  ggplot(aes(y = BMI, x = Incidents_HIV, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$BMI, sdf$Incidents_HIV), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("BMI", "Diphtheria", df, sdf)
 
-df |>
-  ggplot(aes(y = BMI, x = GDP_per_capita, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$BMI, sdf$GDP_per_capita), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("BMI", "Incidents_HIV", df, sdf)
 
-df |>
-  ggplot(aes(y = BMI, x = Population_mln, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$BMI, sdf$Population_mln), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-  
-df |>
-  ggplot(aes(y = BMI, x = Thinness_ten_nineteen_years, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$BMI, sdf$Thinness_ten_nineteen_years), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-  
-df |>
-  ggplot(aes(y = BMI, x = Thinness_five_nine_years, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$BMI, sdf$Thinness_five_nine_years), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-  
-df |>
-  ggplot(aes(y = BMI, x = Schooling, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$BMI, sdf$Schooling), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("BMI", "Alcohol_consumption", df, sdf)
+
+covariance_plot("BMI", "Population_mln", df, sdf)
+
+covariance_plot("BMI", "Thinness_ten_nineteen_years", df, sdf)
+
+covariance_plot("BMI", "Thinness_five_nine_years", df, sdf)
+
+covariance_plot("BMI", "Schooling", df, sdf)
+
 ```
 
 BMI Inferences:
@@ -1629,102 +1230,41 @@ Positive: Life Expectancy, Diphtheria, GDP, measles, polio, schooling
 
 Negative: Thinness, infant deaths, under five deaths, adult mortality
 
-Polio
+------------------------------------------------------------------------
+
+Polio:
 
 ```{r}
 
-df |>
-  ggplot(aes(y = Polio, x = Life_expectancy, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Polio, sdf$Life_expectancy), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Polio", "GDP_per_capita", df, sdf)
 
-df |>
-  ggplot(aes(y = Polio, x = Infant_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Polio, sdf$Infant_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Polio", "Infant_deaths", df, sdf)
 
-df |>
-  ggplot(aes(y = Polio, x = Under_five_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Polio, sdf$Under_five_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Polio", "Under_five_deaths", df, sdf)
 
-df |>
-  ggplot(aes(y = Polio, x = Alcohol_consumption, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Polio, sdf$Alcohol_consumption), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Polio", "Life_expectancy", df, sdf)
 
-df |>
-  ggplot(aes(y = Polio, x = Adult_mortality, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Polio, sdf$Adult_mortality), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Polio", "Adult_mortality", df, sdf)
 
-df |>
-  ggplot(aes(y = Polio, x = Hepatitis_B,color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Polio, sdf$Hepatitis_B), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Polio", "Hepatitis_B", df, sdf)
 
-df |>
-  ggplot(aes(y = Polio, x =  Measles, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Polio, sdf$Measles), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Polio", "Measles", df, sdf)
 
-df |>
-  ggplot(aes(y = Polio, x = BMI, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Polio, sdf$BMI), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Polio", "BMI", df, sdf)
 
-df |>
-  ggplot(aes(y = Polio, x = Diphtheria, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Polio, sdf$Diphtheria), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Polio", "Diphtheria", df, sdf)
 
-df |>
-  ggplot(aes(y = Polio, x = Incidents_HIV, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Polio, sdf$Incidents_HIV), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Polio", "Incidents_HIV", df, sdf)
 
-df |>
-  ggplot(aes(y = Polio, x = GDP_per_capita, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Polio, sdf$GDP_per_capita), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Polio", "Alcohol_consumption", df, sdf)
 
-df |>
-  ggplot(aes(y = Polio, x = Population_mln, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Polio, sdf$Population_mln), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Polio", "Population_mln", df, sdf)
 
-  
-df |>
-  ggplot(aes(y = Polio, x = Thinness_ten_nineteen_years, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Polio, sdf$Thinness_ten_nineteen_years), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Polio", "Thinness_ten_nineteen_years", df, sdf)
 
-  
-df |>
-  ggplot(aes(y = Polio, x = Thinness_five_nine_years, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Polio, sdf$Thinness_five_nine_years), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Polio", "Thinness_five_nine_years", df, sdf)
 
-  
-df |>
-  ggplot(aes(y = Polio, x = Schooling, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Polio, sdf$Schooling), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Polio", "Schooling", df, sdf)
 
 ```
 
@@ -1738,98 +1278,42 @@ Negative: Thinness, adult mortality
 
 Strong Negative: Infant Deaths, Under Five deaths
 
-Diphtheria
+------------------------------------------------------------------------
+
+Diphtheria:
 
 ```{r}
-df |>
-  ggplot(aes(y = Diphtheria, x = Life_expectancy, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Diphtheria, sdf$Life_expectancy), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 
-df |>
-  ggplot(aes(y = Diphtheria, x = Infant_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Diphtheria, sdf$Infant_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Diphtheria", "GDP_per_capita", df, sdf)
 
-df |>
-  ggplot(aes(y = Diphtheria, x = Under_five_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Diphtheria, sdf$Under_five_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Diphtheria", "Infant_deaths", df, sdf)
 
-df |>
-  ggplot(aes(y = Diphtheria, x = Alcohol_consumption, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Diphtheria, sdf$Alcohol_consumption), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Diphtheria", "Under_five_deaths", df, sdf)
 
-df |>
-  ggplot(aes(y = Diphtheria, x = Adult_mortality, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Diphtheria, sdf$Adult_mortality), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Diphtheria", "Life_expectancy", df, sdf)
 
-df |>
-  ggplot(aes(y = Diphtheria, x = Hepatitis_B,color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Diphtheria, sdf$Hepatitis_B), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Diphtheria", "Adult_mortality", df, sdf)
 
-df |>
-  ggplot(aes(y = Diphtheria, x =  Measles, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Diphtheria, sdf$Measles), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Diphtheria", "Hepatitis_B", df, sdf)
 
-df |>
-  ggplot(aes(y = Diphtheria, x = BMI, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Diphtheria, sdf$BMI), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Diphtheria", "Measles", df, sdf)
 
-df |>
-  ggplot(aes(y = Diphtheria, x = Polio, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Diphtheria, sdf$Polio), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Diphtheria", "BMI", df, sdf)
 
-df |>
-  ggplot(aes(y = Diphtheria, x = Incidents_HIV, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Diphtheria, sdf$Incidents_HIV), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Diphtheria", "Polio", df, sdf)
 
-df |>
-  ggplot(aes(y = Diphtheria, x = GDP_per_capita, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Diphtheria, sdf$GDP_per_capita), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Diphtheria", "Incidents_HIV", df, sdf)
 
-df |>
-  ggplot(aes(y = Diphtheria, x = Population_mln, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Diphtheria, sdf$Population_mln), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-  
-df |>
-  ggplot(aes(y = Diphtheria, x = Thinness_ten_nineteen_years, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Diphtheria, sdf$Thinness_ten_nineteen_years), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-  
-df |>
-  ggplot(aes(y = Diphtheria, x = Thinness_five_nine_years, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Diphtheria, sdf$Thinness_five_nine_years), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-  
-df |>
-  ggplot(aes(y = Diphtheria, x = Schooling, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Diphtheria, sdf$Schooling), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Diphtheria", "Alcohol_consumption", df, sdf)
+
+covariance_plot("Diphtheria", "Population_mln", df, sdf)
+
+covariance_plot("Diphtheria", "Thinness_ten_nineteen_years", df, sdf)
+
+covariance_plot("Diphtheria", "Thinness_five_nine_years", df, sdf)
+
+covariance_plot("Diphtheria", "Schooling", df, sdf)
+
 ```
 
 Diphtheria Inferences:
@@ -1842,98 +1326,42 @@ Negative: Thinness, adult mortality
 
 Strong Negative: Infant Deaths, Under Five Deaths
 
-HIV
+------------------------------------------------------------------------
+
+HIV:
 
 ```{r}
-df |>
-  ggplot(aes(y = Incidents_HIV, x = Life_expectancy, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Incidents_HIV, sdf$Life_expectancy), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 
-df |>
-  ggplot(aes(y = Incidents_HIV, x = Infant_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Incidents_HIV, sdf$Infant_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Incidents_HIV", "GDP_per_capita", df, sdf)
 
-df |>
-  ggplot(aes(y = Incidents_HIV, x = Under_five_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Incidents_HIV, sdf$Under_five_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Incidents_HIV", "Infant_deaths", df, sdf)
 
-df |>
-  ggplot(aes(y = Incidents_HIV, x = Alcohol_consumption, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Incidents_HIV, sdf$Alcohol_consumption), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Incidents_HIV", "Under_five_deaths", df, sdf)
 
-df |>
-  ggplot(aes(y = Incidents_HIV, x = Adult_mortality, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Incidents_HIV, sdf$Adult_mortality), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Incidents_HIV", "Life_expectancy", df, sdf)
 
-df |>
-  ggplot(aes(y = Incidents_HIV, x = Hepatitis_B,color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Incidents_HIV, sdf$Hepatitis_B), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Incidents_HIV", "Adult_mortality", df, sdf)
 
-df |>
-  ggplot(aes(y = Incidents_HIV, x =  Measles, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Incidents_HIV, sdf$Measles), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Incidents_HIV", "Hepatitis_B", df, sdf)
 
-df |>
-  ggplot(aes(y = Incidents_HIV, x = BMI, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Incidents_HIV, sdf$BMI), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Incidents_HIV", "Measles", df, sdf)
 
-df |>
-  ggplot(aes(y = Incidents_HIV, x = Polio, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Incidents_HIV, sdf$Polio), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Incidents_HIV", "BMI", df, sdf)
 
-df |>
-  ggplot(aes(y = Incidents_HIV, x = Diphtheria, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Incidents_HIV, sdf$Diphtheria), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Incidents_HIV", "Polio", df, sdf)
 
-df |>
-  ggplot(aes(y = Incidents_HIV, x = GDP_per_capita, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Incidents_HIV, sdf$GDP_per_capita), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Incidents_HIV", "Diphtheria", df, sdf)
 
-df |>
-  ggplot(aes(y = Incidents_HIV, x = Population_mln, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Incidents_HIV, sdf$Population_mln), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-  
-df |>
-  ggplot(aes(y = Incidents_HIV, x = Thinness_ten_nineteen_years, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Incidents_HIV, sdf$Thinness_ten_nineteen_years), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-  
-df |>
-  ggplot(aes(y = Incidents_HIV, x = Thinness_five_nine_years, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Incidents_HIV, sdf$Thinness_five_nine_years), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-  
-df |>
-  ggplot(aes(y = Incidents_HIV, x = Schooling, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Incidents_HIV, sdf$Schooling), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Incidents_HIV", "Alcohol_consumption", df, sdf)
+
+covariance_plot("Incidents_HIV", "Population_mln", df, sdf)
+
+covariance_plot("Incidents_HIV", "Thinness_ten_nineteen_years", df, sdf)
+
+covariance_plot("Incidents_HIV", "Thinness_five_nine_years", df, sdf)
+
+covariance_plot("Incidents_HIV", "Schooling", df, sdf)
+
 ```
 
 HIV Inferences:
@@ -1944,111 +1372,41 @@ Negative: life expectancy
 
 Conclusion: We may want to separate out Africa for this one, as it seems to be skewing the data.
 
-Population
+------------------------------------------------------------------------
+
+Population:
 
 ```{r}
-df |>
-  ggplot(aes(y = Population_mln, x = Life_expectancy, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Population_mln, sdf$Life_expectancy), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 
-df |>
-  ggplot(aes(y = Population_mln, x = Infant_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Population_mln, sdf$Infant_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Population_mln", "GDP_per_capita", df, sdf)
 
+covariance_plot("Population_mln", "Infant_deaths", df, sdf)
 
-df |>
-  ggplot(aes(y = Population_mln, x = Under_five_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Population_mln, sdf$Under_five_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Population_mln", "Under_five_deaths", df, sdf)
 
+covariance_plot("Population_mln", "Life_expectancy", df, sdf)
 
-df |>
-  ggplot(aes(y = Population_mln, x = Alcohol_consumption, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Population_mln, sdf$Alcohol_consumption), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Population_mln", "Adult_mortality", df, sdf)
 
+covariance_plot("Population_mln", "Hepatitis_B", df, sdf)
 
-df |>
-  ggplot(aes(y = Population_mln, x = Adult_mortality, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Population_mln, sdf$Adult_mortality), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Population_mln", "Measles", df, sdf)
 
+covariance_plot("Population_mln", "BMI", df, sdf)
 
-df |>
-  ggplot(aes(y = Population_mln, x = Hepatitis_B,color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Population_mln, sdf$Hepatitis_B), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Population_mln", "Polio", df, sdf)
 
+covariance_plot("Population_mln", "Diphtheria", df, sdf)
 
-df |>
-  ggplot(aes(y = Population_mln, x =  Measles, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Population_mln, sdf$Measles), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Population_mln", "Alcohol_consumption", df, sdf)
 
+covariance_plot("Population_mln", "Incidents_HIV", df, sdf)
 
-df |>
-  ggplot(aes(y = Population_mln, x = BMI, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Population_mln, sdf$BMI), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Population_mln", "Thinness_ten_nineteen_years", df, sdf)
 
+covariance_plot("Population_mln", "Thinness_five_nine_years", df, sdf)
 
-df |>
-  ggplot(aes(y = Population_mln, x = Polio, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Population_mln, sdf$Polio), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-
-
-df |>
-  ggplot(aes(y = Population_mln, x = Diphtheria, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Population_mln, sdf$Diphtheria), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-
-
-df |>
-  ggplot(aes(y = Population_mln, x = GDP_per_capita, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Population_mln, sdf$GDP_per_capita), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-
-
-df |>
-  ggplot(aes(y = Population_mln, x = Incidents_HIV, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Population_mln, sdf$Incidents_HIV), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-
-  
-df |>
-  ggplot(aes(y = Population_mln, x = Thinness_ten_nineteen_years, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Population_mln, sdf$Thinness_ten_nineteen_years), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-
-  
-df |>
-  ggplot(aes(y = Population_mln, x = Thinness_five_nine_years, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Population_mln, sdf$Thinness_five_nine_years), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-
-  
-df |>
-  ggplot(aes(y = Population_mln, x = Schooling, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Population_mln, sdf$Schooling), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Population_mln", "Schooling", df, sdf)
 
 ```
 
@@ -2056,98 +1414,42 @@ Population Inferences:
 
 Conclusion: We may want to do this again without China and India, as they seems to be skewing the data
 
-Thinness
+------------------------------------------------------------------------
+
+Thinness:
 
 ```{r}
-df |>
-  ggplot(aes(y = Thinness_ten_nineteen_years, x = Life_expectancy, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Thinness_ten_nineteen_years, sdf$Life_expectancy), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 
-df |>
-  ggplot(aes(y = Thinness_ten_nineteen_years, x = Infant_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Thinness_ten_nineteen_years, sdf$Infant_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Thinness_ten_nineteen_years", "GDP_per_capita", df, sdf)
 
-df |>
-  ggplot(aes(y = Thinness_ten_nineteen_years, x = Under_five_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Thinness_ten_nineteen_years, sdf$Under_five_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Thinness_ten_nineteen_years", "Infant_deaths", df, sdf)
 
-df |>
-  ggplot(aes(y = Thinness_ten_nineteen_years, x = Alcohol_consumption, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Thinness_ten_nineteen_years, sdf$Alcohol_consumption), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Thinness_ten_nineteen_years", "Under_five_deaths", df, sdf)
 
-df |>
-  ggplot(aes(y = Thinness_ten_nineteen_years, x = Adult_mortality, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Thinness_ten_nineteen_years, sdf$Adult_mortality), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Thinness_ten_nineteen_years", "Life_expectancy", df, sdf)
 
-df |>
-  ggplot(aes(y = Thinness_ten_nineteen_years, x = Hepatitis_B,color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Thinness_ten_nineteen_years, sdf$Hepatitis_B), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Thinness_ten_nineteen_years", "Adult_mortality", df, sdf)
 
-df |>
-  ggplot(aes(y = Thinness_ten_nineteen_years, x =  Measles, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Thinness_ten_nineteen_years, sdf$Measles), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Thinness_ten_nineteen_years", "Hepatitis_B", df, sdf)
 
-df |>
-  ggplot(aes(y = Thinness_ten_nineteen_years, x = BMI, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Thinness_ten_nineteen_years, sdf$BMI), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Thinness_ten_nineteen_years", "Measles", df, sdf)
 
-df |>
-  ggplot(aes(y = Thinness_ten_nineteen_years, x = Polio, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Thinness_ten_nineteen_years, sdf$Polio), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Thinness_ten_nineteen_years", "BMI", df, sdf)
 
-df |>
-  ggplot(aes(y = Thinness_ten_nineteen_years, x = Diphtheria, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Thinness_ten_nineteen_years, sdf$Diphtheria), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Thinness_ten_nineteen_years", "Polio", df, sdf)
 
-df |>
-  ggplot(aes(y = Thinness_ten_nineteen_years, x = GDP_per_capita, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Thinness_ten_nineteen_years, sdf$GDP_per_capita), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Thinness_ten_nineteen_years", "Diphtheria", df, sdf)
 
-df |>
-  ggplot(aes(y = Thinness_ten_nineteen_years, x = Incidents_HIV, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Thinness_ten_nineteen_years, sdf$Incidents_HIV), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-  
-df |>
-  ggplot(aes(y = Thinness_ten_nineteen_years, x = Population_mln, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Thinness_ten_nineteen_years, sdf$Population_mln), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-  
-df |>
-  ggplot(aes(y = Thinness_ten_nineteen_years, x = Thinness_five_nine_years, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Thinness_ten_nineteen_years, sdf$Thinness_five_nine_years), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-  
-df |>
-  ggplot(aes(y = Thinness_ten_nineteen_years, x = Schooling, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Thinness_ten_nineteen_years, sdf$Schooling), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Thinness_ten_nineteen_years", "Alcohol_consumption", df, sdf)
+
+covariance_plot("Thinness_ten_nineteen_years", "Incidents_HIV", df, sdf)
+
+covariance_plot("Thinness_ten_nineteen_years", "Population_mln", df, sdf)
+
+covariance_plot("Thinness_ten_nineteen_years", "Thinness_five_nine_years", df, sdf)
+
+covariance_plot("Thinness_ten_nineteen_years", "Schooling", df, sdf)
+
 ```
 
 Thinness:
@@ -2160,98 +1462,42 @@ Negative: Life expectancy, alcohol consumption, BMI, schooling
 
 No surprise that the two thinness are basically one to one.
 
-Schooling
+------------------------------------------------------------------------
+
+Schooling:
 
 ```{r}
-df |>
-  ggplot(aes(y = Schooling, x = Life_expectancy, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Schooling, sdf$Life_expectancy), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
 
-df |>
-  ggplot(aes(y = Schooling, x = Infant_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Schooling, sdf$Infant_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Schooling", "GDP_per_capita", df, sdf)
 
-df |>
-  ggplot(aes(y = Schooling, x = Under_five_deaths, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Schooling, sdf$Under_five_deaths), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Schooling", "Infant_deaths", df, sdf)
 
-df |>
-  ggplot(aes(y = Schooling, x = Alcohol_consumption, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Schooling, sdf$Alcohol_consumption ), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Schooling", "Under_five_deaths", df, sdf)
 
-df |>
-  ggplot(aes(y = Schooling, x = Adult_mortality, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Schooling, sdf$Adult_mortality), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Schooling", "Life_expectancy", df, sdf)
 
-df |>
-  ggplot(aes(y = Schooling, x = Hepatitis_B,color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Schooling, sdf$Hepatitis_B), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Schooling", "Adult_mortality", df, sdf)
 
-df |>
-  ggplot(aes(y = Schooling, x =  Measles, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Schooling, sdf$Measles), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Schooling", "Hepatitis_B", df, sdf)
 
-df |>
-  ggplot(aes(y = Schooling, x = BMI, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Schooling, sdf$BMI), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Schooling", "Measles", df, sdf)
 
-df |>
-  ggplot(aes(y = Schooling, x = Polio, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Schooling, sdf$Polio), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Schooling", "BMI", df, sdf)
 
-df |>
-  ggplot(aes(y = Schooling, x = Diphtheria, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Schooling, sdf$Diphtheria), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Schooling", "Polio", df, sdf)
 
-df |>
-  ggplot(aes(y = Schooling, x = GDP_per_capita, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Schooling, sdf$GDP_per_capita), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Schooling", "Diphtheria", df, sdf)
 
-df |>
-  ggplot(aes(y = Schooling, x = Incidents_HIV, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Schooling, sdf$Incidents_HIV), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-  
-df |>
-  ggplot(aes(y = Schooling, x = Population_mln, color = Region)) +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Schooling, sdf$Population_mln), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-  
-df |>
-  ggplot(aes(y = Schooling, x = Thinness_five_nine_years, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Schooling, sdf$Thinness_five_nine_years), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
-  
-df |>
-  ggplot(aes(y = Schooling, x = Thinness_ten_nineteen_years, color = Region))   +
-  geom_point() +
-  geom_text(aes(label = paste("Covariance:", round(cov(sdf$Schooling, sdf$Thinness_ten_nineteen_years), 2))),
-            x = Inf, y = Inf, hjust = 1, vjust = 1, color = "black")
+covariance_plot("Schooling", "Alcohol_consumption", df, sdf)
+
+covariance_plot("Schooling", "Incidents_HIV", df, sdf)
+
+covariance_plot("Schooling", "Population_mln", df, sdf)
+
+covariance_plot("Schooling", "Thinness_five_nine_years", df, sdf)
+
+covariance_plot("Schooling", "Thinness_ten_nineteen_years", df, sdf)
+
 ```
 
 Inferences:
@@ -2260,9 +1506,11 @@ Positive: Life expectancy, alcohol consumption, measles, BMI, polio, diphtheria,
 
 Negative: Infant deaths, under five deaths, adult mortality, thinness
 
+------------------------------------------------------------------------
+
 ## 5 Models {data-link="1 Introduction"}
 
-#### 5.1 What varaibles most influence Life Expectancy? {data-link="5.1 Multiple Regression of Life Expectancy"}
+#### 5.1 What variables most influence Life Expectancy? {data-link="5.1 Multiple Regression of Life Expectancy"}
 
 #### 5.1.1 Multiple Regression of Life Expectancy
 
@@ -2622,6 +1870,7 @@ To establish which of the variables are significant we will be removing them one
 Recursive Feature Elimination of the SVR model
 
 ```{r}
+# Adjust cross-validation settings
 ctrl <- rfeControl(method = "cv", number = 5, verbose = FALSE)
 
 # Use parallel processing
@@ -2630,7 +1879,7 @@ cores <- parallel::detectCores()
 cl <- makeCluster(cores - 1)  # Use one less core to avoid overloading
 registerDoParallel(cl)
 
-# Perform RFE
+# Perform RFE with scaled features
 rfe_result <- rfe(x = train.data.svm_scaled, 
                   y = train.data.svm$Life_expectancy,
                   sizes = c(1:length(predictors)), rfeControl = ctrl)
@@ -2638,8 +1887,6 @@ rfe_result <- rfe(x = train.data.svm_scaled,
 # Stop parallel processing
 stopCluster(cl)
 ```
-
-RFE is not working, the code runs forever
 
 ### 5.1.4 Random Forest
 
@@ -2700,7 +1947,7 @@ This backs up the Multiple Regression model findings.
 
 ### 5.1.5 Conclusion of which variables most influence Life Expectancy.
 
-From the various model made above, it seems conclusive that the most siLgnificant variables for Life Expectancy are **Infant_deaths**, **Under_five_deaths**, and **Adult_mortality**. This is not a surprising conclusion as all three of these variables directly relate to death at a certain age, which is what Life Expectancy is measuring.
+From the various model made above, it seems conclusive that the most significant variables for Life Expectancy are **Infant_deaths**, **Under_five_deaths**, and **Adult_mortality**. This is not a surprising conclusion as all three of these variables directly relate to death at a certain age, which is what Life Expectancy is measuring.
 
 The more interesting variables of significance are **Alcohol_consumption**, **BMI**, **Incidents_HIV**, **GDP_per_capita**, and **Schooling.**
 
@@ -2708,50 +1955,9 @@ Incidents of HIV is again no surprise as HIV is a depilitating illness that if u
 
 The other variables in this group are more interesting, and seem to correlate with a nation being more developed, and thus having more access to healthcare, and thus a higher life expectancy.
 
-**\*\*ADD TABLE HERE COMPARING THE DIFFERENT MODELS R\^2 AND RMSE** ONCE YOU FIGURE OUT THE SVR
-
 ------------------------------------------------------------------------
 
-### 5.2 Binaray Analysis: Can we predict Economic Development from Life Expectancy
-
-#### 5.2.1 Logistic Regression: 
-
-split the data
-
-```{r}
-#seed to make this reproducible 
-set.seed(758)
-
-#split the data
-training.samples <- sdf$Life_expectancy |> createDataPartition(p = 0.8, list = FALSE)
-
-train_data_Log <- df[training.samples, ]
-test_data_Log <- df[-training.samples, ]
-```
-
-```{r}
-
-
-
-
-LE_LOG <- glm(test_data_Log$Economy_status_Developed ~ Life_expectancy, data = test_data_Log, family = binomial)
-```
-
-Next is to make the predictions
-
-```{r}
-predictions <- predict(LE_LOG, type = "response")
-
-predicted_Values_Log <- ifelse(predictions > 0.5, "Developed", "Developing")
-
-ConfusionMatrix_Log <- table(predicted_Values_Log, )
-```
-
-###  
-
-------------------------------------------------------------------------
-
-### 5.3 Deep analysis
+### 5.2 Deep analysis
 
 ```{r}
 ggplot(df, aes(x = Under_five_deaths, y = Region)) +
