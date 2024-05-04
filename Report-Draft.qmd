@@ -183,8 +183,6 @@ For ease of use we have re-uploaded the dataset to this Github repository create
 
 -   \- Do certain regions have higher vaccination rates? SVN DECESION TREE/FOREST XG BOOST)
 
--   \- (Make one for Binary CLASSIFICATION) Logistic Regression Model
-
 ## 2 Data Loading
 
 #### 2.1 Importing Libraries
@@ -1782,38 +1780,6 @@ plot(nn)
 
 Testing
 
-```{r}
-# Prediction #
-output <- compute(nn, test_data_nn[, !(names(test_data_nn) %in% c("Life_expectancy"))])
-
-# Extracting predicted values
-predicted_values <- output$net.result
-
-# Combining predicted values with actual values
-results <- data.frame(Actual = test_data_nn$Life_expectancy, Predicted = predicted_values)
-
-
-rounded_results <- sapply(results, round, digits = 0)
-
-# Display the results
-head(rounded_results)
-```
-
-Confusion Matrix
-
-```{r}
-# Ensure that unique levels in actual and prediction vectors match
-all_levels <- unique(c(actual, prediction))
-
-# Convert actual and prediction vectors to factors with the same levels
-actual_factor <- factor(actual, levels = all_levels)
-prediction_factor <- factor(prediction, levels = all_levels)
-
-# Generate and display confusion matrix plot
-library(caret)
-confusionMatrix(actual_factor, prediction_factor)
-```
-
 #### 5.1.3 SVR model for Life Expectancy
 
 ```{r}
@@ -1839,35 +1805,47 @@ train.data.svm_scaled <- as.data.frame(scale(train.data.svm_numeric))
 LE_SVR <- svm(Life_expectancy ~ . , data = train.data.svm_scaled)
 ```
 
-Evaluate Model
+Evaluate Model function:
 
 ```{r}
-actual_values_SVR <- test.data.svm$Life_expectancy
-predicted_Values_SVR <- predict(LE_SVR , newdata = test.data.svm)
+evaluate_SVR_model <- function(model, test_data) {
+  # Extract actual values from test data
+  actual_values <- test_data$Life_expectancy
+  
+  # Predict using the provided model
+  predicted_values <- predict(model, newdata = test_data)
+  
+  # Calculate evaluation metrics
+  mae <- mean(abs(predicted_values - actual_values))
+  mse <- mean((predicted_values - actual_values)^2)
+  rmse <- sqrt(mse)
+  r_squared <- cor(predicted_values, actual_values)^2
+  
+  # Calculate Adjusted R-squared
+  n <- length(actual_values)
+  p <- 1  # Assuming you have one predictor, adjust accordingly if you have more
+  adjusted_r_squared <- 1 - ((1 - r_squared) * (n - 1) / (n - p - 1))
+  
+  # Print evaluation metrics
+  cat("Mean Absolute Error (MAE):", mae, "\n")
+  cat("Mean Squared Error (MSE):", mse, "\n")
+  cat("Root Mean Squared Error (RMSE):", rmse, "\n")
+  cat("R-squared:", r_squared, "\n")
+  cat("Adjusted R-squared:", adjusted_r_squared, "\n")
+}
+```
 
-mae <- mean(abs(predicted_Values_SVR - actual_values_SVR))
-mse <- mean((predicted_Values_SVR - actual_values_SVR)^2)
-rmse <- sqrt(mse)
-r_squared <- cor(predicted_Values_SVR, actual_values_SVR)^2
+Use the function to evaluate the model
 
-# Calculate Adjusted R-squared
-n <- length(actual_values_SVR)
-p <- 1  # Assuming you have one predictor, adjust accordingly if you have more
-adjusted_r_squared <- 1 - ((1 - r_squared) * (n - 1) / (n - p - 1))
-
-# Print evaluation metrics
-cat("Mean Absolute Error (MAE):", mae, "\n")
-cat("Mean Squared Error (MSE):", mse, "\n")
-cat("Root Mean Squared Error (RMSE):", rmse, "\n")
-cat("R-squared:", r_squared, "\n")
-cat("Adjusted R-squared:", adjusted_r_squared, "\n")
+```{r}
+evaluate_SVR_model(LE_SVR, test.data.svm)
 ```
 
 To establish which of the variables are significant we will be removing them one at a time and re-evaluate to see if the model is more or less accurate, Paying attention to the Adjusted R-Square and RMSE especially.
 
 ------------------------------------------------------------------------
 
-Recursive Feature Elimination of the SVR model
+Recursive Feature Elimination-Run this at your own risk!
 
 ```{r}
 # Adjust cross-validation settings
@@ -1887,6 +1865,144 @@ rfe_result <- rfe(x = train.data.svm_scaled,
 # Stop parallel processing
 stopCluster(cl)
 ```
+
+------------------------------------------------------------------------
+
+As RFE is not working on my machine, I am going to just brute force it by removing attributes one at a time and see if the models numbers get better.
+
+Glimpse of the data just for checking the names
+
+```{r}
+glimpse(train.data.svm_scaled)
+```
+
+```{r}
+#Without Infant_deaths
+LE_SVR_Testing <- svm(Life_expectancy ~ . - Infant_deaths, data = train.data.svm_scaled)
+
+evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
+```
+
+```{r}
+#Without Under_five_deaths
+LE_SVR_Testing <- svm(Life_expectancy ~ . - Under_five_deaths, data = train.data.svm_scaled)
+
+evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
+```
+
+```{r}
+#Adult_mortality
+LE_SVR_Testing <- svm(Life_expectancy ~ . - Adult_mortality, data = train.data.svm_scaled)
+
+evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
+```
+
+```{r}
+#Alcohol_consumption
+LE_SVR_Testing<- svm(Life_expectancy ~ . - Alcohol_consumption, data = train.data.svm_scaled)
+
+evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
+```
+
+```{r}
+#Hepatitis_B                 
+LE_SVR_Testing<- svm(Life_expectancy ~ . - Hepatitis_B                 , data = train.data.svm_scaled)
+
+evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
+```
+
+```{r}
+#Measles                                      
+LE_SVR_Testing<- svm(Life_expectancy ~ . - Measles, data = train.data.svm_scaled)
+
+evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
+```
+
+```{r}
+#BMI                                      
+LE_SVR_Testing<- svm(Life_expectancy ~ . - BMI, data = train.data.svm_scaled)
+
+evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
+```
+
+```{r}
+#Polio                                      
+LE_SVR_Testing<- svm(Life_expectancy ~ . - Polio, data = train.data.svm_scaled)
+
+evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
+```
+
+```{r}
+#Diphtheria                                     
+LE_SVR_Testing<- svm(Life_expectancy ~ . - Diphtheria, data = train.data.svm_scaled)
+
+evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
+```
+
+```{r}
+#Incidents_HIV                                     
+LE_SVR_Testing<- svm(Life_expectancy ~ . - Incidents_HIV, data = train.data.svm_scaled)
+
+evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
+```
+
+```{r}
+#GDP_per_capita                                     
+LE_SVR_Testing<- svm(Life_expectancy ~ . - GDP_per_capita, data = train.data.svm_scaled)
+
+evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
+```
+
+```{r}
+#Population_mln                                     
+LE_SVR_Testing<- svm(Life_expectancy ~ . - Population_mln, data = train.data.svm_scaled)
+
+evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
+```
+
+```{r}
+#Thinness_ten_nineteen_years
+LE_SVR_Testing<- svm(Life_expectancy ~ . - Thinness_ten_nineteen_years, data = train.data.svm_scaled)
+
+evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
+```
+
+```{r}
+#Thinness_five_nine_years
+LE_SVR_Testing<- svm(Life_expectancy ~ . - Thinness_five_nine_years, data = train.data.svm_scaled)
+
+evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
+```
+
+```{r}
+#Schooling
+LE_SVR_Testing<- svm(Life_expectancy ~ . - Schooling, data = train.data.svm_scaled)
+
+evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
+```
+
+Table comparing the different SVR models.
+
+| Removed Variable            | MAE        | MSE         | RMSE       | R-Squared | Adjusted R-Squared  |
+|------------|------------|------------|------------|--------------|------------|
+| None (Base)                 | 0.07395971 | 0.00778042  | 0.08820669 | 0.9925481 | 0.992535            |
+| Infant_deaths               | 0.07470623 | 0.007850003 | 0.08860024 | 0.992445  | 0.9924317           |
+| Under_five_deaths           | 0.07621305 | 0.008232278 | 0.0907319  | 0.9920679 | 0.992054            |
+| Adult_mortality             | 0.1133804  | 0.02399256  | 0.1548953  | 0.9766539 | 0.9766129           |
+| Alcohol_consumption         | 0.07744333 | 0.008586509 | 0.09266342 | 0.9916855 | 0.9916709           |
+| Hepatitis_B                 | 0.07243036 | 0.007626723 | 0.08733111 | 0.992664  | 0.9926511           |
+| Measles                     | 0.07528426 | 0.008338268 | 0.09131412 | 0.9919717 | 0.9919576           |
+| BMI                         | 0.07787055 | 0.009170201 | 0.09576117 | 0.9912598 | 0.9912444           |
+| Polio                       | 0.0744371  | 0.007858702 | 0.08864932 | 0.9925011 | 0.9924879           |
+| Diphtheria                  | 0.07355422 | 0.007703352 | 0.08776874 | 0.9926202 | 0.9926072           |
+| Incidents_HIV               | 0.07527161 | 0.008397796 | 0.09163949 | 0.9918974 | 0.9918832           |
+| GDP_per_capita              | 0.07584458 | 0.008198734 | 0.09054686 | 0.9921686 | 0.9921549           |
+| Population_mln              | 0.07505001 | 0.008137925 | 0.09021045 | 0.992191  | 0.9921773           |
+| Thinness_ten_nineteen_years | 0.07371203 | 0.007720199 | 0.08786466 | 0.992582  | 0.992569            |
+| Thinness_five_nine_years    | 0.0740283  | 0.007773223 | 0.08816589 | 0.9925873 | 0.9925743           |
+| Schooling                   | 0.07663966 | 0.008466487 | 0.09201351 | 0.9918468 | 0.9918324           |
+
+The general idea of this table is that the worse the model does without the given variable, the more important the variable is to the SVR model.
 
 ### 5.1.4 Random Forest
 
@@ -1957,7 +2073,15 @@ The other variables in this group are more interesting, and seem to correlate wi
 
 ------------------------------------------------------------------------
 
-### 5.2 Deep analysis
+### 5.2 Predict countries economic status off Life expectancy:
+
+#### 5.2.1 Logistic Regression Model 
+
+#### 5.2.2 XG Boost Model 
+
+#### 5.3.3 Decision Tree
+
+### 5.3 Deep analysis
 
 ```{r}
 ggplot(df, aes(x = Under_five_deaths, y = Region)) +
