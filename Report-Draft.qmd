@@ -1549,7 +1549,7 @@ From this first model we can see that the following attributes are significant:
 
 | Attribute            | P Value  |
 |----------------------|----------|
-| Region               | Varies   |
+| Region               | Various  |
 | Infant Deaths        | 1.04e-15 |
 | Under Five Deaths    | 2e-16    |
 | Adult Mortality      | 2e-16    |
@@ -2095,7 +2095,9 @@ The other variables in this group are more interesting, and seem to correlate wi
 
 #### 5.2.2 XG Boost Model 
 
-#### 5.3.3 Decision Tree
+#### 5.2.3 Decision Tree
+
+#### 5.2.4 Compare the models  
 
 ### 5.3 Deep analysis
 
