@@ -1984,25 +1984,41 @@ evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
 Table comparing the different SVR models.
 
 | Removed Variable            | MAE        | MSE         | RMSE       | R-Squared | Adjusted R-Squared  |
-|------------|------------|------------|------------|--------------|------------|
+|-----------------|----------------|----------------|-----------------|---------------|--|
 | None (Base)                 | 0.07395971 | 0.00778042  | 0.08820669 | 0.9925481 | 0.992535            |
-| Infant_deaths               | 0.07470623 | 0.007850003 | 0.08860024 | 0.992445  | 0.9924317           |
-| Under_five_deaths           | 0.07621305 | 0.008232278 | 0.0907319  | 0.9920679 | 0.992054            |
-| Adult_mortality             | 0.1133804  | 0.02399256  | 0.1548953  | 0.9766539 | 0.9766129           |
-| Alcohol_consumption         | 0.07744333 | 0.008586509 | 0.09266342 | 0.9916855 | 0.9916709           |
-| Hepatitis_B                 | 0.07243036 | 0.007626723 | 0.08733111 | 0.992664  | 0.9926511           |
+| Infant deaths               | 0.07470623 | 0.007850003 | 0.08860024 | 0.992445  | 0.9924317           |
+| Under five deaths           | 0.07621305 | 0.008232278 | 0.0907319  | 0.9920679 | 0.992054            |
+| Adult mortality             | 0.1133804  | 0.02399256  | 0.1548953  | 0.9766539 | 0.9766129           |
+| Alcohol consumption         | 0.07744333 | 0.008586509 | 0.09266342 | 0.9916855 | 0.9916709           |
+| Hepatitis B                 | 0.07243036 | 0.007626723 | 0.08733111 | 0.992664  | 0.9926511           |
 | Measles                     | 0.07528426 | 0.008338268 | 0.09131412 | 0.9919717 | 0.9919576           |
 | BMI                         | 0.07787055 | 0.009170201 | 0.09576117 | 0.9912598 | 0.9912444           |
 | Polio                       | 0.0744371  | 0.007858702 | 0.08864932 | 0.9925011 | 0.9924879           |
 | Diphtheria                  | 0.07355422 | 0.007703352 | 0.08776874 | 0.9926202 | 0.9926072           |
-| Incidents_HIV               | 0.07527161 | 0.008397796 | 0.09163949 | 0.9918974 | 0.9918832           |
-| GDP_per_capita              | 0.07584458 | 0.008198734 | 0.09054686 | 0.9921686 | 0.9921549           |
-| Population_mln              | 0.07505001 | 0.008137925 | 0.09021045 | 0.992191  | 0.9921773           |
-| Thinness_ten_nineteen_years | 0.07371203 | 0.007720199 | 0.08786466 | 0.992582  | 0.992569            |
-| Thinness_five_nine_years    | 0.0740283  | 0.007773223 | 0.08816589 | 0.9925873 | 0.9925743           |
+| Incidents HIV               | 0.07527161 | 0.008397796 | 0.09163949 | 0.9918974 | 0.9918832           |
+| GDP per capita              | 0.07584458 | 0.008198734 | 0.09054686 | 0.9921686 | 0.9921549           |
+| Population mln              | 0.07505001 | 0.008137925 | 0.09021045 | 0.992191  | 0.9921773           |
+| Thinness ten nineteen years | 0.07371203 | 0.007720199 | 0.08786466 | 0.992582  | 0.992569            |
+| Thinness five nine years    | 0.0740283  | 0.007773223 | 0.08816589 | 0.9925873 | 0.9925743           |
 | Schooling                   | 0.07663966 | 0.008466487 | 0.09201351 | 0.9918468 | 0.9918324           |
 
 The general idea of this table is that the worse the model does without the given variable, the more important the variable is to the SVR model.
+
+The fact that Infant deaths and Under 5 deaths are not showing as significant is interesting, as every other model shows them as being very significant. It is possible that due to the Multicollinearity between them, removing one will not have much of an effect as the other is still present in the model, to test this we will remove *both* to see what happens.
+
+```{r}
+LE_SVR_Testing<- svm(Life_expectancy ~ . - Under_five_deaths -Infant_deaths, data = train.data.svm_scaled)
+
+evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
+```
+
+And yes, this is having a very large effect on the model, its not perfectly comparable to the removal of one of the variables at a time, but it is enough for us to assume that Infant Deaths and Under five deaths are more signifigant that the table initially lets on.
+
+#### Conclusion of SVR Model:
+
+**Adult_Mortality**, **BMI** and **Schooling** all negativly impact the model enough when removed to be significant.
+
+This method is not without it faults however, as it doesn't identify **Under_five_deaths** or **Infant_deaths** as significant. However if *both* are removed from the model, it causes a significant increase in error of the model. As we laid out in the previous model, these variables are high in multicollinearity. It is very possible that the removal of one of these is beneficial to the model, to prevent over-fitting, and the negative effects of removing these significant attributes is only shown when both are removed.
 
 ### 5.1.4 Random Forest
 
