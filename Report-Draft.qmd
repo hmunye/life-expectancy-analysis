@@ -1984,7 +1984,7 @@ evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
 Table comparing the different SVR models.
 
 | Removed Variable            | MAE        | MSE         | RMSE       | R-Squared | Adjusted R-Squared |
-|-----------------------------|------------|-------------|------------|-----------|--------------------|
+|------------|------------|------------|------------|------------|------------|
 | None (Base)                 | 0.07395971 | 0.00778042  | 0.08820669 | 0.9925481 | 0.992535           |
 | Infant deaths               | 0.07470623 | 0.007850003 | 0.08860024 | 0.992445  | 0.9924317          |
 | Under five deaths           | 0.07621305 | 0.008232278 | 0.0907319  | 0.9920679 | 0.992054           |
@@ -2217,4 +2217,64 @@ ggplot(filtered_df, aes(x = Thinness_ten_nineteen_years, y = Country)) +
 ggplot(filtered_df, aes(x = Schooling, y = Country)) +
   geom_point() +              
   labs(title = "African Country vs Schooling")
+```
+
+| Country       | Mortality | BMI   | Alcohol | Hepatitis B | Measles | Polio  |
+|---------------|-----------|-------|---------|-------------|---------|--------|
+| Tunisia       | 120       | 25.69 | 1.29    | 96.75%      | 97.81%  | 97.69% |
+| Algeria       | 150       | 24.87 | 0.40    | 88.31%      | 93.25%  | 91.75% |
+| Zimbabwe      | 600       | 23.54 | 2.90    | 79.56%      | 64.00%  | 79.60% |
+| Lesotho       | 690       | 24.49 | 2.62    | 86.63%      | 70.44%  | 87.75% |
+| United States | 116       | 28.27 | 8.60    | 91.5%       | 86.00%  | 92.25% |
+
+```{r}
+filtered_us <- df %>%
+  filter(Country == "United States")
+ggplot(filtered_us, aes(x = Mortality, y = Country)) +
+  geom_point() +              
+  labs(title = "United States vs Mortality")
+
+ggplot(filtered_us, aes(x = BMI, y = Country)) +
+  geom_point() +              
+  labs(title = "United States vs BMI")
+
+ggplot(filtered_us, aes(x = Alcohol_consumption, y = Country)) +
+  geom_point() +              
+  labs(title = "United States vs Alcohol")
+
+ggplot(filtered_us, aes(x = Hepatitis_B, y = Country)) +
+  geom_point() +              
+  labs(title = "United States vs Hepatitis")
+
+ggplot(filtered_us, aes(x = Measles, y = Country)) +
+  geom_point() +              
+  labs(title = "United States vs Measles")
+
+ggplot(filtered_us, aes(x = Polio, y = Country)) +
+  geom_point() +              
+  labs(title = "United States vs Polio")
+
+ggplot(filtered_us, aes(x = Diphtheria, y = Country)) +
+  geom_point() +              
+  labs(title = "United States vs Diphtheria")
+
+ggplot(filtered_us, aes(x = Incidents_HIV, y = Country)) +
+  geom_point() +              
+  labs(title = "United States vs HIV")
+
+ggplot(filtered_us, aes(x = GDP_per_capita, y = Country)) +
+  geom_point() +              
+  labs(title = "United States vs GDP")
+
+ggplot(filtered_us, aes(x = Population_mln, y = Country)) +
+  geom_point() +              
+  labs(title = "United States vs Population")
+
+ggplot(filtered_us, aes(x = Thinness_ten_nineteen_years, y = Country)) +
+  geom_point() +              
+  labs(title = "United States vs Thinness")
+
+ggplot(filtered_us, aes(x = Schooling, y = Country)) +
+  geom_point() +              
+  labs(title = "United States vs Schooling")
 ```
