@@ -2292,6 +2292,14 @@ ggplot(filtered_df, aes(x = Schooling, y = Country)) +
 | Lesotho       | 690       | 24.49 | 2.62    | 86.63%      | 70.44%  | 87.75% | 89.56%     | 14.35 |
 | United States | 116       | 28.27 | 8.60    | 91.5%       | 86.00%  | 92.25% | 95.13%     | 0.13  |
 
+| Country       | GDP      | Population |
+|---------------|----------|------------|
+| Tunisia       | 3585.63  | 10.39      |
+| Algeria       | 3745.13  | 34.82      |
+| Zimbabwe      | 1290.6   | 12.5       |
+| Lesotho       | 926.69   | 2.01       |
+| United States | 52662.94 | 302.10     |
+
 ```{r}
 filtered_us <- df %>%
   filter(Country == "United States")
