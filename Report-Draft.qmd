@@ -198,10 +198,11 @@ install.packages("e1071")
 install.packages("randomForest")
 install.packages("caTools")
 install.packages("clusterGeneration")
+install.packages("pROC")
 ```
 
 ```{r}
-install.packages("pROC")
+install.packages("rpart")
 ```
 
 ```{r}
@@ -216,6 +217,7 @@ library(caTools)
 library(parallel)
 library(doParallel)
 library(pROC)
+library(rpart)
 
 ```
 
@@ -2206,6 +2208,21 @@ Please note that this "Best" model is simply the one with the highest sum of sen
 #### 5.2.2 XG Boost Model
 
 #### 5.2.3 Decision Tree
+
+```{r}
+set.seed(127)
+
+partiton_index <- createDataPartition(df$Economy_status_Developed, p = 0.7, list = FALSE)
+
+train_data_DT <- df[partiton_index,]
+validation_data_DT <- df[-partiton_index,]
+```
+
+Make the tree model
+
+```{r}
+tree_model <- rpart(Status ~., data = train_data_DT)
+```
 
 #### 5.2.4 Compare the models
 
