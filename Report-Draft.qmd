@@ -2284,13 +2284,13 @@ ggplot(filtered_df, aes(x = Schooling, y = Country)) +
   labs(title = "African Country vs Schooling")
 ```
 
-| Country       | Mortality | BMI   | Alcohol | Hepatitis B | Measles | Polio  | Diphtheria | HIV |
+| Country       | Mortality | BMI   | Alcohol | Hepatitis B | Measles | Polio  | Diphtheria | HIV   |
 |----------|---------|-------|--------|----------|--------|-------|----------|--------|
-| Tunisia       | 120       | 25.69 | 1.29    | 96.75%      | 97.81%  | 97.69% | 97.69%     |     |
-| Algeria       | 150       | 24.87 | 0.40    | 88.31%      | 93.25%  | 91.75% | 91.88%     |     |
-| Zimbabwe      | 600       | 23.54 | 2.90    | 79.56%      | 64.00%  | 79.60% | 79.10%     |     |
-| Lesotho       | 690       | 24.49 | 2.62    | 86.63%      | 70.44%  | 87.75% | 89.56%     |     |
-| United States | 116       | 28.27 | 8.60    | 91.5%       | 86.00%  | 92.25% | 95.13%     |     |
+| Tunisia       | 120       | 25.69 | 1.29    | 96.75%      | 97.81%  | 97.69% | 97.69%     | 0.03  |
+| Algeria       | 150       | 24.87 | 0.40    | 88.31%      | 93.25%  | 91.75% | 91.88%     | 0.02  |
+| Zimbabwe      | 600       | 23.54 | 2.90    | 79.56%      | 64.00%  | 79.60% | 79.10%     | 8.0   |
+| Lesotho       | 690       | 24.49 | 2.62    | 86.63%      | 70.44%  | 87.75% | 89.56%     | 14.35 |
+| United States | 116       | 28.27 | 8.60    | 91.5%       | 86.00%  | 92.25% | 95.13%     | 0.13  |
 
 ```{r}
 filtered_us <- df %>%
