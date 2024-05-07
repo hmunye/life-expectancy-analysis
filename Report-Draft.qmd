@@ -201,7 +201,7 @@ install.packages("clusterGeneration")
 ```
 
 ```{r}
-install.packages("doParallel")
+install.packages("pROC")
 ```
 
 ```{r}
@@ -215,6 +215,7 @@ library(randomForest)
 library(caTools)
 library(parallel)
 library(doParallel)
+library(pROC)
 
 ```
 
@@ -1984,7 +1985,7 @@ evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
 Table comparing the different SVR models.
 
 | Removed Variable                | MAE            | MSE             | RMSE           | R-Squared     | Adjusted R-Squared     |
-|---------------------------------|----------------|-----------------|----------------|---------------|------------------------|
+|------------|------------|------------|------------|------------|------------|
 | -----------------------------   | ------------   | -------------   | ------------   | -----------   | --------------------   |
 | None (Base)                     | 0.07395971     | 0.00778042      | 0.08820669     | 0.9925481     | 0.992535               |
 | Infant deaths                   | 0.07470623     | 0.007850003     | 0.08860024     | 0.992445      | 0.9924317              |
@@ -2152,11 +2153,55 @@ odds_ratio <- exp(coef(LE_Log))
 print(odds_ratio)
 ```
 
-Predictions:
+Predictions and Confusion matrix
 
 ```{r}
-predictions <- predict(LE_log)
+predictions <- predict(LE_Log, validation_data_log, type = "response" )
+
+binary_predictions <- ifelse(predictions > 0.5, 1, 0)
+
+confusion_Matrix <- confusionMatrix(factor(binary_predictions), factor(validation_data_log$Economy_status_Developed))
+
+print(confusion_Matrix)
+
 ```
+
+Overall accuracy: 90.1%
+
+Specificity: 70.62%
+
+Sensitivity: 95.16%
+
+Overall a very good model, going off this confusion matrix. However can we make it better?
+
+ROC Curve
+
+```{r}
+ la.roc <- roc(validation_data_log$Economy_status_Developed, predictions)
+ plot.roc(la.roc, print.auc = TRUE, print.thres ="best")
+```
+
+From this we have learned that the best threshold for this model for predictions would be 0.308
+
+Remake the model with the best threshold.
+
+```{r}
+predictions <- predict(LE_Log, validation_data_log, type = "response" )
+
+binary_predictions <- ifelse(predictions > 0.308, 1, 0)
+
+confusion_Matrix <- confusionMatrix(factor(binary_predictions), factor(validation_data_log$Economy_status_Developed))
+
+print(confusion_Matrix)
+```
+
+Overall accuracy: 89.76%
+
+Specificity: 83.05%
+
+Sensitivity: 91.5%
+
+Please note that this "Best" model is simply the one with the highest sum of sensitivity and specificity.
 
 #### 5.2.2 XG Boost Model
 
