@@ -523,7 +523,7 @@ num_outliers(df, df$Under_five_deaths)
 
 #### 3.2.2 Decision for Treating Outliers
 
-After doing research on how to identify and treat outliers in R,
+After doing research on how to identify and treat outliers in R, and reviewing the outliers present in our data, we have chosen to leave the outliers as is. None of them appear erroneous and as such provide valid data for training the models
 
 #### 3.2.3 Approach {#approach-1}
 
