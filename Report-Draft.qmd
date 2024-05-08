@@ -198,10 +198,11 @@ install.packages("e1071")
 install.packages("randomForest")
 install.packages("caTools")
 install.packages("clusterGeneration")
+install.packages("pROC")
 ```
 
 ```{r}
-install.packages("pROC")
+install.packages("xgboost")
 ```
 
 ```{r}
@@ -216,7 +217,9 @@ library(caTools)
 library(parallel)
 library(doParallel)
 library(pROC)
-
+library(rpart)
+library(rpart.plot)
+library(xgboost)
 ```
 
 #### 2.2 Loading and Understanding the Data
@@ -1984,44 +1987,26 @@ evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
 
 Table comparing the different SVR models.
 
-| Removed Variable                | MAE            | MSE             | RMSE           | R-Squared     | Adjusted R-Squared     |
+| Removed Variable              | MAE          | MSE           | RMSE         | R-Squared   | Adjusted R-Squared   |
 |------------|------------|------------|------------|------------|------------|
-| -----------------------------   | ------------   | -------------   | ------------   | -----------   | --------------------   |
-| None (Base)                     | 0.07395971     | 0.00778042      | 0.08820669     | 0.9925481     | 0.992535               |
-| Infant deaths                   | 0.07470623     | 0.007850003     | 0.08860024     | 0.992445      | 0.9924317              |
-| Under five deaths               | 0.07621305     | 0.008232278     | 0.0907319      | 0.9920679     | 0.992054               |
-| Adult mortality                 | 0.1133804      | 0.02399256      | 0.1548953      | 0.9766539     | 0.9766129              |
-| Alcohol consumption             | 0.07744333     | 0.008586509     | 0.09266342     | 0.9916855     | 0.9916709              |
-| Hepatitis B                     | 0.07243036     | 0.007626723     | 0.08733111     | 0.992664      | 0.9926511              |
-| Measles                         | 0.07528426     | 0.008338268     | 0.09131412     | 0.9919717     | 0.9919576              |
-| BMI                             | 0.07787055     | 0.009170201     | 0.09576117     | 0.9912598     | 0.9912444              |
-| Polio                           | 0.0744371      | 0.007858702     | 0.08864932     | 0.9925011     | 0.9924879              |
-| Diphtheria                      | 0.07355422     | 0.007703352     | 0.08776874     | 0.9926202     | 0.9926072              |
-| Incidents HIV                   | 0.07527161     | 0.008397796     | 0.09163949     | 0.9918974     | 0.9918832              |
-| GDP per capita                  | 0.07584458     | 0.008198734     | 0.09054686     | 0.9921686     | 0.9921549              |
-| Population mln                  | 0.07505001     | 0.008137925     | 0.09021045     | 0.992191      | 0.9921773              |
-| Thinness ten nineteen years     | 0.07371203     | 0.007720199     | 0.08786466     | 0.992582      | 0.992569               |
-| Thinness five nine years        | 0.0740283      | 0.007773223     | 0.08816589     | 0.9925873     | 0.9925743              |
-| Schooling                       | 0.07663966     | 0.008466487     | 0.09201351     | 0.9918468     | 0.9918324              |
-| Removed Variable                | MAE            | MSE             | RMSE           | R-Squared     | Adjusted R-Squared     |
-| ------------------------------- | -------------- | --------------- | -------------- | ------------- | ---------------------- |
-| -----------------------------   | ------------   | -------------   | ------------   | -----------   | --------------------   |
-| None (Base)                     | 0.07395971     | 0.00778042      | 0.08820669     | 0.9925481     | 0.992535               |
-| Infant deaths                   | 0.07470623     | 0.007850003     | 0.08860024     | 0.992445      | 0.9924317              |
-| Under five deaths               | 0.07621305     | 0.008232278     | 0.0907319      | 0.9920679     | 0.992054               |
-| Adult mortality                 | 0.1133804      | 0.02399256      | 0.1548953      | 0.9766539     | 0.9766129              |
-| Alcohol consumption             | 0.07744333     | 0.008586509     | 0.09266342     | 0.9916855     | 0.9916709              |
-| Hepatitis B                     | 0.07243036     | 0.007626723     | 0.08733111     | 0.992664      | 0.9926511              |
-| Measles                         | 0.07528426     | 0.008338268     | 0.09131412     | 0.9919717     | 0.9919576              |
-| BMI                             | 0.07787055     | 0.009170201     | 0.09576117     | 0.9912598     | 0.9912444              |
-| Polio                           | 0.0744371      | 0.007858702     | 0.08864932     | 0.9925011     | 0.9924879              |
-| Diphtheria                      | 0.07355422     | 0.007703352     | 0.08776874     | 0.9926202     | 0.9926072              |
-| Incidents HIV                   | 0.07527161     | 0.008397796     | 0.09163949     | 0.9918974     | 0.9918832              |
-| GDP per capita                  | 0.07584458     | 0.008198734     | 0.09054686     | 0.9921686     | 0.9921549              |
-| Population mln                  | 0.07505001     | 0.008137925     | 0.09021045     | 0.992191      | 0.9921773              |
-| Thinness ten nineteen years     | 0.07371203     | 0.007720199     | 0.08786466     | 0.992582      | 0.992569               |
-| Thinness five nine years        | 0.0740283      | 0.007773223     | 0.08816589     | 0.9925873     | 0.9925743              |
-| Schooling                       | 0.07663966     | 0.008466487     | 0.09201351     | 0.9918468     | 0.9918324              |
+| ----------------------------- | ------------ | ------------- | ------------ | ----------- | -------------------- |
+| None (Base)                   | 0.07395971   | 0.00778042    | 0.08820669   | 0.9925481   | 0.992535             |
+| Infant deaths                 | 0.07470623   | 0.007850003   | 0.08860024   | 0.992445    | 0.9924317            |
+| Under five deaths             | 0.07621305   | 0.008232278   | 0.0907319    | 0.9920679   | 0.992054             |
+| Adult mortality               | 0.1133804    | 0.02399256    | 0.1548953    | 0.9766539   | 0.9766129            |
+| Alcohol consumption           | 0.07744333   | 0.008586509   | 0.09266342   | 0.9916855   | 0.9916709            |
+| Hepatitis B                   | 0.07243036   | 0.007626723   | 0.08733111   | 0.992664    | 0.9926511            |
+| Measles                       | 0.07528426   | 0.008338268   | 0.09131412   | 0.9919717   | 0.9919576            |
+| BMI                           | 0.07787055   | 0.009170201   | 0.09576117   | 0.9912598   | 0.9912444            |
+| Polio                         | 0.0744371    | 0.007858702   | 0.08864932   | 0.9925011   | 0.9924879            |
+| Diphtheria                    | 0.07355422   | 0.007703352   | 0.08776874   | 0.9926202   | 0.9926072            |
+| Incidents HIV                 | 0.07527161   | 0.008397796   | 0.09163949   | 0.9918974   | 0.9918832            |
+| GDP per capita                | 0.07584458   | 0.008198734   | 0.09054686   | 0.9921686   | 0.9921549            |
+| Population mln                | 0.07505001   | 0.008137925   | 0.09021045   | 0.992191    | 0.9921773            |
+| Thinness ten nineteen years   | 0.07371203   | 0.007720199   | 0.08786466   | 0.992582    | 0.992569             |
+| Thinness five nine years      | 0.0740283    | 0.007773223   | 0.08816589   | 0.9925873   | 0.9925743            |
+| Schooling                     | 0.07663966   | 0.008466487   | 0.09201351   | 0.9918468   | 0.9918324            |
+| Removed Variable              | MAE          | MSE           | RMSE         | R-Squared   | Adjusted R-Squared   |
 
 The general idea of this table is that the worse the model does without the given variable, the more important the variable is to the SVR model.
 
@@ -2201,11 +2186,153 @@ Specificity: 83.05%
 
 Sensitivity: 91.5%
 
-Please note that this "Best" model is simply the one with the highest sum of sensitivity and specificity.
+Please note that this "Best" model is simply the one with the highest sum of sensitivity and specificity. As we do not have any costs associated with false negatives and false positives it is not possible to determine what the best model for our situation is.
 
 #### 5.2.2 XG Boost Model
 
+```{r}
+glimpse(df)
+```
+
+any factors need to be turned back into numeric values for this model
+
+```{r}
+xgdf <- df %>%
+  mutate_if(is.factor, as.numeric)
+
+```
+
+Split the data
+
+```{r}
+set.seed(101)  
+train_index <- createDataPartition(xgdf$Economy_status_Developed, p = 0.8, list = FALSE)
+train_data <- xgdf[train_index, ]
+test_data <- xgdf[-train_index, ]
+```
+
+XGBoost requires a specific format, DMatrix
+
+```{r}
+dtrain <- xgb.DMatrix(data = as.matrix(train_data[, -ncol(train_data)]), label = train_data$Economy_status_Developed)
+dtest <- xgb.DMatrix(data = as.matrix(test_data[, -ncol(test_data)]), label = test_data$Economy_status_Developed)
+```
+
+Now we can actually make the model
+
+```{r}
+params <- list(
+  booster = "gbtree",
+  objective = "binary:logistic",
+  eta = 0.1,
+  gamma = 1,
+  max_depth = 6,
+  min_child_weight = 1,
+  subsample = 0.8,
+  colsample_bytree = 0.8
+)
+
+# Number of rounds for boosting
+nrounds <- 100
+
+# Train the model
+XG_model <- xgb.train(params = params, data = dtrain, nrounds = nrounds, watchlist = list(train = dtrain, test = dtest), early_stopping_rounds = 10)
+```
+
+Predictions and Confusion Matrix
+
+```{r}
+
+preds <- predict(XG_model, dtest)
+predicted_labels <- ifelse(preds > 0.5, 1, 0)
+
+conf_matrix <- table(Predicted = predicted_labels, Actual = test_data$Economy_status_Developed)
+print(conf_matrix) 
+
+```
+
+This model is 100% accurate???
+
+```{r}
+ xg.roc <- roc(test_data$Economy_status_Developed, preds)
+ plot.roc(xg.roc, print.auc = TRUE, print.thres ="best")
+```
+
 #### 5.2.3 Decision Tree
+
+```{r}
+set.seed(127)
+
+# Create the partition
+partiton_index <- createDataPartition(df$Economy_status_Developed, p = 0.7, list = FALSE)
+train_data_DT <- df[partiton_index,]
+validation_data_DT <- df[-partiton_index,]
+
+# Build the decision tree model
+tree_model <- rpart(Economy_status_Developed ~ Life_expectancy, data = train_data_DT, method="class")
+
+# Predict using the model
+predictions <- predict(tree_model, validation_data_DT, type = "class")
+
+# Ensure predictions are factors with the same levels as the actual data
+predictions <- factor(predictions, levels = levels(validation_data_DT$Economy_status_Developed))
+
+# Compute confusion matrix
+confusion_Matrix_dt <- confusionMatrix(predictions, validation_data_DT$Economy_status_Developed)
+print(confusion_Matrix_dt)
+```
+
+```{r}
+set.seed(431)
+tree_model2 <- train(
+  Economy_status_Developed ~ Life_expectancy, 
+  data = train_data_DT, method ="rpart",
+  trControl = trainControl("cv", number = 10),
+  tuneLength = 10
+)
+
+plot(tree_model2)
+tree_model2$bestTune
+```
+
+```{r}
+# Predict using new the model
+predictions <- predict(tree_model2, validation_data_DT)
+
+# Ensure predictions are factors with the same levels as the actual data
+predictions <- factor(predictions, levels = levels(validation_data_DT$Economy_status_Developed))
+
+# Compute confusion matrix
+confusion_Matrix_dt <- confusionMatrix(predictions, validation_data_DT$Economy_status_Developed)
+print(confusion_Matrix_dt)
+```
+
+Sensitivity: 96.04%
+
+Specificity: 66.67%
+
+Overall Accuracy: 89.98%
+
+```{r}
+# Visualize the first model
+print(rpart.plot(tree_model))
+
+# Visualize the tuned model
+print(rpart.plot(tree_model2$finalModel))
+```
+
+pruning the tree has made no change in the model. Which, thinking about it makes sense. There isn't anything to prune.
+
+Make the ROC Cruve
+
+```{r}
+prob_predictions <- predict(tree_model2, validation_data_DT, type = "prob")
+
+
+roc_curve <- roc(validation_data_DT$Economy_status_Developed, prob_predictions[,2])
+plot(roc_curve, main="ROC Curve" , print.auc = TRUE, print.thres ="best")
+
+```
 
 #### 5.2.4 Compare the models
 
@@ -2285,7 +2412,7 @@ ggplot(filtered_df, aes(x = Schooling, y = Country)) +
 ```
 
 | Country       | Mortality | BMI   | Alcohol | Hepatitis B | Measles | Polio  | Diphtheria | HIV   |
-|----------|---------|-------|--------|----------|--------|-------|----------|--------|
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|
 | Tunisia       | 120       | 25.69 | 1.29    | 96.75%      | 97.81%  | 97.69% | 97.69%     | 0.03  |
 | Algeria       | 150       | 24.87 | 0.40    | 88.31%      | 93.25%  | 91.75% | 91.88%     | 0.02  |
 | Zimbabwe      | 600       | 23.54 | 2.90    | 79.56%      | 64.00%  | 79.60% | 79.10%     | 8.0   |
