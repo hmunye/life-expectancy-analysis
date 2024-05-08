@@ -1782,8 +1782,6 @@ nn <- neuralnet(Life_expectancy ~ . -Diphtheria  - Infant_deaths - Thinness_ten_
 plot(nn)
 ```
 
-Testing
-
 #### 5.1.3 SVR model for Life Expectancy
 
 ```{r}
@@ -1805,7 +1803,7 @@ train.data.svm_numeric <- train.data.svm[, numeric_cols]
 # Scale the numeric features
 train.data.svm_scaled <- as.data.frame(scale(train.data.svm_numeric))
 
-# Train the SVR model with scaled features
+# Train the SVR model 
 LE_SVR <- svm(Life_expectancy ~ . , data = train.data.svm_scaled)
 ```
 
@@ -1813,10 +1811,10 @@ Evaluate Model function:
 
 ```{r}
 evaluate_SVR_model <- function(model, test_data) {
-  # Extract actual values from test data
+  
   actual_values <- test_data$Life_expectancy
   
-  # Predict using the provided model
+  # Predict 
   predicted_values <- predict(model, newdata = test_data)
   
   # Calculate evaluation metrics
@@ -1987,26 +1985,24 @@ evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
 
 Table comparing the different SVR models.
 
-| Removed Variable              | MAE          | MSE           | RMSE         | R-Squared   | Adjusted R-Squared   |
+| Removed Variable            | MAE        | MSE         | RMSE       | R-Squared | Adjusted R-Squared |
 |------------|------------|------------|------------|------------|------------|
-| ----------------------------- | ------------ | ------------- | ------------ | ----------- | -------------------- |
-| None (Base)                   | 0.07395971   | 0.00778042    | 0.08820669   | 0.9925481   | 0.992535             |
-| Infant deaths                 | 0.07470623   | 0.007850003   | 0.08860024   | 0.992445    | 0.9924317            |
-| Under five deaths             | 0.07621305   | 0.008232278   | 0.0907319    | 0.9920679   | 0.992054             |
-| Adult mortality               | 0.1133804    | 0.02399256    | 0.1548953    | 0.9766539   | 0.9766129            |
-| Alcohol consumption           | 0.07744333   | 0.008586509   | 0.09266342   | 0.9916855   | 0.9916709            |
-| Hepatitis B                   | 0.07243036   | 0.007626723   | 0.08733111   | 0.992664    | 0.9926511            |
-| Measles                       | 0.07528426   | 0.008338268   | 0.09131412   | 0.9919717   | 0.9919576            |
-| BMI                           | 0.07787055   | 0.009170201   | 0.09576117   | 0.9912598   | 0.9912444            |
-| Polio                         | 0.0744371    | 0.007858702   | 0.08864932   | 0.9925011   | 0.9924879            |
-| Diphtheria                    | 0.07355422   | 0.007703352   | 0.08776874   | 0.9926202   | 0.9926072            |
-| Incidents HIV                 | 0.07527161   | 0.008397796   | 0.09163949   | 0.9918974   | 0.9918832            |
-| GDP per capita                | 0.07584458   | 0.008198734   | 0.09054686   | 0.9921686   | 0.9921549            |
-| Population mln                | 0.07505001   | 0.008137925   | 0.09021045   | 0.992191    | 0.9921773            |
-| Thinness ten nineteen years   | 0.07371203   | 0.007720199   | 0.08786466   | 0.992582    | 0.992569             |
-| Thinness five nine years      | 0.0740283    | 0.007773223   | 0.08816589   | 0.9925873   | 0.9925743            |
-| Schooling                     | 0.07663966   | 0.008466487   | 0.09201351   | 0.9918468   | 0.9918324            |
-| Removed Variable              | MAE          | MSE           | RMSE         | R-Squared   | Adjusted R-Squared   |
+| None (Base)                 | 0.07395971 | 0.00778042  | 0.08820669 | 0.9925481 | 0.992535           |
+| Infant deaths               | 0.07470623 | 0.007850003 | 0.08860024 | 0.992445  | 0.9924317          |
+| Under five deaths           | 0.07621305 | 0.008232278 | 0.0907319  | 0.9920679 | 0.992054           |
+| Adult mortality             | 0.1133804  | 0.02399256  | 0.1548953  | 0.9766539 | 0.9766129          |
+| Alcohol consumption         | 0.07744333 | 0.008586509 | 0.09266342 | 0.9916855 | 0.9916709          |
+| Hepatitis B                 | 0.07243036 | 0.007626723 | 0.08733111 | 0.992664  | 0.9926511          |
+| Measles                     | 0.07528426 | 0.008338268 | 0.09131412 | 0.9919717 | 0.9919576          |
+| BMI                         | 0.07787055 | 0.009170201 | 0.09576117 | 0.9912598 | 0.9912444          |
+| Polio                       | 0.0744371  | 0.007858702 | 0.08864932 | 0.9925011 | 0.9924879          |
+| Diphtheria                  | 0.07355422 | 0.007703352 | 0.08776874 | 0.9926202 | 0.9926072          |
+| Incidents HIV               | 0.07527161 | 0.008397796 | 0.09163949 | 0.9918974 | 0.9918832          |
+| GDP per capita              | 0.07584458 | 0.008198734 | 0.09054686 | 0.9921686 | 0.9921549          |
+| Population mln              | 0.07505001 | 0.008137925 | 0.09021045 | 0.992191  | 0.9921773          |
+| Thinness ten nineteen years | 0.07371203 | 0.007720199 | 0.08786466 | 0.992582  | 0.992569           |
+| Thinness five nine years    | 0.0740283  | 0.007773223 | 0.08816589 | 0.9925873 | 0.9925743          |
+| Schooling                   | 0.07663966 | 0.008466487 | 0.09201351 | 0.9918468 | 0.9918324          |
 
 The general idea of this table is that the worse the model does without the given variable, the more important the variable is to the SVR model.
 
@@ -2061,6 +2057,20 @@ rf_model <- randomForest(Life_expectancy ~ ., data = train_data_RF, ntree = 500)
 print(rf_model)
 ```
 
+Assessing the model:
+
+```{r}
+predicted_values <- predict(rf_model, test_data_RF)
+
+rmse_value <- sqrt(mean((predicted_values - test_data_RF$Life_expectancy)^2))
+print(paste("RMSE:", rmse_value))
+
+# R-squared
+observed_values <- test_data_RF$Life_expectancy
+r_squared <- cor(observed_values, predicted_values)^2
+print(paste("R-squared:", r_squared))
+```
+
 Significance plot
 
 ```{r}
@@ -2094,6 +2104,16 @@ Incidents of HIV is again no surprise as HIV is a depilitating illness that if u
 The other variables in this group are more interesting, and seem to correlate with a nation being more developed, and thus having more access to healthcare, and thus a higher life expectancy.
 
 ------------------------------------------------------------------------
+
+### 5.1.6 Comparing the models
+
+For each of these models if multiple models were made, we are using the final version of the model for comparison.
+
+| Model                | RMSE            | Adjusted R\^2   |
+|----------------------|-----------------|-----------------|
+| Multiple Regression  | 0.007220434     | 0.9784          |
+| Random Forest        | 0.5001062729781 | 0.9973385774022 |
+| SVR                  | 0.08820669      | 0.992533        |
 
 ### 5.2 Predict countries economic status off Life expectancy:
 
@@ -2199,7 +2219,8 @@ any factors need to be turned back into numeric values for this model
 ```{r}
 xgdf <- df %>%
   mutate_if(is.factor, as.numeric)
-
+xgdf <- xgdf %>%
+  select(Life_expectancy, Economy_status_Developed)
 ```
 
 Split the data
@@ -2251,7 +2272,11 @@ print(conf_matrix)
 
 ```
 
-This model is 100% accurate???
+Sensitivity:81.11%
+
+Specificity: 92.74%
+
+Overall Accuracy: 90.90%
 
 ```{r}
  xg.roc <- roc(test_data$Economy_status_Developed, preds)
@@ -2335,6 +2360,12 @@ plot(roc_curve, main="ROC Curve" , print.auc = TRUE, print.thres ="best")
 ```
 
 #### 5.2.4 Compare the models
+
+|              | Logistic  | Tree    | XGBoost |
+|--------------|-----------|---------|---------|
+| Specificity  | 83.05%    | 66.67%  | 92.74%  |
+| Sensitivity  | 91.5%     | 96.04%  | 81.11%  |
+| Overall      | 89.76%    | 89.98%  | 90.90%  |
 
 ### 5.3 Deep analysis
 
