@@ -2186,53 +2186,76 @@ Specificity: 83.05%
 
 Sensitivity: 91.5%
 
-Please note that this "Best" model is simply the one with the highest sum of sensitivity and specificity.
+Please note that this "Best" model is simply the one with the highest sum of sensitivity and specificity. As we do not have any costs associated with false negatives and false positives it is not possible to determine what the best model for our situation is.
 
 #### 5.2.2 XG Boost Model
 
-Convert data to work with XG Boost
+```{r}
+glimpse(df)
+```
+
+any factors need to be turned back into numeric values for this model
 
 ```{r}
-# Convert character columns to factors
-train_data_log$Country <- as.factor(train_data_log$Country)
-train_data_log$Region <- as.factor(train_data_log$Region)
+xgdf <- df %>%
+  mutate_if(is.factor, as.numeric)
 
-# Convert factors to dummy variables
-train_data_numeric <- model.matrix(~ . - 1 - Economy_status_Developing, data = train_data_log)
-validation_data_numeric <- model.matrix(~ . - 1 - Economy_status_Developing, data = validation_data_log)
-
-train_matrix <- xgb.DMatrix(data = train_data_numeric, label = train_data_log$Economy_status_Developed)
-validation_matrix <- xgb.DMatrix(data = validation_data_numeric, label = validation_data_log$Economy_status_Developed)
 ```
+
+Split the data
+
+```{r}
+set.seed(101)  
+train_index <- createDataPartition(xgdf$Economy_status_Developed, p = 0.8, list = FALSE)
+train_data <- xgdf[train_index, ]
+test_data <- xgdf[-train_index, ]
+```
+
+XGBoost requires a specific format, DMatrix
+
+```{r}
+dtrain <- xgb.DMatrix(data = as.matrix(train_data[, -ncol(train_data)]), label = train_data$Economy_status_Developed)
+dtest <- xgb.DMatrix(data = as.matrix(test_data[, -ncol(test_data)]), label = test_data$Economy_status_Developed)
+```
+
+Now we can actually make the model
 
 ```{r}
 params <- list(
   booster = "gbtree",
   objective = "binary:logistic",
-  eta = 0.3,
+  eta = 0.1,
+  gamma = 1,
   max_depth = 6,
   min_child_weight = 1,
   subsample = 0.8,
   colsample_bytree = 0.8
 )
+
+# Number of rounds for boosting
+nrounds <- 100
+
+# Train the model
+XG_model <- xgb.train(params = params, data = dtrain, nrounds = nrounds, watchlist = list(train = dtrain, test = dtest), early_stopping_rounds = 10)
 ```
 
+Predictions and Confusion Matrix
+
 ```{r}
-xgb_model <- xgb.train(params = params, 
-                       data = train_matrix, 
-                       nrounds = 100,
-                       watchlist = list(eval = validation_matrix, train = train_matrix),
-                       print.every.n = 10,
-                       early_stopping_rounds = 10,
-                       verbose = 1)
+
+preds <- predict(XG_model, dtest)
+predicted_labels <- ifelse(preds > 0.5, 1, 0)
+
+conf_matrix <- table(Predicted = predicted_labels, Actual = test_data$Economy_status_Developed)
+print(conf_matrix) 
+
 ```
 
-```{r}
-validation_predictions <- predict(xgb_model, validation_matrix)
-binary_validation_predictions <- ifelse(validation_predictions > 0.5, 1, 0)  # Using default threshold of 0.5 initially
+This model is 100% accurate???
 
-confusion_matrix_xgb <- confusionMatrix(factor(binary_validation_predictions), factor(validation_data_log$Economy_status_Developed))
-print(confusion_matrix_xgb)
+```{r}
+ xg.roc <- roc(test_data$Economy_status_Developed, preds)
+ plot.roc(xg.roc, print.auc = TRUE, print.thres ="best")
 ```
 
 #### 5.2.3 Decision Tree
@@ -2284,6 +2307,12 @@ confusion_Matrix_dt <- confusionMatrix(predictions, validation_data_DT$Economy_s
 print(confusion_Matrix_dt)
 ```
 
+Sensitivity: 96.04%
+
+Specificity: 66.67%
+
+Overall Accuracy: 89.98%
+
 ```{r}
 # Visualize the first model
 print(rpart.plot(tree_model))
@@ -2293,6 +2322,17 @@ print(rpart.plot(tree_model2$finalModel))
 ```
 
 pruning the tree has made no change in the model. Which, thinking about it makes sense. There isn't anything to prune.
+
+Make the ROC Cruve
+
+```{r}
+prob_predictions <- predict(tree_model2, validation_data_DT, type = "prob")
+
+
+roc_curve <- roc(validation_data_DT$Economy_status_Developed, prob_predictions[,2])
+plot(roc_curve, main="ROC Curve" , print.auc = TRUE, print.thres ="best")
+
+```
 
 #### 5.2.4 Compare the models
 
@@ -2372,7 +2412,7 @@ ggplot(filtered_df, aes(x = Schooling, y = Country)) +
 ```
 
 | Country       | Mortality | BMI   | Alcohol | Hepatitis B | Measles | Polio  | Diphtheria | HIV   |
-|----------|---------|-------|--------|----------|--------|-------|----------|--------|
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|
 | Tunisia       | 120       | 25.69 | 1.29    | 96.75%      | 97.81%  | 97.69% | 97.69%     | 0.03  |
 | Algeria       | 150       | 24.87 | 0.40    | 88.31%      | 93.25%  | 91.75% | 91.88%     | 0.02  |
 | Zimbabwe      | 600       | 23.54 | 2.90    | 79.56%      | 64.00%  | 79.60% | 79.10%     | 8.0   |
