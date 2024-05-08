@@ -515,6 +515,108 @@ Under_five_deaths:
 num_outliers(df, df$Under_five_deaths)
 ```
 
+## Explanation & Insights:
+
+### Note:
+
+The variation in outlier counts between our analytical methods (IQR Method, identify_outliers function) and boxplot visualization likely comes from differing definitions of outliers. While the analytical methods stick to strict statistical criteria, boxplots visually show points beyond the data's central range, potentially capturing more extreme values.
+
+```{r}
+ggplot(df, aes(x = Region, y = Infant_deaths)) + geom_boxplot() + ggtitle("Comparison of Infant Deaths Incidence by Region")
+```
+
+The "Infant_deaths" column represents the number of infant deaths per 1000 population. The IQR method identifies 29 outliers. The regions with outliers include Africa, Central America and Caribbean, European Union, Middle East, Rest of Europe, and South America. Outliers in infant deaths may indicate regions with unusually high infant mortality rates, potentially reflecting poor healthcare access and quality.
+
+```{r}
+ggplot(df, aes(x = Region, y = Under_five_deaths )) + geom_boxplot() + ggtitle("Comparison of Under Five Deaths:  by Region")
+```
+
+The "Under_five_deaths" column represents deaths of children under five years old per 1000 population. The IQR method identifies 102 outliers. The regions with outliers include Africa, Asia, Central America and Caribbean, European Union, Middle East, Rest of Europe, and South America. High rates of under-five deaths may indicate challenges related to healthcare access, quality, and availability of essential services such as maternal and child healthcare and vaccinations.
+
+```{r}
+ggplot(df, aes(x = Region, y = Adult_mortality)) + geom_boxplot() + ggtitle("Comparison of Adult M         ortality by Region")
+```
+
+The "Adult_mortality" column represents the probability of dying between 15 and 60 per 1000 population. The IQR method identifies 112 outliers. The only region with outliers is Africa. High rates of adult mortality may indicate challenges related to healthcare access, quality, and availability of essential services such as vaccinations.
+
+```{r}
+ggplot(df, aes(x = Region, y = Alcohol_consumption)) + geom_boxplot() + ggtitle("Comparison of Alcohol Consumption by Region")
+```
+
+The "Alcohol_consumption" column represents alcohol consumption per capita by liter. The IQR method identifies 2 outliers.
+
+```{r}
+ggplot(df, aes(x = Region, y = Hepatitis_B)) + geom_boxplot() + ggtitle("Comparison of Hepatitis B by Region")
+```
+
+The "Hepatitas_B" column represents Hepatitis B immunization coverage in 1-year olds. The IQR method identifies 164 outliers.
+
+```{r}
+ggplot(df, aes(x = Region, y = Measles)) + geom_boxplot() + ggtitle("Comparison of Measles by Region")
+```
+
+The "Measles" column represents number of measles cases reported per 1000 population. The IQR method identifies 35 outliers. The regions with outliers include Indonesia(Asia), Philippines(Asia), Afghanistan(Asia), and Suriname(South America). High rates of measles may indicate challenges related to healthcare access.
+
+```{r}
+ggplot(df, aes(x = Region, y = BMI)) + geom_boxplot() + ggtitle("Comparison of BMI by Region")
+```
+
+The "BMI" column represents the body mass index of the entire population. The IQR method identifies 25 outliers. The regions with outliers are Samoa and Tonga. Higher BMI may indicate genetic predispositions and fattier diets.
+
+```{r}
+ggplot(df, aes(x = Region, y = Polio)) + geom_boxplot() + ggtitle("Comparison of Polio by Region")
+```
+
+The "Polio" column represents the polio immunization records among 1-year olds. The IQR method identifies 190 outliers. The regions with outliers include Africa and Oceania. Lower polio vaccination rates may indicate challenges related to healthcare access.
+
+```{r}
+ggplot(df, aes(x = Region, y = Diphtheria)) + geom_boxplot() + ggtitle("Comparison of Diphtheria by Region")
+```
+
+The "Diphtheria" column represents the TDP immunization records among 1-year olds. The IQR method identifies 187 outliers. The regions with outliers include Africa and Asia. Lower diphtheria vaccination rates may indicate challenges related to healthcare access.
+
+```{r}
+ggplot(df, aes(x = Region, y = Incidents_HIV)) + geom_boxplot() + ggtitle("Comparison of Incidents HIV by Region")
+```
+
+The "Incidents_HIV" column represents the deaths per 1000 live births due to HIV/AIDS. The IQR method identifies 461 outliers. The region with outliers is Africa. Higher HIV rates may indicate challenges related to healthcare access.
+
+```{r}
+ggplot(df, aes(x = Region, y = GDP_per_capita)) + geom_boxplot() + ggtitle("Comparison of GDP Per Capita by Region")
+```
+
+The "GDP_per_capita' column represents the gross domestic product per capita. The IQR method identifies 425 outliers. The regions with outliers includes France and Austria. Higher GDP may indicate a more developed economy. \
+
+```{r}
+ggplot(df, aes(x = Region, y = Population_mln)) + geom_boxplot() + ggtitle("Comparison of Population by Region")
+```
+
+The "Population_mln" column represents the total population in millions. The IQR method identifies 362 outliers. The regions with outliers include India, China, and the United States. \
+
+```{r}
+ggplot(df, aes(x = Region, y = Thinness_ten_nineteen_years)) + geom_boxplot() + ggtitle("Comparison of Thinness Ten to Nineteen Years by Region")
+```
+
+The "Thinness_ten_nineteen_years" column represents the prevalence of thinness among 10 to 19 year olds. The IQR method identifies 89 outliers. The regions with outliers include Asia and Africa. Higher rates of thinness may indicate challenges related to healthcare access, diet, and cultural values. \
+
+```{r}
+ggplot(df, aes(x = Region, y = Thinness_five_nine_years)) + geom_boxplot() + ggtitle("Comparison of Thinness Five to Nine Years by Region")
+```
+
+The "Thinness_five_nine_years" column represents the prevalence of thinness among 5 to 9 year olds. The IQR method identifies 95 outliers. The regions with outliers include Asia and Africa. Higher rates of thinness may indicate challenges related to healthcare access, diet, and cultural values. \
+
+```{r}
+ggplot(df, aes(x = Region, y = Schooling)) + geom_boxplot() + ggtitle("Comparison of Schooling by Region")
+```
+
+There are no outliers
+
+```{r}
+ggplot(df, aes(x = Region, y = Life_expectancy)) + geom_boxplot() + ggtitle("Comparison of Life Expectancy by Region")
+```
+
+The "Life_expectancy" represents the average life expectancy in age. The IQR method identifies 19 outliers. The region with outliers include Africa. Lower life expectancy rates may indicate challenges related to healthcare access.
+
 #### 3.2.1 Treating Outliers
 
 **1) Trimming**: Remove outliers from the dataset. This approach can be appropriate if the outliers are deemed to be data entry errors or highly improbable values. Due to the high number of outliers in the dataset, this is not a viable option.
@@ -523,7 +625,7 @@ num_outliers(df, df$Under_five_deaths)
 
 #### 3.2.2 Decision for Treating Outliers
 
-After doing research on how to identify and treat outliers in R,
+After doing research on how to identify and treat outliers in R, and reviewing the outliers present in our data, we have chosen to leave the outliers as is. None of them appear erroneous and as such provide valid data for training the models
 
 #### 3.2.3 Approach {#approach-1}
 
@@ -1782,8 +1884,6 @@ nn <- neuralnet(Life_expectancy ~ . -Diphtheria  - Infant_deaths - Thinness_ten_
 plot(nn)
 ```
 
-Testing
-
 #### 5.1.3 SVR model for Life Expectancy
 
 ```{r}
@@ -1805,7 +1905,7 @@ train.data.svm_numeric <- train.data.svm[, numeric_cols]
 # Scale the numeric features
 train.data.svm_scaled <- as.data.frame(scale(train.data.svm_numeric))
 
-# Train the SVR model with scaled features
+# Train the SVR model 
 LE_SVR <- svm(Life_expectancy ~ . , data = train.data.svm_scaled)
 ```
 
@@ -1813,10 +1913,10 @@ Evaluate Model function:
 
 ```{r}
 evaluate_SVR_model <- function(model, test_data) {
-  # Extract actual values from test data
+  
   actual_values <- test_data$Life_expectancy
   
-  # Predict using the provided model
+  # Predict 
   predicted_values <- predict(model, newdata = test_data)
   
   # Calculate evaluation metrics
@@ -1987,26 +2087,24 @@ evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
 
 Table comparing the different SVR models.
 
-| Removed Variable              | MAE          | MSE           | RMSE         | R-Squared   | Adjusted R-Squared   |
+| Removed Variable            | MAE        | MSE         | RMSE       | R-Squared | Adjusted R-Squared |
 |------------|------------|------------|------------|------------|------------|
-| ----------------------------- | ------------ | ------------- | ------------ | ----------- | -------------------- |
-| None (Base)                   | 0.07395971   | 0.00778042    | 0.08820669   | 0.9925481   | 0.992535             |
-| Infant deaths                 | 0.07470623   | 0.007850003   | 0.08860024   | 0.992445    | 0.9924317            |
-| Under five deaths             | 0.07621305   | 0.008232278   | 0.0907319    | 0.9920679   | 0.992054             |
-| Adult mortality               | 0.1133804    | 0.02399256    | 0.1548953    | 0.9766539   | 0.9766129            |
-| Alcohol consumption           | 0.07744333   | 0.008586509   | 0.09266342   | 0.9916855   | 0.9916709            |
-| Hepatitis B                   | 0.07243036   | 0.007626723   | 0.08733111   | 0.992664    | 0.9926511            |
-| Measles                       | 0.07528426   | 0.008338268   | 0.09131412   | 0.9919717   | 0.9919576            |
-| BMI                           | 0.07787055   | 0.009170201   | 0.09576117   | 0.9912598   | 0.9912444            |
-| Polio                         | 0.0744371    | 0.007858702   | 0.08864932   | 0.9925011   | 0.9924879            |
-| Diphtheria                    | 0.07355422   | 0.007703352   | 0.08776874   | 0.9926202   | 0.9926072            |
-| Incidents HIV                 | 0.07527161   | 0.008397796   | 0.09163949   | 0.9918974   | 0.9918832            |
-| GDP per capita                | 0.07584458   | 0.008198734   | 0.09054686   | 0.9921686   | 0.9921549            |
-| Population mln                | 0.07505001   | 0.008137925   | 0.09021045   | 0.992191    | 0.9921773            |
-| Thinness ten nineteen years   | 0.07371203   | 0.007720199   | 0.08786466   | 0.992582    | 0.992569             |
-| Thinness five nine years      | 0.0740283    | 0.007773223   | 0.08816589   | 0.9925873   | 0.9925743            |
-| Schooling                     | 0.07663966   | 0.008466487   | 0.09201351   | 0.9918468   | 0.9918324            |
-| Removed Variable              | MAE          | MSE           | RMSE         | R-Squared   | Adjusted R-Squared   |
+| None (Base)                 | 0.07395971 | 0.00778042  | 0.08820669 | 0.9925481 | 0.992535           |
+| Infant deaths               | 0.07470623 | 0.007850003 | 0.08860024 | 0.992445  | 0.9924317          |
+| Under five deaths           | 0.07621305 | 0.008232278 | 0.0907319  | 0.9920679 | 0.992054           |
+| Adult mortality             | 0.1133804  | 0.02399256  | 0.1548953  | 0.9766539 | 0.9766129          |
+| Alcohol consumption         | 0.07744333 | 0.008586509 | 0.09266342 | 0.9916855 | 0.9916709          |
+| Hepatitis B                 | 0.07243036 | 0.007626723 | 0.08733111 | 0.992664  | 0.9926511          |
+| Measles                     | 0.07528426 | 0.008338268 | 0.09131412 | 0.9919717 | 0.9919576          |
+| BMI                         | 0.07787055 | 0.009170201 | 0.09576117 | 0.9912598 | 0.9912444          |
+| Polio                       | 0.0744371  | 0.007858702 | 0.08864932 | 0.9925011 | 0.9924879          |
+| Diphtheria                  | 0.07355422 | 0.007703352 | 0.08776874 | 0.9926202 | 0.9926072          |
+| Incidents HIV               | 0.07527161 | 0.008397796 | 0.09163949 | 0.9918974 | 0.9918832          |
+| GDP per capita              | 0.07584458 | 0.008198734 | 0.09054686 | 0.9921686 | 0.9921549          |
+| Population mln              | 0.07505001 | 0.008137925 | 0.09021045 | 0.992191  | 0.9921773          |
+| Thinness ten nineteen years | 0.07371203 | 0.007720199 | 0.08786466 | 0.992582  | 0.992569           |
+| Thinness five nine years    | 0.0740283  | 0.007773223 | 0.08816589 | 0.9925873 | 0.9925743          |
+| Schooling                   | 0.07663966 | 0.008466487 | 0.09201351 | 0.9918468 | 0.9918324          |
 
 The general idea of this table is that the worse the model does without the given variable, the more important the variable is to the SVR model.
 
@@ -2061,6 +2159,20 @@ rf_model <- randomForest(Life_expectancy ~ ., data = train_data_RF, ntree = 500)
 print(rf_model)
 ```
 
+Assessing the model:
+
+```{r}
+predicted_values <- predict(rf_model, test_data_RF)
+
+rmse_value <- sqrt(mean((predicted_values - test_data_RF$Life_expectancy)^2))
+print(paste("RMSE:", rmse_value))
+
+# R-squared
+observed_values <- test_data_RF$Life_expectancy
+r_squared <- cor(observed_values, predicted_values)^2
+print(paste("R-squared:", r_squared))
+```
+
 Significance plot
 
 ```{r}
@@ -2094,6 +2206,16 @@ Incidents of HIV is again no surprise as HIV is a depilitating illness that if u
 The other variables in this group are more interesting, and seem to correlate with a nation being more developed, and thus having more access to healthcare, and thus a higher life expectancy.
 
 ------------------------------------------------------------------------
+
+### 5.1.6 Comparing the models
+
+For each of these models if multiple models were made, we are using the final version of the model for comparison.
+
+| Model                | RMSE            | Adjusted R\^2   |
+|----------------------|-----------------|-----------------|
+| Multiple Regression  | 0.007220434     | 0.9784          |
+| Random Forest        | 0.5001062729781 | 0.9973385774022 |
+| SVR                  | 0.08820669      | 0.992533        |
 
 ### 5.2 Predict countries economic status off Life expectancy:
 
@@ -2199,7 +2321,8 @@ any factors need to be turned back into numeric values for this model
 ```{r}
 xgdf <- df %>%
   mutate_if(is.factor, as.numeric)
-
+xgdf <- xgdf %>%
+  select(Life_expectancy, Economy_status_Developed)
 ```
 
 Split the data
@@ -2251,7 +2374,11 @@ print(conf_matrix)
 
 ```
 
-This model is 100% accurate???
+Sensitivity:81.11%
+
+Specificity: 92.74%
+
+Overall Accuracy: 90.90%
 
 ```{r}
  xg.roc <- roc(test_data$Economy_status_Developed, preds)
@@ -2335,6 +2462,12 @@ plot(roc_curve, main="ROC Curve" , print.auc = TRUE, print.thres ="best")
 ```
 
 #### 5.2.4 Compare the models
+
+|              | Logistic  | Tree    | XGBoost |
+|--------------|-----------|---------|---------|
+| Specificity  | 83.05%    | 66.67%  | 92.74%  |
+| Sensitivity  | 91.5%     | 96.04%  | 81.11%  |
+| Overall      | 89.76%    | 89.98%  | 90.90%  |
 
 ### 5.3 Deep analysis
 
