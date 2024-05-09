@@ -137,7 +137,7 @@ Columns in the dataset:
 
 -   **Economy_status_Developing:** Developing county
 
--   **Life_expectancy:** Average life expectancy of both genders in different years from 2000 to 2015
+-   **Life_expectancy:** Average life expectancy of both genders in different years from 2010 to 2015
 
 #### 1.2 Data Source
 
@@ -2088,7 +2088,7 @@ evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
 Table comparing the different SVR models.
 
 | Removed Variable            | MAE        | MSE         | RMSE       | R-Squared | Adjusted R-Squared |
-|-----------------------------|------------|-------------|------------|-----------|--------------------|
+|---------------|------------|------------|------------|------------|------------|
 | None (Base)                 | 0.07395971 | 0.00778042  | 0.08820669 | 0.9925481 | 0.992535           |
 | Infant deaths               | 0.07470623 | 0.007850003 | 0.08860024 | 0.992445  | 0.9924317          |
 | Under five deaths           | 0.07621305 | 0.008232278 | 0.0907319  | 0.9920679 | 0.992054           |
@@ -2357,11 +2357,9 @@ params <- list(
   colsample_bytree = 0.8
 )
 
-# Number of rounds for boosting
-nrounds <- 100
 
 # Train the model
-XG_model <- xgb.train(params = params, data = dtrain, nrounds = nrounds, watchlist = list(train = dtrain, test = dtest), early_stopping_rounds = 10)
+XG_model <- xgb.train(params = params, data = dtrain, nrounds = 100, watchlist = list(train = dtrain, test = dtest), early_stopping_rounds = 10)
 ```
 
 Predictions and Confusion Matrix
@@ -2370,15 +2368,24 @@ Predictions and Confusion Matrix
 
 preds <- predict(XG_model, dtest)
 predicted_labels <- ifelse(preds > 0.5, 1, 0)
-
-conf_matrix <- table(Predicted = predicted_labels, Actual = test_data$Economy_status_Developed)
-print(conf_matrix) 
-
 ```
 
-Sensitivity:81.11%
+```{r}
+predicted_labels_factor <- factor(predicted_labels, levels = c(0, 1))
+actual_labels_factor <- factor(test_data$Economy_status_Developed, levels = c(0, 1))
 
-Specificity: 92.74%
+# Compute the confusion matrix
+conf_matrix <- confusionMatrix(predicted_labels_factor, actual_labels_factor)
+print(conf_matrix)
+```
+
+```{r}
+confusionMatrix(factor(preds),factor())
+```
+
+Sensitivity:96.34%
+
+Specificity: 67.59%
 
 Overall Accuracy: 90.90%
 
@@ -2480,9 +2487,11 @@ plot(roc_curve, main="ROC Curve" , print.auc = TRUE, print.thres ="best")
 
 |             | Logistic | Tree   | XGBoost |
 |-------------|----------|--------|---------|
-| Specificity | 83.05%   | 66.67% | 92.74%  |
-| Sensitivity | 91.5%    | 96.04% | 81.11%  |
+| Specificity | 83.05%   | 66.67% | 67.59%  |
+| Sensitivity | 91.5%    | 96.04% | 96.34%  |
 | Overall     | 89.76%   | 89.98% | 90.90%  |
+
+For Specificity (Minimize False Positives) the logistic model is the winner, For Sensitivity (Minimize False Negatives) both the decision tree and the XGBoost are comparable. However none of these models were made with either in mind, and these values could be fine tuned via the ROC Curves provided with each to specialize in either. However our data set doesn’t include any costs for False Positives or negatives, and as such it is difficult to determine a “Best.”
 
 ### 5.3 Deep analysis
 
@@ -2560,20 +2569,20 @@ ggplot(filtered_df, aes(x = Schooling, y = Country)) +
 ```
 
 | Country       | Mortality | BMI   | Alcohol | Hepatitis B | Measles | Polio  | Diphtheria | HIV   |
-|---------------|-----------|-------|---------|-------------|---------|--------|------------|-------|
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|
 | Tunisia       | 120       | 25.69 | 1.29    | 96.75%      | 97.81%  | 97.69% | 97.69%     | 0.03  |
 | Algeria       | 150       | 24.87 | 0.40    | 88.31%      | 93.25%  | 91.75% | 91.88%     | 0.02  |
 | Zimbabwe      | 600       | 23.54 | 2.90    | 79.56%      | 64.00%  | 79.60% | 79.10%     | 8.0   |
 | Lesotho       | 690       | 24.49 | 2.62    | 86.63%      | 70.44%  | 87.75% | 89.56%     | 14.35 |
 | United States | 116       | 28.27 | 8.60    | 91.5%       | 86.00%  | 92.25% | 95.13%     | 0.13  |
 
-| Country       | GDP      | Population | Thinness | Schooling |
-|---------------|----------|------------|----------|-----------|
-| Tunisia       | 3585.63  | 10.39      | 6.41     | 6.11      |
-| Algeria       | 3745.13  | 34.82      | 6.09     | 6.99      |
-| Zimbabwe      | 1290.6   | 12.5       | 7.0      | 7.2       |
-| Lesotho       | 926.69   | 2.01       | 7.19     | 5.52      |
-| United States | 52662.94 | 302.10     | 0.73     | 13.01     |
+| Country       | GDP      | Population |
+|---------------|----------|------------|
+| Tunisia       | 3585.63  | 10.39      |
+| Algeria       | 3745.13  | 34.82      |
+| Zimbabwe      | 1290.6   | 12.5       |
+| Lesotho       | 926.69   | 2.01       |
+| United States | 52662.94 | 302.10     |
 
 ```{r}
 filtered_us <- df %>%
