@@ -137,7 +137,7 @@ Columns in the dataset:
 
 -   **Economy_status_Developing:** Developing county
 
--   **Life_expectancy:** Average life expectancy of both genders in different years from 2010 to 2015
+-   **Life_expectancy:** Average life expectancy of both genders in different years from 2000 to 2015
 
 #### 1.2 Data Source
 
@@ -585,25 +585,25 @@ The "Incidents_HIV" column represents the deaths per 1000 live births due to HIV
 ggplot(df, aes(x = Region, y = GDP_per_capita)) + geom_boxplot() + ggtitle("Comparison of GDP Per Capita by Region")
 ```
 
-The "GDP_per_capita' column represents the gross domestic product per capita. The IQR method identifies 425 outliers. The regions with outliers includes France and Austria. Higher GDP may indicate a more developed economy. \
+The "GDP_per_capita' column represents the gross domestic product per capita. The IQR method identifies 425 outliers. The regions with outliers includes France and Austria. Higher GDP may indicate a more developed economy.\
 
 ```{r}
 ggplot(df, aes(x = Region, y = Population_mln)) + geom_boxplot() + ggtitle("Comparison of Population by Region")
 ```
 
-The "Population_mln" column represents the total population in millions. The IQR method identifies 362 outliers. The regions with outliers include India, China, and the United States. \
+The "Population_mln" column represents the total population in millions. The IQR method identifies 362 outliers. The regions with outliers include India, China, and the United States.\
 
 ```{r}
 ggplot(df, aes(x = Region, y = Thinness_ten_nineteen_years)) + geom_boxplot() + ggtitle("Comparison of Thinness Ten to Nineteen Years by Region")
 ```
 
-The "Thinness_ten_nineteen_years" column represents the prevalence of thinness among 10 to 19 year olds. The IQR method identifies 89 outliers. The regions with outliers include Asia and Africa. Higher rates of thinness may indicate challenges related to healthcare access, diet, and cultural values. \
+The "Thinness_ten_nineteen_years" column represents the prevalence of thinness among 10 to 19 year olds. The IQR method identifies 89 outliers. The regions with outliers include Asia and Africa. Higher rates of thinness may indicate challenges related to healthcare access, diet, and cultural values.\
 
 ```{r}
 ggplot(df, aes(x = Region, y = Thinness_five_nine_years)) + geom_boxplot() + ggtitle("Comparison of Thinness Five to Nine Years by Region")
 ```
 
-The "Thinness_five_nine_years" column represents the prevalence of thinness among 5 to 9 year olds. The IQR method identifies 95 outliers. The regions with outliers include Asia and Africa. Higher rates of thinness may indicate challenges related to healthcare access, diet, and cultural values. \
+The "Thinness_five_nine_years" column represents the prevalence of thinness among 5 to 9 year olds. The IQR method identifies 95 outliers. The regions with outliers include Asia and Africa. Higher rates of thinness may indicate challenges related to healthcare access, diet, and cultural values.\
 
 ```{r}
 ggplot(df, aes(x = Region, y = Schooling)) + geom_boxplot() + ggtitle("Comparison of Schooling by Region")
@@ -2211,11 +2211,11 @@ The other variables in this group are more interesting, and seem to correlate wi
 
 For each of these models if multiple models were made, we are using the final version of the model for comparison.
 
-| Model                | RMSE            | Adjusted R\^2   |
-|----------------------|-----------------|-----------------|
-| Multiple Regression  | 0.007220434     | 0.9784          |
-| Random Forest        | 0.5001062729781 | 0.9973385774022 |
-| SVR                  | 0.08820669      | 0.992533        |
+| Model               | RMSE            | Adjusted R\^2   |
+|---------------------|-----------------|-----------------|
+| Multiple Regression | 0.007220434     | 0.9784          |
+| Random Forest       | 0.5001062729781 | 0.9973385774022 |
+| SVR                 | 0.08820669      | 0.992533        |
 
 ### 5.2 Predict countries economic status off Life expectancy:
 
@@ -2463,11 +2463,11 @@ plot(roc_curve, main="ROC Curve" , print.auc = TRUE, print.thres ="best")
 
 #### 5.2.4 Compare the models
 
-|              | Logistic  | Tree    | XGBoost |
-|--------------|-----------|---------|---------|
-| Specificity  | 83.05%    | 66.67%  | 92.74%  |
-| Sensitivity  | 91.5%     | 96.04%  | 81.11%  |
-| Overall      | 89.76%    | 89.98%  | 90.90%  |
+|             | Logistic | Tree   | XGBoost |
+|-------------|----------|--------|---------|
+| Specificity | 83.05%   | 66.67% | 92.74%  |
+| Sensitivity | 91.5%    | 96.04% | 81.11%  |
+| Overall     | 89.76%   | 89.98% | 90.90%  |
 
 ### 5.3 Deep analysis
 
