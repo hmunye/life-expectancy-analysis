@@ -655,6 +655,13 @@ df |>
 ggplot() +
     geom_histogram(aes(x=df$Life_expectancy), bins = 30)
 
+ggplot(df, aes(x=Life_expectancy, fill=Region)) +
+    geom_histogram(bins=30, alpha=0.6, position="identity") +
+    labs(title="Histogram of Life expectancy by Region",
+         x="Life expectancy",
+         y="Count") +
+    theme_minimal()
+
 summary(df$Life_expectancy)
 ```
 
@@ -685,6 +692,13 @@ df |>
 ggplot() +
     geom_histogram(aes(x=df$Infant_deaths), bins = 30)
 
+ggplot(df, aes(x=Life_expectancy, fill=Region)) +
+    geom_histogram(bins=30, alpha=0.6, position="identity") +
+    labs(title="Histogram of Infant_deaths by Region",
+         x="Infant deaths",
+         y="Count") +
+    theme_minimal()
+
 summary(df$Infant_deaths)
 ```
 
@@ -712,6 +726,13 @@ ggplot() +
 df |>
 ggplot() +
     geom_histogram(aes(x=df$Under_five_deaths), bins = 30)
+
+ggplot(df, aes(x=Under_five_deaths, fill=Region)) +
+    geom_histogram(bins=30, alpha=0.6, position="identity") +
+    labs(title="Histogram of Under_five_deaths by Region",
+         x="Under_five_deaths",
+         y="Count") +
+    theme_minimal()
 
 summary(df$Under_five_deaths)
 ```
@@ -741,6 +762,13 @@ df |>
 ggplot() +
     geom_histogram(aes(x=df$Adult_mortality), bins = 30)
 
+ggplot(df, aes(x=Adult_mortality, fill=Region)) +
+    geom_histogram(bins=30, alpha=0.6, position="identity") +
+    labs(title="Histogram of Adult_mortality by Region",
+         x="Adult_mortality",
+         y="Count") +
+    theme_minimal()
+
 summary(df$Adult_mortality)
 ```
 
@@ -768,6 +796,17 @@ ggplot() +
 df |>
 ggplot() +
     geom_histogram(aes(x=df$Alcohol_consumption), bins = 30)
+
+df |>
+ggplot() +
+    geom_histogram(aes(x=df$Alcohol_consumption), bins = 30)
+
+ggplot(df, aes(x=Alcohol_consumption, fill=Region)) +
+    geom_histogram(bins=30, alpha=0.6, position="identity") +
+    labs(title="Histogram of Alcohol_consumption by Region",
+         x="Alcohol_consumption",
+         y="Count") +
+    theme_minimal()
 
 summary(df$Alcohol_consumption)
 ```
@@ -799,6 +838,13 @@ df |>
 ggplot() +
     geom_histogram(aes(x=df$Hepatitis_B), bins = 30)
 
+ggplot(df, aes(x=Hepatitis_B, fill=Region)) +
+    geom_histogram(bins=30, alpha=0.6, position="identity") +
+    labs(title="Histogram of Hepatitis_B by Region",
+         x="Hepatitis_B",
+         y="Count") +
+    theme_minimal()
+
 summary(df$Hepatitis_B)
 ```
 
@@ -828,6 +874,13 @@ ggplot() +
 df |>
 ggplot() +
     geom_histogram(aes(x=df$Measles), bins = 30)
+
+ggplot(df, aes(x=Measles, fill=Region)) +
+    geom_histogram(bins=30, alpha=0.6, position="identity") +
+    labs(title="Histogram of Measles by Region",
+         x="Measles",
+         y="Count") +
+    theme_minimal()
 
 summary(df$Measles)
 
@@ -860,7 +913,14 @@ df |>
 ggplot() +
     geom_histogram(aes(x=df$BMI), bins = 30)
 
-summary(df$Polio)
+ggplot(df, aes(x=BMI, fill=Region)) +
+    geom_histogram(bins=30, alpha=0.6, position="identity") +
+    labs(title="Histogram of BMI by Region",
+         x="BMI",
+         y="Count") +
+    theme_minimal()
+
+summary(df$BMI)
 ```
 
 BMI Inferences:
@@ -869,9 +929,9 @@ BMI represents the nutritional status of the adult population
 
 It is not evenly distributed
 
-Min 8
+Min 19
 
-Max 99
+Max 32.10
 
 Why is there two groups?
 
@@ -883,6 +943,16 @@ ggplot() +
 df |>
 ggplot() +
     geom_histogram(aes(x=df$Polio), bins = 30)
+
+ggplot(df, aes(x=Polio, fill=Region)) +
+    geom_histogram(bins=30, alpha=0.6, position="identity") +
+    labs(title="Histogram of Polio by Region",
+         x="Polio",
+         y="Count") +
+    theme_minimal()
+
+summary(df$Polio)
+
 
 summary(df$Polio)
 ```
@@ -898,6 +968,13 @@ df |>
 ggplot() +
     geom_histogram(aes(x=df$Diphtheria), bins = 30)
 
+ggplot(df, aes(x=Diphtheria, fill=Region)) +
+    geom_histogram(bins=30, alpha=0.6, position="identity") +
+    labs(title="Histogram of Diphtheria by Region",
+         x="Diphtheria",
+         y="Count") +
+    theme_minimal()
+
 summary(df$Diphtheria)
 ```
 
@@ -912,6 +989,13 @@ df |>
 ggplot() +
     geom_histogram(aes(x=df$Incidents_HIV), bins = 30)
 
+ggplot(df, aes(x=Incidents_HIV, fill=Region)) +
+    geom_histogram(bins=30, alpha=0.6, position="identity") +
+    labs(title="Histogram of Incidents_HIV by Region",
+         x="Incidents_HIV",
+         y="Count") +
+    theme_minimal()
+
 summary(df$Incidents_HIV)
 ```
 
@@ -923,6 +1007,13 @@ ggplot() +
 df |>
 ggplot() +
     geom_histogram(aes(x=df$GDP_per_capita), bins = 30)
+
+ggplot(df, aes(x=GDP_per_capita, fill=Region)) +
+    geom_histogram(bins=30, alpha=0.6, position="identity") +
+    labs(title="Histogram of GDP_per_capita by Region",
+         x="GDP_per_capita",
+         y="Count") +
+    theme_minimal()
 
 summary(df$GDP_per_capita)
 ```
@@ -944,6 +1035,13 @@ ggplot() +
     geom_histogram(aes(x=df$Population_mln), bins = 30) +
   xlim(0,350)
 
+ggplot(df, aes(x=Population_mln, fill=Region)) +
+    geom_histogram(bins=30, alpha=0.6, position="identity") +
+    labs(title="Histogram of Population_mln by Region",
+         x="Population_mln",
+         y="Count") +
+    theme_minimal()
+
 summary(df$Population_mln)
 ```
 
@@ -957,6 +1055,13 @@ ggplot() +
 df |>
 ggplot() +
     geom_histogram(aes(x=df$Thinness_ten_nineteen_years), bins = 30)
+
+ggplot(df, aes(x=Thinness_ten_nineteen_years, fill=Region)) +
+    geom_histogram(bins=30, alpha=0.6, position="identity") +
+    labs(title="Histogram of Thinness_ten_nineteen_years by Region",
+         x="Thinness_ten_nineteen_years",
+         y="Count") +
+    theme_minimal()
 
 summary(df$Thinness_ten_nineteen_years)
 ```
@@ -972,6 +1077,13 @@ df |>
 ggplot() +
     geom_histogram(aes(x=df$Thinness_five_nine_years), bins = 30)
 
+ggplot(df, aes(x=Thinness_five_nine_years, fill=Region)) +
+    geom_histogram(bins=30, alpha=0.6, position="identity") +
+    labs(title="Histogram of Thinness_five_nine_years by Region",
+         x="Thinness_five_nine_years",
+         y="Count") +
+    theme_minimal()
+
 summary(df$Thinness_five_nine_years)
 ```
 
@@ -985,6 +1097,13 @@ ggplot() +
 df |>
 ggplot() +
     geom_histogram(aes(x=df$Schooling), bins = 30)
+
+ggplot(df, aes(x=Schooling, fill=Region)) +
+    geom_histogram(bins=30, alpha=0.6, position="identity") +
+    labs(title="Histogram of Schooling by Region",
+         x="Schooling",
+         y="Count") +
+    theme_minimal()
 
 summary(df$Schooling)
 ```
