@@ -290,7 +290,7 @@ geom_boxplot() +
 ggtitle("Comparison of GDP Per Capita by Region")
 ```
 
-The "GDP_per_capita' column represents the gross domestic product per capita. The IQR method identifies 425 outliers. The regions with outliers includes France and Austria. Higher GDP may indicate a more developed economy. \
+The "GDP_per_capita' column represents the gross domestic product per capita. The IQR method identifies 425 outliers. The regions with outliers includes France and Austria. Higher GDP may indicate a more developed economy.\
 
 ```{r}
 ggplot(df, aes(x = Region, y = Population_mln)) +
@@ -298,7 +298,7 @@ geom_boxplot() +
 ggtitle("Comparison of Population by Region")
 ```
 
-The "Population_mln" column represents the total population in millions. The IQR method identifies 362 outliers. The regions with outliers include India, China, and the United States. \
+The "Population_mln" column represents the total population in millions. The IQR method identifies 362 outliers. The regions with outliers include India, China, and the United States.\
 
 ```{r}
 ggplot(df, aes(x = Region, y = Thinness_ten_nineteen_years)) +
@@ -306,7 +306,7 @@ geom_boxplot() +
 ggtitle("Comparison of Thinness Ten to Nineteen Years by Region")
 ```
 
-The "Thinness_ten_nineteen_years" column represents the prevalence of thinness among 10 to 19 year olds. The IQR method identifies 89 outliers. The regions with outliers include Asia and Africa. Higher rates of thinness may indicate challenges related to healthcare access, diet, and cultural values. \
+The "Thinness_ten_nineteen_years" column represents the prevalence of thinness among 10 to 19 year olds. The IQR method identifies 89 outliers. The regions with outliers include Asia and Africa. Higher rates of thinness may indicate challenges related to healthcare access, diet, and cultural values.\
 
 ```{r}
 ggplot(df, aes(x = Region, y = Thinness_five_nine_years)) +
@@ -314,7 +314,7 @@ geom_boxplot() +
 ggtitle("Comparison of Thinness Five to Nine Years by Region")
 ```
 
-The "Thinness_five_nine_years" column represents the prevalence of thinness among 5 to 9 year olds. The IQR method identifies 95 outliers. The regions with outliers include Asia and Africa. Higher rates of thinness may indicate challenges related to healthcare access, diet, and cultural values. \
+The "Thinness_five_nine_years" column represents the prevalence of thinness among 5 to 9 year olds. The IQR method identifies 95 outliers. The regions with outliers include Asia and Africa. Higher rates of thinness may indicate challenges related to healthcare access, diet, and cultural values.\
 
 ```{r}
 ggplot(df, aes(x = Region, y = Schooling)) +

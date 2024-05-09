@@ -585,25 +585,25 @@ The "Incidents_HIV" column represents the deaths per 1000 live births due to HIV
 ggplot(df, aes(x = Region, y = GDP_per_capita)) + geom_boxplot() + ggtitle("Comparison of GDP Per Capita by Region")
 ```
 
-The "GDP_per_capita' column represents the gross domestic product per capita. The IQR method identifies 425 outliers. The regions with outliers includes France and Austria. Higher GDP may indicate a more developed economy. \
+The "GDP_per_capita' column represents the gross domestic product per capita. The IQR method identifies 425 outliers. The regions with outliers includes France and Austria. Higher GDP may indicate a more developed economy.\
 
 ```{r}
 ggplot(df, aes(x = Region, y = Population_mln)) + geom_boxplot() + ggtitle("Comparison of Population by Region")
 ```
 
-The "Population_mln" column represents the total population in millions. The IQR method identifies 362 outliers. The regions with outliers include India, China, and the United States. \
+The "Population_mln" column represents the total population in millions. The IQR method identifies 362 outliers. The regions with outliers include India, China, and the United States.\
 
 ```{r}
 ggplot(df, aes(x = Region, y = Thinness_ten_nineteen_years)) + geom_boxplot() + ggtitle("Comparison of Thinness Ten to Nineteen Years by Region")
 ```
 
-The "Thinness_ten_nineteen_years" column represents the prevalence of thinness among 10 to 19 year olds. The IQR method identifies 89 outliers. The regions with outliers include Asia and Africa. Higher rates of thinness may indicate challenges related to healthcare access, diet, and cultural values. \
+The "Thinness_ten_nineteen_years" column represents the prevalence of thinness among 10 to 19 year olds. The IQR method identifies 89 outliers. The regions with outliers include Asia and Africa. Higher rates of thinness may indicate challenges related to healthcare access, diet, and cultural values.\
 
 ```{r}
 ggplot(df, aes(x = Region, y = Thinness_five_nine_years)) + geom_boxplot() + ggtitle("Comparison of Thinness Five to Nine Years by Region")
 ```
 
-The "Thinness_five_nine_years" column represents the prevalence of thinness among 5 to 9 year olds. The IQR method identifies 95 outliers. The regions with outliers include Asia and Africa. Higher rates of thinness may indicate challenges related to healthcare access, diet, and cultural values. \
+The "Thinness_five_nine_years" column represents the prevalence of thinness among 5 to 9 year olds. The IQR method identifies 95 outliers. The regions with outliers include Asia and Africa. Higher rates of thinness may indicate challenges related to healthcare access, diet, and cultural values.\
 
 ```{r}
 ggplot(df, aes(x = Region, y = Schooling)) + geom_boxplot() + ggtitle("Comparison of Schooling by Region")
@@ -1642,7 +1642,7 @@ We are leaving out one of the two economy status variables as they are two halve
 We must also pick between Country and Region, as having both in the model seems to create singularities. For readability sake we will be keeping Region
 
 ```{r}
-#make the multiple Regression model for Life Expectancy 
+#make the model
 LE_MR <- lm(Life_expectancy ~ .  -Economy_status_Developing -Country , data = train.data)
 
 #print summary of the model
@@ -1795,8 +1795,6 @@ ggplot(df, aes(x = Schooling, y = Life_expectancy)) +
   labs(title = "Life Expectancy vs Schooling")
 ```
 
-As deaths under five go up, life expectancy goes down As adult mortality goes up, life expectancy goes down As alcohol consumption goes up, so does life expectancy As BMI goes up, so does life expectancy As incidents of HIV goes up, life expectancy goes down As GDP goes up, so does life expectancy As thinness goes up in prevalence, life expectancy goes down As schooling goes up, so does life expectancy
-
 Testing the data
 
 ```{r}
@@ -1896,6 +1894,8 @@ training.samples <- sdf$Life_expectancy |> createDataPartition(p = 0.8, list = F
 train.data.svm <- sdf[training.samples, ]
 test.data.svm <- sdf[-training.samples, ]
 ```
+
+The data needs to be scaled for SVR
 
 ```{r}
 # Filter out non-numeric columns
@@ -2088,7 +2088,7 @@ evaluate_SVR_model(LE_SVR_Testing, test.data.svm)
 Table comparing the different SVR models.
 
 | Removed Variable            | MAE        | MSE         | RMSE       | R-Squared | Adjusted R-Squared |
-|------------|------------|------------|------------|------------|------------|
+|-----------------------------|------------|-------------|------------|-----------|--------------------|
 | None (Base)                 | 0.07395971 | 0.00778042  | 0.08820669 | 0.9925481 | 0.992535           |
 | Infant deaths               | 0.07470623 | 0.007850003 | 0.08860024 | 0.992445  | 0.9924317          |
 | Under five deaths           | 0.07621305 | 0.008232278 | 0.0907319  | 0.9920679 | 0.992054           |
@@ -2120,7 +2120,7 @@ And yes, this is having a very large effect on the model, its not perfectly comp
 
 #### Conclusion of SVR Model:
 
-**Adult_Mortality**, **BMI** and **Schooling** all negativly impact the model enough when removed to be significant.
+**Adult_Mortality**, **BMI** and **Schooling** all negatively impact the model enough when removed to be significant.
 
 This method is not without it faults however, as it doesn't identify **Under_five_deaths** or **Infant_deaths** as significant. However if *both* are removed from the model, it causes a significant increase in error of the model. As we laid out in the previous model, these variables are high in multicollinearity. It is very possible that the removal of one of these is beneficial to the model, to prevent over-fitting, and the negative effects of removing these significant attributes is only shown when both are removed.
 
@@ -2211,11 +2211,13 @@ The other variables in this group are more interesting, and seem to correlate wi
 
 For each of these models if multiple models were made, we are using the final version of the model for comparison.
 
-| Model                | RMSE            | Adjusted R\^2   |
-|----------------------|-----------------|-----------------|
-| Multiple Regression  | 0.007220434     | 0.9784          |
-| Random Forest        | 0.5001062729781 | 0.9973385774022 |
-| SVR                  | 0.08820669      | 0.992533        |
+| Model               | RMSE            | Adjusted R\^2   |
+|---------------------|-----------------|-----------------|
+| Multiple Regression | 0.007220434     | 0.9784          |
+| Random Forest       | 0.5001062729781 | 0.9973385774022 |
+| SVR                 | 0.08820669      | 0.992533        |
+
+According to these numbers, the Multiple Regression model is the most accurate.
 
 ### 5.2 Predict countries economic status off Life expectancy:
 
@@ -2388,6 +2390,21 @@ Overall Accuracy: 90.90%
 #### 5.2.3 Decision Tree
 
 ```{r}
+glimpse(df)
+```
+
+Change the data to a factor
+
+```{r}
+df$Country <- factor(df$Country)
+df$Region <- factor(df$Region)
+df$Region <- factor(df$Region)
+df$Year <- factor(df$Year)
+df$Economy_status_Developed <- factor(df$Economy_status_Developed)
+df$Economy_status_Developing <- factor(df$Economy_status_Developing)
+```
+
+```{r}
 set.seed(127)
 
 # Create the partition
@@ -2401,8 +2418,6 @@ tree_model <- rpart(Economy_status_Developed ~ Life_expectancy, data = train_dat
 # Predict using the model
 predictions <- predict(tree_model, validation_data_DT, type = "class")
 
-# Ensure predictions are factors with the same levels as the actual data
-predictions <- factor(predictions, levels = levels(validation_data_DT$Economy_status_Developed))
 
 # Compute confusion matrix
 confusion_Matrix_dt <- confusionMatrix(predictions, validation_data_DT$Economy_status_Developed)
@@ -2463,11 +2478,11 @@ plot(roc_curve, main="ROC Curve" , print.auc = TRUE, print.thres ="best")
 
 #### 5.2.4 Compare the models
 
-|              | Logistic  | Tree    | XGBoost |
-|--------------|-----------|---------|---------|
-| Specificity  | 83.05%    | 66.67%  | 92.74%  |
-| Sensitivity  | 91.5%     | 96.04%  | 81.11%  |
-| Overall      | 89.76%    | 89.98%  | 90.90%  |
+|             | Logistic | Tree   | XGBoost |
+|-------------|----------|--------|---------|
+| Specificity | 83.05%   | 66.67% | 92.74%  |
+| Sensitivity | 91.5%    | 96.04% | 81.11%  |
+| Overall     | 89.76%   | 89.98% | 90.90%  |
 
 ### 5.3 Deep analysis
 
@@ -2545,7 +2560,7 @@ ggplot(filtered_df, aes(x = Schooling, y = Country)) +
 ```
 
 | Country       | Mortality | BMI   | Alcohol | Hepatitis B | Measles | Polio  | Diphtheria | HIV   |
-|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+|---------------|-----------|-------|---------|-------------|---------|--------|------------|-------|
 | Tunisia       | 120       | 25.69 | 1.29    | 96.75%      | 97.81%  | 97.69% | 97.69%     | 0.03  |
 | Algeria       | 150       | 24.87 | 0.40    | 88.31%      | 93.25%  | 91.75% | 91.88%     | 0.02  |
 | Zimbabwe      | 600       | 23.54 | 2.90    | 79.56%      | 64.00%  | 79.60% | 79.10%     | 8.0   |
