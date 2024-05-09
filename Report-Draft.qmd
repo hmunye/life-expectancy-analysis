@@ -137,7 +137,7 @@ Columns in the dataset:
 
 -   **Economy_status_Developing:** Developing county
 
--   **Life_expectancy:** Average life expectancy of both genders in different years from 2010 to 2015
+-   **Life_expectancy:** Average life expectancy of both genders in different years from 2000 to 2015
 
 #### 1.2 Data Source
 
@@ -2567,13 +2567,13 @@ ggplot(filtered_df, aes(x = Schooling, y = Country)) +
 | Lesotho       | 690       | 24.49 | 2.62    | 86.63%      | 70.44%  | 87.75% | 89.56%     | 14.35 |
 | United States | 116       | 28.27 | 8.60    | 91.5%       | 86.00%  | 92.25% | 95.13%     | 0.13  |
 
-| Country       | GDP      | Population |
-|---------------|----------|------------|
-| Tunisia       | 3585.63  | 10.39      |
-| Algeria       | 3745.13  | 34.82      |
-| Zimbabwe      | 1290.6   | 12.5       |
-| Lesotho       | 926.69   | 2.01       |
-| United States | 52662.94 | 302.10     |
+| Country       | GDP      | Population | Thinness | Schooling |
+|---------------|----------|------------|----------|-----------|
+| Tunisia       | 3585.63  | 10.39      | 6.41     | 6.11      |
+| Algeria       | 3745.13  | 34.82      | 6.09     | 6.99      |
+| Zimbabwe      | 1290.6   | 12.5       | 7.0      | 7.2       |
+| Lesotho       | 926.69   | 2.01       | 7.19     | 5.52      |
+| United States | 52662.94 | 302.10     | 0.73     | 13.01     |
 
 ```{r}
 filtered_us <- df %>%
