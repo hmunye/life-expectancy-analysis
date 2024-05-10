@@ -797,9 +797,7 @@ df |>
 ggplot() +
     geom_histogram(aes(x=df$Alcohol_consumption), bins = 30)
 
-df |>
-ggplot() +
-    geom_histogram(aes(x=df$Alcohol_consumption), bins = 30)
+
 
 ggplot(df, aes(x=Alcohol_consumption, fill=Region)) +
     geom_histogram(bins=30, alpha=0.6, position="identity") +
