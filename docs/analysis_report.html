@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Mackenzie Hiddie, Adam Thomas, Huseen Munye, Yusuf Unsal, Austin Perkins, Justyn Kovalsk">
 
-<title>Analysis Report</title>
+<title>Life Expectancy Analysis Report</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -118,19 +117,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#table-of-contents" id="toc-table-of-contents" class="nav-link active" data-scroll-target="#table-of-contents">Table of Contents</a>
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">1 Introduction</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
   <li><a href="#data-understanding" id="toc-data-understanding" class="nav-link" data-scroll-target="#data-understanding">1.1 Data Understanding</a></li>
   <li><a href="#data-source" id="toc-data-source" class="nav-link" data-scroll-target="#data-source">1.2 Data Source</a></li>
   <li><a href="#initial-questions" id="toc-initial-questions" class="nav-link" data-scroll-target="#initial-questions">1.3 Initial Questions</a></li>
   </ul></li>
-  <li><a href="#data-loading" id="toc-data-loading" class="nav-link" data-scroll-target="#data-loading">2 Data Loading</a>
+  <li><a href="#data-loading-understanding" id="toc-data-loading-understanding" class="nav-link" data-scroll-target="#data-loading-understanding">Data Loading &amp; Understanding</a>
   <ul class="collapse">
   <li><a href="#importing-libraries" id="toc-importing-libraries" class="nav-link" data-scroll-target="#importing-libraries">2.1 Importing Libraries</a></li>
   <li><a href="#loading-and-understanding-the-data" id="toc-loading-and-understanding-the-data" class="nav-link" data-scroll-target="#loading-and-understanding-the-data">2.2 Loading and Understanding the Data</a></li>
   <li><a href="#categorizing-the-datasets-attributes" id="toc-categorizing-the-datasets-attributes" class="nav-link" data-scroll-target="#categorizing-the-datasets-attributes">2.3 Categorizing the Datasets Attributes</a></li>
   </ul></li>
-  <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link" data-scroll-target="#data-cleaning">3 Data Cleaning</a>
+  <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link" data-scroll-target="#data-cleaning">Data Cleaning</a>
   <ul class="collapse">
   <li><a href="#handling-null-values" id="toc-handling-null-values" class="nav-link" data-scroll-target="#handling-null-values">3.1 Handling Null Values</a>
   <ul class="collapse">
@@ -145,13 +144,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#decision-for-treating-outliers" id="toc-decision-for-treating-outliers" class="nav-link" data-scroll-target="#decision-for-treating-outliers">3.2.3 Decision for Treating Outliers</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#data-analysis" id="toc-data-analysis" class="nav-link" data-scroll-target="#data-analysis">4 Data Analysis</a>
+  <li><a href="#data-analysis" id="toc-data-analysis" class="nav-link" data-scroll-target="#data-analysis">Data Analysis</a>
   <ul class="collapse">
   <li><a href="#plots" id="toc-plots" class="nav-link" data-scroll-target="#plots">4.1 Plots</a></li>
   <li><a href="#variance-analysis" id="toc-variance-analysis" class="nav-link" data-scroll-target="#variance-analysis">4.2 Variance Analysis</a></li>
   <li><a href="#covariance-analysis" id="toc-covariance-analysis" class="nav-link" data-scroll-target="#covariance-analysis">4.3 Covariance Analysis</a></li>
   </ul></li>
-  <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models">5 Models</a>
+  <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models">Models</a>
   <ul class="collapse">
   <li><a href="#multiple-regression-of-life-expectancy" id="toc-multiple-regression-of-life-expectancy" class="nav-link" data-scroll-target="#multiple-regression-of-life-expectancy">5.1 Multiple Regression of Life Expectancy</a>
   <ul class="collapse">
@@ -188,7 +187,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Analysis Report</h1>
+<h1 class="title">Life Expectancy Analysis Report</h1>
 </div>
 
 
@@ -213,20 +212,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="table-of-contents" class="level1">
 <h1>Table of Contents</h1>
-<ul>
-<li><p>[<strong>1</strong> <strong>Introduction</strong>]</p>
+<p><strong>Introduction</strong></p>
 <ul>
 <li><p><a href="#data-understanding">1.1 Data Understanding</a></p></li>
 <li><p><a href="#data-source">1.2 Data Source</a></p></li>
 <li><p><a href="#initial-questions">1.3 Initial Questions</a></p></li>
-</ul></li>
-<li><p>[<strong>2 Data Loading</strong>]</p>
+</ul>
+<p><strong>Data Loading &amp; Understanding</strong></p>
 <ul>
 <li><p><a href="#importing-libraries">2.1 Importing Libraries</a></p></li>
 <li><p><a href="#loading-and-understanding-the-data">2.2 Loading and Understanding the Data</a></p></li>
-<li><p>2.3 Categorizing the Dataset’s Attributes</p></li>
-</ul></li>
-<li><p>[<strong>3 Data Cleaning</strong>]</p>
+<li><p><a href="#categorizing-the-datasets-attributes">2.3 Categorizing the Datasets Attributes</a></p></li>
+</ul>
+<p><strong>Data Cleaning</strong></p>
 <ul>
 <li><p><a href="#handling-null-values">3.1 Handling Null Values</a></p>
 <ul>
@@ -239,44 +237,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><a href="#treating-outliers">3.2.2 Treating Outliers</a></p></li>
 <li><p><a href="#decision-for-treating-outliers">3.2.3 Decision for Treating Outliers</a></p></li>
 </ul></li>
-</ul></li>
-<li><p>[<strong>4 Data Analysis</strong>]</p>
+</ul>
+<p><strong>Data Analysis</strong></p>
 <ul>
 <li><p><a href="#plots">4.1 Plots</a></p></li>
 <li><p><a href="#variance-analysis">4.2 Variance Analysis</a></p></li>
 <li><p><a href="#covariance-analysis">4.3 Covariance Analysis</a></p></li>
-</ul></li>
-<li><p>[<strong>5 Models</strong>]</p>
+</ul>
+<p><strong>Models</strong></p>
 <ul>
-<li><p>5.1 Multiple Regression of Life Expectancy</p>
+<li><p><a href="#multiple-regression-of-life-expectancy">5.1 Multiple Regression of Life Expectancy</a></p>
 <ul>
-<li><p>5.1.1 Splitting the Data</p></li>
-<li><p>5.1.2 Making the First Model</p></li>
-<li><p>5.1.3 Pruning the Model</p></li>
+<li><p><a href="#splitting-the-data">5.1.1 Splitting the Data</a></p></li>
+<li><p><a href="#making-the-first-model">5.1.2 Making the First Model</a></p></li>
+<li><p><a href="#pruning-the-model">5.1.3 Pruning the Model</a></p></li>
 </ul></li>
-<li><p>5.2 Neural Network of Life Expectancy</p></li>
-<li><p>5.3 SVR Model for Life Expectancy</p>
+<li><p><a href="#neural-network-of-life-expectancy">5.2 Neural Network of Life Expectancy</a></p></li>
+<li><p><a href="#svr-model-for-life-expectancy">5.3 SVR Model for Life Expectancy</a></p>
 <ul>
-<li>5.3.1 Conclusion of SVR Model</li>
+<li><a href="#conclusion-of-svr-model">5.3.1 Conclusion of SVR Model</a></li>
 </ul></li>
-<li><p>5.4 Random Forest</p></li>
-<li><p>5.5 Which Variables Most Influence Life Expectancy</p></li>
-<li><p>5.6 Comparing the Models</p></li>
-<li><p>5.7 Predict Countries Economic Status from Life Expectancy</p>
+<li><p><a href="#random-forest">5.4 Random Forest</a></p></li>
+<li><p><a href="#which-variables-most-influence-life-expectancy">5.5 Which Variables Most Influence Life Expectancy</a></p></li>
+<li><p><a href="#comparing-the-models">5.6 Comparing the Models</a></p></li>
+<li><p><a href="#predict-countries-economic-status-from-life-expectancy">5.7 Predict Countries Economic Status from Life Expectancy</a></p>
 <ul>
-<li><p>5.7.1 Logistic Regression Model</p></li>
-<li><p>5.7.2 XG Boost Model</p></li>
-<li><p>5.7.3 Decision Tree</p></li>
-<li><p>5.7.4 Comparing the Models</p></li>
+<li><p><a href="#logistic-regression-model">5.7.1 Logistic Regression Model</a></p></li>
+<li><p><a href="#xg-boost-model">5.7.2 XG Boost Model</a></p></li>
+<li><p><a href="#decision-tree">5.7.3 Decision Tree</a></p></li>
+<li><p><a href="#comparing-the-models-1">5.7.4 Comparing the Models</a></p></li>
 </ul></li>
-<li><p>5.8 Deep Analysis</p>
+<li><p><a href="#deep-analysis">5.8 Deep Analysis</a></p>
 <ul>
-<li>5.8.1 Deep Analysis Conclusion</li>
-</ul></li>
+<li><a href="#deep-analysis-conclusion">5.8.1 Deep Analysis Conclusion</a></li>
 </ul></li>
 </ul>
 <section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">1 Introduction</h2>
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>This dataset includes comprehensive information on 179 countries spanning from 2000 to 2015, covering aspects like life expectancy, health indicators, immunization rates, and economic and demographic data. Originally sourced from Kaggle, it underwent updates to rectify inaccuracies and missing values. Population, GDP, and life expectancy figures were updated from World Bank data, while data on vaccinations, alcohol consumption, BMI, HIV rates, mortality, and other health metrics were sourced from the World Health Organization. Additional information on schooling was gathered from the University of Oxford’s Our World in Data project. Missing values were addressed using strategies such as filling with the closest three-year average or the regional average. Countries with significant missing data were excluded, and the remaining countries were categorized based on their Gross National Income per capita into developed vs developing economies, following guidelines from organizations like the World Trade Organization and the UN.</p>
 <section id="data-understanding" class="level3">
 <h3 class="anchored" data-anchor-id="data-understanding">1.1 Data Understanding</h3>
@@ -339,8 +336,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 </section>
-<section id="data-loading" class="level2">
-<h2 class="anchored" data-anchor-id="data-loading">2 Data Loading</h2>
+<section id="data-loading-understanding" class="level2">
+<h2 class="anchored" data-anchor-id="data-loading-understanding">Data Loading &amp; Understanding</h2>
 <section id="importing-libraries" class="level3">
 <h3 class="anchored" data-anchor-id="importing-libraries">2.1 Importing Libraries</h3>
 <p>Install these packages if not already installed on your machine:</p>
@@ -756,7 +753,7 @@ $ Life_expectancy             &lt;dbl&gt; 76.5, 82.8, 65.4, 67.0, 81.7, 78.2, 71
 </section>
 </section>
 <section id="data-cleaning" class="level2">
-<h2 class="anchored" data-anchor-id="data-cleaning">3 Data Cleaning</h2>
+<h2 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h2>
 <section id="handling-null-values" class="level3">
 <h3 class="anchored" data-anchor-id="handling-null-values">3.1 Handling Null Values</h3>
 <p>The original data set had several hundred missing values. While the data is publicly available as it is all published by the various nations of the world and the World Heath Organization, it is not feasible with our teams man hours to manually enter each missing value.</p>
@@ -1232,7 +1229,7 @@ $ Life_expectancy             &lt;dbl&gt; 76.5, 82.8, 65.4, 67.0, 81.7, 78.2, 71
 </section>
 </section>
 <section id="data-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="data-analysis">4 Data Analysis</h2>
+<h2 class="anchored" data-anchor-id="data-analysis">Data Analysis</h2>
 <section id="plots" class="level3">
 <h3 class="anchored" data-anchor-id="plots">4.1 Plots</h3>
 <div class="cell">
@@ -4808,7 +4805,7 @@ Life_expectancy                  1.00000000</code></pre>
 </section>
 </section>
 <section id="models" class="level2">
-<h2 class="anchored" data-anchor-id="models">5 Models</h2>
+<h2 class="anchored" data-anchor-id="models">Models</h2>
 <section id="multiple-regression-of-life-expectancy" class="level3">
 <h3 class="anchored" data-anchor-id="multiple-regression-of-life-expectancy">5.1 Multiple Regression of Life Expectancy</h3>
 <p>For testing purposes, we must separate out a portion of the data now. We will be using a 80/20 split. 80% Training, 20% testing.</p>
